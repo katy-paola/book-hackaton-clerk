@@ -45,9 +45,9 @@ export default function Home() {
                   <Search />
                   <input
                     id="search-input"
-                    type="text"
+                    type="search"
                     name="search"
-                    placeholder="Buscar libros..."
+                    placeholder="Buscar libros"
                     aria-label="Buscar por título, autor, categoría, descripción o nombre de quien publicó"
                   />
                 </label>
@@ -131,6 +131,16 @@ export default function Home() {
               </button>
               <fieldset>
                 <legend>Categorías</legend>
+                <label htmlFor="search-categories-input">
+                  <Search />
+                  <input
+                    id="search-categories-input"
+                    type="search"
+                    name="search"
+                    placeholder="Buscar categorías"
+                    aria-label="Buscar entre todas las categorías disponibles"
+                  />
+                </label>
                 <label htmlFor="finanzas">
                   <input
                     id="finanzas"
@@ -176,29 +186,12 @@ export default function Home() {
                   />
                   Literatura
                 </label>
-
-                <fieldset>
-                  <legend>Agregar nueva categoría</legend>
-                  <div>
-                    <input
-                      type="text"
-                      name="new-category"
-                      placeholder="Nueva categoría"
-                      aria-label="Nombre de la nueva categoría"
-                    />
-                    <button type="button" aria-label="Agregar">
-                      <Add />
-                    </button>
-                  </div>
-                </fieldset>
                 <button type="submit">Aplicar</button>
               </fieldset>
             </form>
           </section>
         </section>
-        <p>
-          Se encontraron 5 resultados para “Patrones de lectura”.
-        </p>
+        <p>Se encontraron 5 resultados para “Patrones de lectura”.</p>
         <p>
           No se encontraron resultados para “Patrones de lectura”. Intenta con
           otra palabra clave.
