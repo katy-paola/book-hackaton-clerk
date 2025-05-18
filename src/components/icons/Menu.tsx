@@ -10,9 +10,9 @@ export default function Menu() {
       <path
         d="M4 5H20M4 12H20M4 19H20"
         stroke="#616983"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
