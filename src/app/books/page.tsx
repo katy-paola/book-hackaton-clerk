@@ -36,21 +36,22 @@ async function BooksList({ selectedCategories = [], selectedAccessTypes = [] }: 
   )
 }
 
-export default async function BooksPage({ 
-  searchParams 
-}: { 
-  searchParams: { categories?: string, access?: string } 
-}) {
+export default async function BooksPage(
+  props: { 
+    searchParams: Promise<{ categories?: string, access?: string }> 
+  }
+) {
+  const searchParams = await props.searchParams;
   // Obtener categorías seleccionadas de los parámetros de búsqueda
   const selectedCategories = searchParams.categories
     ? searchParams.categories.split(',')
     : []
-    
+
   // Obtener tipos de acceso seleccionados
   const selectedAccessTypes = searchParams.access
     ? searchParams.access.split(',')
     : []
-  
+
   // Determinar si hay algún filtro activo
   const hasActiveFilters = selectedCategories.length > 0 || selectedAccessTypes.length > 0
 

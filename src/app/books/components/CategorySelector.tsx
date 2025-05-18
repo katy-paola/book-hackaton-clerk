@@ -41,8 +41,10 @@ export default function CategorySelector({
   }
 
   // Manejar creación de nueva categoría
-  const handleAddCategory = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleAddCategory = async (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault()
+    }
     
     if (!newCategoryName.trim()) {
       setError('El nombre de la categoría no puede estar vacío')
@@ -126,7 +128,7 @@ export default function CategorySelector({
       )}
 
       <div className="add-category-section">
-        <form onSubmit={handleAddCategory} className="add-category-form">
+        <div className="add-category-form">
           <input
             type="text"
             value={newCategoryName}
@@ -134,15 +136,22 @@ export default function CategorySelector({
             placeholder="Agregar nueva categoría"
             className="add-category-input"
             disabled={isAddingCategory}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                handleAddCategory();
+              }
+            }}
           />
           <button
-            type="submit"
+            type="button"
             className="add-category-button"
             disabled={isAddingCategory}
+            onClick={handleAddCategory}
           >
             {isAddingCategory ? 'Agregando...' : 'Agregar'}
           </button>
-        </form>
+        </div>
         
         {error && <p className="category-error">{error}</p>}
         
