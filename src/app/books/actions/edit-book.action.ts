@@ -71,7 +71,8 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
     const bookData = validation.data
     console.log('Book data to update:', bookData);
     
-    const { data: updatedBook, error: updateError } = await supabase
+    // First update the book without retrieving data
+    const { error: updateError } = await supabase
       .from('books')
       .update({
         title: bookData.title,
@@ -82,12 +83,22 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
         link: bookData.link,
       })
       .eq('id', bookId)
-      .select()
-      .single()
     
     if (updateError) {
       console.error('Error updating book:', updateError);
       return { error: 'Error al actualizar el libro' }
+    }
+    
+    // Then fetch the updated book
+    const { data: updatedBook, error: fetchUpdatedError } = await supabase
+      .from('books')
+      .select('*')
+      .eq('id', bookId)
+      .single()
+    
+    if (fetchUpdatedError) {
+      console.error('Error fetching updated book:', fetchUpdatedError);
+      // Continue anyway, as the update was successful
     }
     
     // Actualizar categorías si se proporcionaron
@@ -133,7 +144,17 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
     
     return { 
       success: true, 
-      data: updatedBook 
+      data: updatedBook || { 
+        id: bookId,
+        title: bookData.title,
+        author: bookData.author,
+        description: bookData.description || null,
+        cover_url: bookData.cover_url,
+        access: bookData.access,
+        link: bookData.link,
+        user_id: userId,
+        created_at: null
+      }
     }
   } catch (error) {
     console.error('Exception in editBook:', error);
