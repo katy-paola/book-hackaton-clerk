@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import {
-  ClerkProvider,
+import { ClerkProvider } from "@clerk/nextjs";
+/* import {
   SignInButton,
   SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
-} from "@clerk/nextjs";
+} from "@clerk/nextjs"; */
 import { DM_Sans } from "next/font/google";
 
 const dmSans = DM_Sans({
@@ -35,15 +35,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${dmSans.className}`}>
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
+          <header></header>
           {children}
         </body>
       </html>
