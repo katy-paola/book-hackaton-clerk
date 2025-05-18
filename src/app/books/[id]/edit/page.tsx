@@ -5,28 +5,29 @@ import { getBookById } from '@/app/books/services/book.service'
 
 import EditBookForm from './EditBookForm'
 
-export default async function EditBookPage({ params }: { params: { id: string } }) {
+export default async function EditBookPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const bookId = params.id
-  
+
   // Verificar si el usuario está autenticado
   const { userId } = await auth()
   if (!userId) {
     redirect('/books')
   }
-  
+
   // Obtener el libro
   const { data: book, error } = await getBookById(bookId)
-  
+
   // Verificar si el libro existe y pertenece al usuario
   if (error || !book) {
     redirect('/books')
   }
-  
+
   if (book.user_id !== userId) {
     // Si el libro no pertenece al usuario, redireccionar
     redirect('/books')
   }
-  
+
   return (
     <div className="page-container">
       <div className="page-header">

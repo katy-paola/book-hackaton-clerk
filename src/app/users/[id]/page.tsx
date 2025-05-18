@@ -49,7 +49,8 @@ async function UserInfo({ userId }: { userId: string }) {
   )
 }
 
-export default async function UserProfilePage({ params }: { params: { id: string } }) {
+export default async function UserProfilePage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   return (
     <div className="page-container">
       <div className="page-header">
