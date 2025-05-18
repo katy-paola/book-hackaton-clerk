@@ -1,0 +1,60 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Image Component Usage
+
+Do NOT use the Next.js Image component (`import Image from "next/image"`) in this project due to cost considerations.
+
+## Preferred Approach
+
+Instead of Next.js Image, use native HTML elements:
+
+- Use `<img>` for simple images
+- Use `<picture>` with multiple `<source>` elements for responsive images
+
+## Example
+
+Instead of:
+```tsx
+import Image from "next/image";
+
+export default function Component() {
+  return (
+    <Image
+      src="/example.jpg"
+      alt="Example image"
+      width={500}
+      height={300}
+    />
+  );
+}
+```
+
+Use:
+```tsx
+export default function Component() {
+  return (
+    <img
+      src="/example.jpg"
+      alt="Example image"
+      width="500"
+      height="300"
+    />
+  );
+}
+```
+
+Or for responsive images:
+```tsx
+export default function Component() {
+  return (
+    <picture>
+      <source srcSet="/example-large.jpg" media="(min-width: 1024px)" />
+      <source srcSet="/example-medium.jpg" media="(min-width: 640px)" />
+      <img src="/example-small.jpg" alt="Example image" />
+    </picture>
+  );
+}
+```

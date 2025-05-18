@@ -1,0 +1,59 @@
+import { z } from 'zod'
+
+// Esquema de validación para un libro
+export const BookSchema = z.object({
+  title: z.string().min(1, 'El título es requerido'),
+  author: z.string().min(1, 'El autor es requerido'),
+  category: z.string().min(1, 'La categoría es requerida'),
+  description: z.string().optional(),
+  cover_url: z.string().url('La URL de la portada no es válida'),
+  link: z.string().url('El enlace del libro no es válido'),
+  access: z.enum(['free', 'paid'], {
+    errorMap: () => ({ message: 'El acceso debe ser "free" o "paid"' })
+  }),
+})
+
+export type Book = z.infer<typeof BookSchema>
+
+export type ValidationResult = 
+  | { success: true; data: Book }
+  | { success: false; error: string }
+
+export function validateBook(formData: FormData): ValidationResult {
+  try {
+    const title = formData.get('title')
+    const author = formData.get('author')
+    const category = formData.get('category')
+    const description = formData.get('description')
+    const cover_url = formData.get('cover_url')
+    const link = formData.get('link')
+    const access = formData.get('access')
+
+    const result = BookSchema.safeParse({
+      title,
+      author,
+      category,
+      description: description || undefined,
+      cover_url,
+      link,
+      access,
+    })
+
+    if (!result.success) {
+      // Extraer el primer mensaje de error
+      const firstError = result.error.errors[0]
+      return { success: false, error: firstError.message }
+    }
+
+    return {
+      success: true,
+      data: result.data,
+    }
+  } catch (err) {
+    console.error('Error en validación:', err)
+    return {
+      success: false,
+      error: 'Ha ocurrido un error en la validación'
+    }
+  }
+} 

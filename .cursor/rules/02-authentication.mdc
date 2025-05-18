@@ -1,0 +1,46 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Authentication with Clerk
+
+This project uses Clerk for authentication. Here's how authentication is set up:
+
+## Middleware
+
+[src/middleware.ts](mdc:src/middleware.ts) configures Clerk middleware to protect routes.
+
+## Components
+
+Authentication UI components are provided in [src/app/layout.tsx](mdc:src/app/layout.tsx):
+
+- `SignInButton` and `SignUpButton` for unauthenticated users
+- `UserButton` for authenticated users
+
+## Usage
+
+To access the current user in a server component:
+```tsx
+import { auth } from '@clerk/nextjs/server';
+
+export default function ServerComponent() {
+  const { userId } = auth();
+  // Use userId
+}
+```
+
+To access the current user in a client component:
+```tsx
+'use client';
+import { useUser } from '@clerk/nextjs';
+
+export default function ClientComponent() {
+  const { user } = useUser();
+  // Use user
+}
+```
+
+## Supabase Integration
+
+This project integrates Clerk authentication with Supabase. For detailed information on this integration, see the [Supabase Integration](mdc:.cursor/rules/05-supabase-integration.mdc) rule.

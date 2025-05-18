@@ -1,0 +1,40 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Next.js App Router Structure
+
+This project uses Next.js 15 with the App Router.
+
+## Key Components
+
+- [src/app/layout.tsx](mdc:src/app/layout.tsx) - Root layout that wraps all pages
+- [src/app/page.tsx](mdc:src/app/page.tsx) - Home page component
+
+## Routing Conventions
+
+- Files named `page.tsx` become route segments
+- Files named `layout.tsx` provide shared UI for child routes
+- Files named `error.tsx` provide error handling
+- Files named `loading.tsx` provide loading states
+
+## Server vs Client Components
+
+By default, all components in the App Router are React Server Components. To make a component a Client Component, add the `'use client'` directive at the top of the file.
+
+## Data Fetching
+
+Server Components can directly fetch data without useEffect or additional libraries:
+
+```tsx
+async function getData() {
+  const res = await fetch('https://api.example.com/data');
+  return res.json();
+}
+
+export default async function Page() {
+  const data = await getData();
+  return <div>{data.title}</div>;
+}
+```

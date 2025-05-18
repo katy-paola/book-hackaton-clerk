@@ -1,12 +1,42 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #0070f3;
+  --primary-hover: #0060df;
+  --error: #f8d7da;
+  --error-text: #721c24;
+  --success: #d4edda;
+  --success-text: #155724;
+  --border: #eaeaea;
+  --card-background: #fff;
+  --spinner-border: rgba(0, 0, 0, 0.1);
+  --spinner-color: #000;
+  --text-muted: #666;
+  --access-free-bg: #d1e7dd;
+  --access-free-text: #0f5132;
+  --access-paid-bg: #f8d7da;
+  --access-paid-text: #842029;
+  --error-bg: #fff9f9;
+  --error-border: #ffcccc;
+  --error-title: #cc0000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --border: #333;
+    --card-background: #111;
+    --spinner-border: rgba(255, 255, 255, 0.1);
+    --spinner-color: #fff;
+    --text-muted: #999;
+    --access-free-bg: rgba(13, 81, 50, 0.3);
+    --access-free-text: #8fffc9;
+    --access-paid-bg: rgba(132, 32, 41, 0.3);
+    --access-paid-text: #ffaaaa;
+    --error-bg: rgba(132, 32, 41, 0.1);
+    --error-border: #842029;
+    --error-title: #ff6b6b;
   }
 }
 
@@ -39,4 +69,209 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/* Estilos para el componente de carga */
+.loading-container {
+  padding: 20px;
+}
+
+.loading-spinner-container {
+  text-align: center;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--spinner-border);
+  border-left-color: var(--spinner-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Estilos para tarjetas y botones */
+.button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: var(--primary-hover);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: var(--card-background);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.message.success {
+  background-color: var(--success);
+  color: var(--success-text);
+}
+
+.message.error {
+  background-color: var(--error);
+  color: var(--error-text);
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+/* Estilos para el BookCard */
+.book-content {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.book-cover {
+  flex: 0 0 150px;
+}
+
+.book-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.book-details {
+  flex: 1;
+}
+
+.book-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.book-info {
+  margin: 4px 0;
+  color: var(--text-muted);
+}
+
+.book-access {
+  margin: 4px 0;
+}
+
+.access-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.access-badge.free {
+  background-color: var(--access-free-bg);
+  color: var(--access-free-text);
+}
+
+.access-badge.paid {
+  background-color: var(--access-paid-bg);
+  color: var(--access-paid-text);
+}
+
+.book-description {
+  margin: 8px 0;
+  font-size: 14px;
+  color: var(--foreground);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.view-button {
+  margin-top: 12px;
+  padding: 6px 14px;
+  font-size: 14px;
+}
+
+/* Estilos para el componente de Error */
+.error-container {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  background-color: var(--error-bg);
+  border-radius: 8px;
+  border: 1px solid var(--error-border);
+}
+
+.error-title {
+  color: var(--error-title);
+  margin-bottom: 10px;
+}
+
+.error-message {
+  margin-bottom: 15px;
+}
+
+/* Estilos para la página */
+.page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin: 0;
+}
+
+.no-books-message {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--text-muted);
 }

@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Overview
+
+This is a Next.js application integrated with Clerk for authentication and Supabase for database functionality.
+
+## Key Files
+
+- [src/middleware.ts](mdc:src/middleware.ts) - Clerk middleware for authentication
+- [src/app/layout.tsx](mdc:src/app/layout.tsx) - Root layout with Clerk provider and auth UI components
+- [src/app/page.tsx](mdc:src/app/page.tsx) - Main page component
+
+## Project Structure
+
+- `/src` - Main source code
+  - `/app` - Next.js App Router components
+  - `middleware.ts` - Clerk authentication middleware
+- `/public` - Static files
+
+## Tech Stack
+
+- Next.js 15 with App Router
+- Clerk for authentication
+- Supabase for database and backend services
+- React 19
+- TypeScript

@@ -1,0 +1,105 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Supabase Integration with Clerk
+
+This project integrates Supabase with Clerk authentication.
+
+## Setup Requirements
+
+To use Supabase with Clerk authentication, you need to:
+
+1. Install the Supabase client library:
+```bash
+npm install @supabase/supabase-js
+```
+
+2. Configure environment variables in `.env.local`:
+```
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+```
+
+## Clerk JWT Configuration
+
+You must set up a JWT template in your Clerk Dashboard:
+1. Go to the Clerk Dashboard → JWT Templates
+2. Create a template named "supabase"
+3. Configure with:
+   - Issuer: Your Clerk domain
+   - Audience: Your Supabase project URL
+   - Custom claim: `sub` with value of `{{user_id}}`
+
+## Supabase Configuration
+
+In Supabase, configure JWT verification:
+1. Go to Authentication → JWT Providers
+2. Add Clerk as a JWT provider with:
+   - JWT URL: `https://your-clerk-domain.clerk.accounts.dev/.well-known/jwks.json`
+   - JWT Claim: `sub`
+
+## Usage Patterns
+
+### Server-Side (Recommended)
+```tsx
+// Server component or API route
+import { createClient } from '@supabase/supabase-js'
+import { auth } from '@clerk/nextjs/server'
+
+export async function getData() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      async accessToken() {
+        const { getToken } = await auth()
+        return getToken() || null
+      },
+    }
+  )
+  
+  const { data } = await supabase.from('examples').select()
+  return data
+}
+```
+
+### Client-Side
+```tsx
+'use client'
+import { useEffect, useState } from 'react'
+import { useSession } from '@clerk/nextjs'
+import { createClient } from '@supabase/supabase-js'
+
+export default function ClientComponent() {
+  const { session } = useSession()
+  const [data, setData] = useState(null)
+  
+  useEffect(() => {
+    if (!session) return
+    
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        global: {
+          headers: {
+            Authorization: `Bearer ${session.getToken()}`,
+          },
+        },
+      }
+    )
+    
+    async function fetchData() {
+      const { data } = await supabase.from('examples').select()
+      setData(data)
+    }
+    
+    fetchData()
+  }, [session])
+  
+  return <div>{/* render data */}</div>
+}
