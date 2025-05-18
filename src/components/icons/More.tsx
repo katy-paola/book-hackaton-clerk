@@ -10,9 +10,9 @@ export default function More() {
       <path
         d="M11.992 12H12.001M11.9842 18H11.9932M11.9998 6H12.0088"
         stroke="#616983"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

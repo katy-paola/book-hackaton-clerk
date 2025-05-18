@@ -10,9 +10,9 @@ export default function Check() {
       <path
         d="M5 14L8.5 17.5L19 6.5"
         stroke="#616983"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

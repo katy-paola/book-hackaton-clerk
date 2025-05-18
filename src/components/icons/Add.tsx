@@ -10,9 +10,9 @@ export default function Add() {
       <path
         d="M12 4V20M20 12H4"
         stroke="#616983"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
