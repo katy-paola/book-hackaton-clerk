@@ -197,6 +197,9 @@ export default function Home() {
           </section>
         </section>
         <p>
+          Se encontraron 5 resultados para “Patrones de lectura”.
+        </p>
+        <p>
           No se encontraron resultados para “Patrones de lectura”. Intenta con
           otra palabra clave.
         </p>
