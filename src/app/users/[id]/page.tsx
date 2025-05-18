@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { getUserById } from '@/app/users/services/user.service'
 import { getBooksByUser } from '@/app/books/services/book.service'
 import BookCard from '@/app/books/components/BookCard'
-import Loading from '@/app/books/loading'
+import Loading from './loading'
 
 // Componente que carga los libros del usuario
 async function UserBooks({ userId }: { userId: string }) {
@@ -58,7 +58,7 @@ export default async function UserProfilePage({ params }: { params: { id: string
         </Link>
       </div>
       
-      <Suspense fallback={<div>Cargando información del usuario...</div>}>
+      <Suspense fallback={<Loading />}>
         <UserInfo userId={params.id} />
       </Suspense>
       

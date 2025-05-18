@@ -4,7 +4,7 @@ export default function Loading() {
       <div className="loading-spinner-container">
         <div className="loading-spinner"></div>
       </div>
-      <p className="loading-text">Cargando formulario...</p>
+      <p className="loading-text">Cargando formulario de edición...</p>
     </div>
   )
 } 

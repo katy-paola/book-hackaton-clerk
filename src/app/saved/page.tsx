@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { auth } from '@clerk/nextjs/server'
 import { getSavedBooks } from './services/saved.service'
 import BookCard from '@/app/books/components/BookCard'
-import Loading from '@/app/books/loading'
+import Loading from './loading'
 
 // Componente que muestra la lista de libros guardados
 async function SavedBooksList() {

@@ -4,7 +4,6 @@ import { z } from 'zod'
 export const BookSchema = z.object({
   title: z.string().min(1, 'El título es requerido'),
   author: z.string().min(1, 'El autor es requerido'),
-  category: z.string().min(1, 'La categoría es requerida'),
   description: z.string().optional(),
   cover_url: z.string().url('La URL de la portada no es válida'),
   link: z.string().url('El enlace del libro no es válido'),
@@ -23,7 +22,6 @@ export function validateBook(formData: FormData): ValidationResult {
   try {
     const title = formData.get('title')
     const author = formData.get('author')
-    const category = formData.get('category')
     const description = formData.get('description')
     const cover_url = formData.get('cover_url')
     const link = formData.get('link')
@@ -32,7 +30,6 @@ export function validateBook(formData: FormData): ValidationResult {
     const result = BookSchema.safeParse({
       title,
       author,
-      category,
       description: description || undefined,
       cover_url,
       link,

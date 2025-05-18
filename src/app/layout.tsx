@@ -51,6 +51,9 @@ export default function RootLayout({
                 <Link href="/saved" className="nav-link">
                   Guardados
                 </Link>
+                <Link href="/categories" className="nav-link">
+                  Categorías
+                </Link>
                 <Link href="/users" className="profile-link">
                   Mi perfil
                 </Link>

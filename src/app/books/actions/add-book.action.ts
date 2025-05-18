@@ -4,6 +4,7 @@ import { auth } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
 import { validateBook } from '../schemas/book.schema'
 import { addBook as addBookService } from '../services/book.service'
+import { saveBookCategories } from '../services/category.service'
 import { BookRow } from '../types/book.type'
 
 export type AddBookResult = 
@@ -20,7 +21,15 @@ export async function addBook(formData: FormData): Promise<AddBookResult> {
       }
     }
 
-    // Valida los datos del formulario
+    // Obtener categorías seleccionadas
+    const categoryIds = formData.getAll('categories') as string[]
+    
+    // Validar que al menos hay una categoría seleccionada
+    if (!categoryIds.length) {
+      return { error: 'Debes seleccionar al menos una categoría' }
+    }
+
+    // Valida los datos del formulario básicos del libro
     const validation = validateBook(formData)
     if (!validation.success) {
       return { error: validation.error }
@@ -46,6 +55,17 @@ export async function addBook(formData: FormData): Promise<AddBookResult> {
       }
       
       return { error: errorMessage }
+    }
+
+    if (data && data.length > 0) {
+      // Guardar las relaciones libro-categorías
+      const bookId = data[0].id
+      const { error: categoriesError } = await saveBookCategories(bookId, categoryIds)
+      
+      if (categoriesError) {
+        console.error('Error al guardar categorías:', categoriesError)
+        // No fallamos completamente, el libro se guarda pero las categorías pueden fallar
+      }
     }
 
     // Revalidar la ruta para actualizar la lista de libros

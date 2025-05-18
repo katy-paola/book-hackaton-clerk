@@ -2,13 +2,20 @@ import Link from "next/link"
 import { Database } from "@/types/database.types"
 import { Suspense } from "react"
 import SaveBookButtonWrapper from "@/app/saved/components/SaveBookButtonWrapper"
+import BookCardActions from "./BookCardActions"
 
-// Updated type to include the joined users data
+// Updated type to include the joined users data and categories
 type Book = Database['public']['Tables']['books']['Row'] & {
   users?: {
     name: string;
     avatar: string;
-  } | null
+  } | null;
+  book_categories?: {
+    categories: {
+      id: string;
+      name: string;
+    }
+  }[];
 }
 
 export default function BookCard({ book }: { book: Book }) {
@@ -33,9 +40,20 @@ export default function BookCard({ book }: { book: Book }) {
           <p className="book-info">
             <strong>Autor:</strong> {book.author}
           </p>
-          <p className="book-info">
-            <strong>Categoría:</strong> {book.category}
-          </p>
+          
+          {book.book_categories && book.book_categories.length > 0 && (
+            <div className="book-categories">
+              <strong>Categorías:</strong>
+              <div className="category-tags">
+                {book.book_categories.map(item => (
+                  <span key={item.categories.id} className="category-tag">
+                    {item.categories.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          
           {book.users && book.user_id && (
             <div className="user-info">
               <strong>Agregado por:</strong>
@@ -52,6 +70,14 @@ export default function BookCard({ book }: { book: Book }) {
                   <span className="user-name">{book.users.name}</span>
                 </div>
               </Link>
+              
+              {/* Acciones de propietario */}
+              <Suspense fallback={null}>
+                <BookCardActions 
+                  bookId={book.id} 
+                  userId={book.user_id} 
+                />
+              </Suspense>
             </div>
           )}
           <p className="book-access">
