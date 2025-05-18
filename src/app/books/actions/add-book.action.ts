@@ -1,13 +1,12 @@
 'use server'
 
-import { auth, currentUser } from '@clerk/nextjs/server'
+import { auth } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
 import { validateBook } from '../schemas/book.schema'
 import { addBook as addBookService } from '../services/book.service'
-import { ensureUserExists } from '@/app/users/services/user.service'
-import { Database } from '@/types/database.types'
+import { saveBookCategories } from '../services/category.service'
+import { BookRow } from '../types/book.type'
 
-type BookRow = Database['public']['Tables']['books']['Row']
 export type AddBookResult = 
   | { success: true; data: BookRow[] }
   | { error: string; success?: never }
@@ -22,35 +21,15 @@ export async function addBook(formData: FormData): Promise<AddBookResult> {
       }
     }
 
-    // Obtenemos los datos del usuario actual de Clerk
-    const user = await currentUser()
-    if (!user) {
-      return {
-        error: 'No se pudo obtener la información del usuario'
-      }
+    // Obtener categorías seleccionadas
+    const categoryIds = formData.getAll('categories') as string[]
+    
+    // Validar que al menos hay una categoría seleccionada
+    if (!categoryIds.length) {
+      return { error: 'Debes seleccionar al menos una categoría' }
     }
 
-    // Preparamos los datos del usuario para Supabase
-    const userData = {
-      email: user.emailAddresses[0]?.emailAddress || '',
-      name: `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Usuario',
-      // Usamos la imagen de perfil de Clerk o una imagen por defecto
-      avatar: user.imageUrl || 'https://via.placeholder.com/150'
-    }
-
-    // Verificar si el usuario existe en Supabase, si no, crearlo
-    const { error: userError } = await ensureUserExists(
-      session.userId,
-      userData
-    )
-
-    if (userError) {
-      return {
-        error: `Error al verificar/crear el usuario: ${userError.message}`
-      }
-    }
-
-    // Valida los datos del formulario
+    // Valida los datos del formulario básicos del libro
     const validation = validateBook(formData)
     if (!validation.success) {
       return { error: validation.error }
@@ -76,6 +55,17 @@ export async function addBook(formData: FormData): Promise<AddBookResult> {
       }
       
       return { error: errorMessage }
+    }
+
+    if (data && data.length > 0) {
+      // Guardar las relaciones libro-categorías
+      const bookId = data[0].id
+      const { error: categoriesError } = await saveBookCategories(bookId, categoryIds)
+      
+      if (categoriesError) {
+        console.error('Error al guardar categorías:', categoriesError)
+        // No fallamos completamente, el libro se guarda pero las categorías pueden fallar
+      }
     }
 
     // Revalidar la ruta para actualizar la lista de libros

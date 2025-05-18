@@ -9,11 +9,40 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      book_categories: {
+        Row: {
+          book_id: string
+          category_id: string
+        }
+        Insert: {
+          book_id: string
+          category_id: string
+        }
+        Update: {
+          book_id?: string
+          category_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "book_categories_book_id_fkey"
+            columns: ["book_id"]
+            isOneToOne: false
+            referencedRelation: "books"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "book_categories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       books: {
         Row: {
           access: Database["public"]["Enums"]["access_type"]
           author: string
-          category: string
           cover_url: string
           created_at: string | null
           description: string | null
@@ -25,7 +54,6 @@ export type Database = {
         Insert: {
           access: Database["public"]["Enums"]["access_type"]
           author: string
-          category: string
           cover_url: string
           created_at?: string | null
           description?: string | null
@@ -37,7 +65,6 @@ export type Database = {
         Update: {
           access?: Database["public"]["Enums"]["access_type"]
           author?: string
-          category?: string
           cover_url?: string
           created_at?: string | null
           description?: string | null
@@ -55,6 +82,21 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      categories: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id?: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
+        }
+        Relationships: []
       }
       saved: {
         Row: {

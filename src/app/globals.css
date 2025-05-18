@@ -197,6 +197,7 @@ a {
 
 .book-cover {
   flex: 0 0 150px;
+  position: relative;
 }
 
 .book-image {
@@ -299,5 +300,704 @@ a {
 .no-books-message {
   text-align: center;
   margin-top: 20px;
+  color: var(--text-muted);
+}
+
+/* Estilos para el perfil de usuario */
+.user-info {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-profile-link {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.user-profile-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.user-profile-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 16px;
+  background-color: rgba(0, 112, 243, 0.05);
+  transition: background-color 0.2s;
+}
+
+.user-profile-preview:hover {
+  background-color: rgba(0, 112, 243, 0.1);
+}
+
+.user-avatar-small {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+/* Estilos para la página de perfil de usuario */
+.user-profile {
+  margin-bottom: 24px;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.section-title {
+  margin: 24px 0 16px;
+  font-size: 1.5rem;
+}
+
+.back-button {
+  display: inline-block;
+  color: var(--primary);
+  margin-bottom: 16px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.profile-link {
+  color: var(--primary);
+  text-decoration: none;
+  margin-right: 16px;
+  transition: color 0.2s;
+}
+
+.profile-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Estilos para estados de carga (skeletons) */
+.skeleton-text {
+  background: linear-gradient(90deg, var(--border) 25%, #f0f0f0 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.books-skeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.book-skeleton {
+  height: 200px;
+  border-radius: 8px;
+  background: var(--card-background);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+}
+
+.book-skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: shimmer-sweep 1.5s infinite;
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Estilos para botón de guardar */
+.book-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.save-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.save-button:hover {
+  background-color: #fff;
+  color: var(--primary);
+  transform: scale(1.05);
+}
+
+.save-button.saved {
+  color: #ff3e00;
+}
+
+.save-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.save-icon {
+  transition: transform 0.2s ease;
+}
+
+.save-button:active .save-icon {
+  transform: scale(0.9);
+}
+
+.save-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.book-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.no-saved-books {
+  text-align: center;
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Estilos para la navegación principal */
+.main-nav {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-link {
+  color: var(--foreground);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Estilos para selector de categorías */
+.categories-selector {
+  margin-bottom: 16px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-item:hover {
+  background-color: rgba(0, 112, 243, 0.05);
+}
+
+.category-item.selected {
+  background-color: rgba(0, 112, 243, 0.1);
+  border-color: var(--primary);
+}
+
+.category-checkbox {
+  margin-right: 8px;
+}
+
+.category-name {
+  font-size: 14px;
+}
+
+.selected-categories {
+  margin-top: 12px;
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.category-tag {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 112, 243, 0.1);
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 13px;
+  color: var(--primary);
+}
+
+.remove-category {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 18px;
+  margin-left: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 0 4px;
+}
+
+.remove-category:hover {
+  color: #ff3e00;
+}
+
+/* Estilos para categorías en BookCard */
+.book-categories {
+  margin: 8px 0;
+}
+
+.book-categories .category-tags {
+  margin-top: 4px;
+}
+
+.book-categories .category-tag {
+  background-color: rgba(0, 112, 243, 0.1);
+  border: none;
+  padding: 2px 8px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--primary);
+}
+
+/* Estilos para formulario de agregar categoría */
+.add-category-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.add-category-form {
+  display: flex;
+  gap: 8px;
+}
+
+.add-category-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.add-category-button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  min-width: 100px;
+  transition: background-color 0.2s;
+}
+
+.add-category-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.add-category-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.category-error {
+  color: #ff3e00;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.category-suggestions {
+  margin-top: 12px;
+}
+
+.category-suggestions p {
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+
+.category-suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.category-suggestion-item {
+  background: none;
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-suggestion-item:hover {
+  background-color: rgba(0, 112, 243, 0.05);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Estilos para página de administración de categorías */
+.categories-manager {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: var(--foreground);
+}
+
+.categories-list-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container {
+  margin-bottom: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.categories-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.category-item-row {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--card-background);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.category-item-row:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-color: var(--primary);
+}
+
+.no-results {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 20px;
+}
+
+/* Estilos para botones de edición y eliminación */
+.owner-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+.edit-button,
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-error {
+  color: #ff3e00;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Estilos para botones secundarios */
+.button-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+  margin-left: 10px;
+}
+
+.button-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+.form-actions {
+  display: flex;
+  margin-top: 20px;
+}
+
+/* Layout con sidebar */
+.page-content-with-sidebar {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.page-sidebar {
+  flex: 0 0 250px;
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.page-main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Filtro de categorías */
+.category-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.filter-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.clear-filter-button {
+  background: none;
+  border: none;
+  color: #7065f0;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.category-filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.category-filter-item {
+  padding: 0.35rem 0;
+}
+
+.category-filter-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.category-filter-checkbox {
+  accent-color: #7065f0;
+}
+
+.category-filter-name {
+  font-size: 0.95rem;
+}
+
+.category-filter-count {
+  color: #666;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+
+.no-categories-message {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-content-with-sidebar {
+    flex-direction: column;
+  }
+  
+  .page-sidebar {
+    flex: 0 0 auto;
+    position: static;
+    width: 100%;
+  }
+}
+
+/* Filtro de acceso */
+.filter-divider {
+  height: 1px;
+  background-color: var(--border);
+  margin: 1.5rem 0;
+}
+
+.access-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.access-filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.access-filter-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.access-filter-label:hover {
+  background-color: rgba(0, 112, 243, 0.05);
+}
+
+.access-filter-button {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.access-filter-button:hover {
+  border-color: var(--primary);
+  background-color: rgba(0, 112, 243, 0.05);
+}
+
+.access-filter-button.selected {
+  border-color: var(--primary);
+  background-color: rgba(0, 112, 243, 0.1);
+}
+
+/* Resumen de filtros activos */
+.active-filters {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.active-filters-count {
+  font-size: 0.85rem;
   color: var(--text-muted);
 }

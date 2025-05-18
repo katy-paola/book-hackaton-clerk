@@ -1,24 +1,16 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-/* import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs"; */
 import { DM_Sans } from "next/font/google";
+import Link from "next/link";
+import Image from "next/image";
+import Menu from "@/components/icons/Menu";
 
 const dmSans = DM_Sans({
   weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
-
-import "./globals.css";
-import Link from "next/link";
-import Image from "next/image";
-import Menu from "@/components/icons/Menu";
 
 export const metadata: Metadata = {
   title: "BooK - No pierdas tus libros por leer",
@@ -37,6 +29,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+
         <body className={`${dmSans.className}`}>
           <header>
             <Link href="/" aria-label="Inicio">
@@ -55,14 +48,18 @@ export default function RootLayout({
                 <li>
                   <Link href="/">Explorar</Link>
                 </li>
-                <li>
-                  <Link href="/profile">Mis libros</Link>
+                <li>   
+                <Link href="/users" className="profile-link">
+                  Mi perfil
+                </Link>
                 </li>
                 <li>
-                  <Link href="/saved">Guardado</Link>
+                  <Link href="/saved" className="nav-link">
+                  Guardado
+                </Link>
                 </li>
                 <li>
-                  <Link href="/library">Cerrar sesión</Link>
+                  <Link href="/">Cerrar sesión</Link>
                 </li>
               </ul>
               <ul>
@@ -74,6 +71,7 @@ export default function RootLayout({
                 </li>
               </ul>
             </nav>
+
           </header>
           {children}
         </body>
