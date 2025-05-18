@@ -14,7 +14,7 @@ export async function getAllBooks(): Promise<BookResponse> {
     const supabase = createServerSupabaseClient()
     const { data, error } = await supabase
       .from('books')
-      .select('*')
+      .select('*, users:user_id(name, avatar)')
       .order('created_at', { ascending: false })
 
     if (error) {
@@ -54,7 +54,7 @@ export async function getBooksByUser(userId: string): Promise<BookResponse> {
     const supabase = createServerSupabaseClient()
     const { data, error } = await supabase
       .from('books')
-      .select('*')
+      .select('*, users:user_id(name, avatar)')
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
 

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
 import { addBook } from '../actions'
+import Link from 'next/link'
 
 // Componente de botón de envío con estado de carga integrado
 function SubmitButton() {
@@ -49,7 +50,12 @@ export default function AddBookPage() {
   
   return (
     <div className="page-container">
-      <h1 className="page-title">Agregar Nuevo Libro</h1>
+      <div className="page-header">
+        <h1 className="page-title">Agregar Nuevo Libro</h1>
+        <Link href="/books" className="back-button">
+          ← Volver al catálogo
+        </Link>
+      </div>
       
       {message && (
         <div className={`message ${message.type}`}>

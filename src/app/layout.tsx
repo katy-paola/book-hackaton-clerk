@@ -8,6 +8,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 import { Geist, Geist_Mono } from 'next/font/google'
+import Link from 'next/link'
 import './globals.css'
 
 const geistSans = Geist({
@@ -43,6 +44,17 @@ export default function RootLayout({
               <SignUpButton />
             </SignedOut>
             <SignedIn>
+              <nav className="main-nav">
+                <Link href="/books" className="nav-link">
+                  Catálogo
+                </Link>
+                <Link href="/saved" className="nav-link">
+                  Guardados
+                </Link>
+                <Link href="/users" className="profile-link">
+                  Mi perfil
+                </Link>
+              </nav>
               <UserButton />
             </SignedIn>
           </header>

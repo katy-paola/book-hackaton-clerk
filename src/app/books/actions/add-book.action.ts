@@ -1,13 +1,11 @@
 'use server'
 
-import { auth, currentUser } from '@clerk/nextjs/server'
+import { auth } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
 import { validateBook } from '../schemas/book.schema'
 import { addBook as addBookService } from '../services/book.service'
-import { ensureUserExists } from '@/app/users/services/user.service'
-import { Database } from '@/types/database.types'
+import { BookRow } from '../types/book.type'
 
-type BookRow = Database['public']['Tables']['books']['Row']
 export type AddBookResult = 
   | { success: true; data: BookRow[] }
   | { error: string; success?: never }
@@ -19,34 +17,6 @@ export async function addBook(formData: FormData): Promise<AddBookResult> {
     if (!session.userId) {
       return {
         error: 'Debes iniciar sesión para agregar un libro'
-      }
-    }
-
-    // Obtenemos los datos del usuario actual de Clerk
-    const user = await currentUser()
-    if (!user) {
-      return {
-        error: 'No se pudo obtener la información del usuario'
-      }
-    }
-
-    // Preparamos los datos del usuario para Supabase
-    const userData = {
-      email: user.emailAddresses[0]?.emailAddress || '',
-      name: `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Usuario',
-      // Usamos la imagen de perfil de Clerk o una imagen por defecto
-      avatar: user.imageUrl || 'https://via.placeholder.com/150'
-    }
-
-    // Verificar si el usuario existe en Supabase, si no, crearlo
-    const { error: userError } = await ensureUserExists(
-      session.userId,
-      userData
-    )
-
-    if (userError) {
-      return {
-        error: `Error al verificar/crear el usuario: ${userError.message}`
       }
     }
 

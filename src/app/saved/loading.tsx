@@ -1,4 +1,4 @@
-export default function Loading() {
+export default function SavedBooksLoading() {
   return (
     <div className="loading-container">
       <div className="books-skeleton">
