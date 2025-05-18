@@ -19,6 +19,30 @@
   --error-bg: #fff9f9;
   --error-border: #ffcccc;
   --error-title: #cc0000;
+
+  /* Colors */
+  --neutral-500: #4e4e4e;
+  --neutral-700: #2f2f2f;
+  --orange-700: #be6804;
+  --orange-500: #ef9731;
+  --orange-100: #fff6ed;
+  --neutral-100: #fbfbfb;
+  --orange-200: #ffe7ca;
+  --green-700: #05781a;
+  --blue-700: #08497d;
+  --green-500: #34be4d;
+  --red-700: #e30e0e;
+  --green-100: #edfff0;
+  --blue-500: #50a0e0;
+  --neutral-200: #ebebeb;
+  --blue-100: #edf7ff;
+  --yellow-700: #6d6400;
+  --red-500: #f96262;
+  --red-100: #fff6f6;
+  --neutral-300: #b4b0ac;
+  --yellow-500: #e9d718;
+  --orange-300: #ffc37e;
+  --yellow-100: #fffcd7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -96,7 +120,9 @@ a {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Estilos para tarjetas y botones */
@@ -127,7 +153,7 @@ a {
   padding: 16px;
   margin-bottom: 16px;
   background-color: var(--card-background);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .message {
