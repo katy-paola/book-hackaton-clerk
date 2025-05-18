@@ -1,69 +1,81 @@
-import type { Metadata } from 'next'
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
-import { Geist, Geist_Mono } from 'next/font/google'
-import Link from 'next/link'
-import './globals.css'
+import "./globals.css";
+import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
+import { DM_Sans } from "next/font/google";
+import Link from "next/link";
+import Image from "next/image";
+import Menu from "@/components/icons/Menu";
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+const dmSans = DM_Sans({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: 'BooK - No pierdas tus libros por leer',
-  description: 'BooK te ayuda a no perder de vista tus libros pendientes. Guarda, organiza y accede a tus recomendaciones favoritas en tu biblioteca digital personal.',
+  title: "BooK - No pierdas tus libros por leer",
+  description:
+    "BooK te ayuda a no perder de vista tus libros pendientes. Guarda, organiza y accede a tus recomendaciones favoritas en tu biblioteca digital personal.",
   icons: {
     icon: "/favicon.svg",
-  }
-}
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <nav className="main-nav">
-                <Link href="/books" className="nav-link">
-                  Catálogo
-                </Link>
-                <Link href="/saved" className="nav-link">
-                  Guardados
-                </Link>
-                <Link href="/categories" className="nav-link">
-                  Categorías
-                </Link>
+
+        <body className={`${dmSans.className}`}>
+          <header>
+            <Link href="/" aria-label="Inicio">
+              <Image
+                src="/logo.svg"
+                alt="Logo de BooK"
+                width={120}
+                height={40}
+              />
+            </Link>
+            <nav>
+              <button aria-label="Abrir menú de navegación">
+                <Menu />
+              </button>
+              <ul>
+                <li>
+                  <Link href="/">Explorar</Link>
+                </li>
+                <li>   
                 <Link href="/users" className="profile-link">
                   Mi perfil
                 </Link>
-              </nav>
-              <UserButton />
-            </SignedIn>
+                </li>
+                <li>
+                  <Link href="/saved" className="nav-link">
+                  Guardado
+                </Link>
+                </li>
+                <li>
+                  <Link href="/">Cerrar sesión</Link>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <Link href="/">Explorar</Link>
+                </li>
+                <li>
+                  <Link href="/sign-in">Ingresar</Link>
+                </li>
+              </ul>
+            </nav>
+
           </header>
           {children}
         </body>
       </html>
     </ClerkProvider>
-  )
+  );
 }
