@@ -5,6 +5,7 @@ import { DM_Sans } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import Menu from "@/components/icons/Menu";
+import ArrowUp from "@/components/icons/ArrowUp";
 
 const dmSans = DM_Sans({
   weight: "400",
@@ -29,7 +30,6 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-
         <body className={`${dmSans.className}`}>
           <header>
             <Link href="/" aria-label="Inicio">
@@ -48,15 +48,15 @@ export default function RootLayout({
                 <li>
                   <Link href="/">Explorar</Link>
                 </li>
-                <li>   
-                <Link href="/users" className="profile-link">
-                  Mi perfil
-                </Link>
+                <li>
+                  <Link href="/users" className="profile-link">
+                    Mi perfil
+                  </Link>
                 </li>
                 <li>
                   <Link href="/saved" className="nav-link">
-                  Guardado
-                </Link>
+                    Guardado
+                  </Link>
                 </li>
                 <li>
                   <Link href="/">Cerrar sesión</Link>
@@ -71,9 +71,17 @@ export default function RootLayout({
                 </li>
               </ul>
             </nav>
-
           </header>
           {children}
+          <footer>
+            <p>
+              Hecho por <a href="#">@katy-paola</a> y <a href="#">@pipegoods</a>
+              .
+            </p>
+            <Link href="#" aria-label="Volver arriba" title="Volver arriba">
+              <ArrowUp />
+            </Link>
+          </footer>
         </body>
       </html>
     </ClerkProvider>
