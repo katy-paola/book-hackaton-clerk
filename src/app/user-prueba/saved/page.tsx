@@ -202,6 +202,7 @@ export default function SavedPage() {
           <article>
             <header>
               <h3>Hábitos atómicos</h3> - <span>Autoayuda</span>
+              {/* Estos dos elementos de abajo deben ir en un mismo contenedor */}
               <p>James Clear</p>
               <small>De pago</small>
             </header>
