@@ -32,6 +32,7 @@ type FormState = {
 export default function AddBookForm() {
   const router = useRouter()
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
   
   // Estado del formulario
   const [formState, setFormState] = useState<FormState>({
@@ -47,6 +48,54 @@ export default function AddBookForm() {
       router.refresh();
     }
   }, [formState.success, router]);
+
+  // Manejador para previsualizar la imagen seleccionada
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validar el tipo de archivo
+      if (!file.type.startsWith('image/')) {
+        setFormState({
+          error: 'El archivo seleccionado debe ser una imagen',
+          success: false,
+          data: null
+        });
+        e.target.value = '';
+        setImagePreview(null);
+        return;
+      }
+      
+      // Validar el tamaño (máximo 2MB)
+      if (file.size > 2 * 1024 * 1024) {
+        setFormState({
+          error: 'La imagen no debe superar los 2MB',
+          success: false,
+          data: null
+        });
+        e.target.value = '';
+        setImagePreview(null);
+        return;
+      }
+      
+      // Crear URL para previsualización
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      
+      // Limpiar error si existe
+      if (formState.error) {
+        setFormState({
+          error: null,
+          success: false,
+          data: null
+        });
+      }
+    } else {
+      setImagePreview(null);
+    }
+  };
 
   // Función para manejar la acción del formulario con categorías
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -119,15 +168,31 @@ export default function AddBookForm() {
         </div>
         
         <div className="form-group">
-          <label className="form-label" htmlFor="cover_url">URL de Portada</label>
+          <label className="form-label" htmlFor="cover_image">Imagen de Portada</label>
           <input
-            type="url"
-            id="cover_url"
-            name="cover_url"
+            type="file"
+            id="cover_image"
+            name="cover_image"
             className="form-input"
-            placeholder="https://ejemplo.com/imagen.jpg"
+            accept="image/*"
+            onChange={handleImageChange}
             required
           />
+          {imagePreview && (
+            <div className="image-preview">
+              <img 
+                src={imagePreview} 
+                alt="Vista previa" 
+                style={{ 
+                  maxWidth: '100%', 
+                  maxHeight: '200px', 
+                  marginTop: '10px',
+                  borderRadius: '4px'
+                }} 
+              />
+            </div>
+          )}
+          <p className="input-help">Formato recomendado: JPG o PNG. Máximo 2MB.</p>
         </div>
 
         <div className="form-group">

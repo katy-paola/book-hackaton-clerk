@@ -5,7 +5,7 @@ export const BookSchema = z.object({
   title: z.string().min(1, 'El título es requerido'),
   author: z.string().min(1, 'El autor es requerido'),
   description: z.string().optional(),
-  cover_url: z.string().url('La URL de la portada no es válida'),
+  cover_url: z.string().url('La URL de la portada no es válida').optional(),
   link: z.string().url('El enlace del libro no es válido'),
   access: z.enum(['free', 'paid'], {
     errorMap: () => ({ message: 'El acceso debe ser "free" o "paid"' })
@@ -23,15 +23,16 @@ export function validateBook(formData: FormData): ValidationResult {
     const title = formData.get('title')
     const author = formData.get('author')
     const description = formData.get('description')
-    const cover_url = formData.get('cover_url')
     const link = formData.get('link')
     const access = formData.get('access')
+
+    // Ya no es necesario buscar cover_url, ya que ahora manejamos un archivo
+    // La URL real se generará después de cargar el archivo a Supabase Storage
 
     const result = BookSchema.safeParse({
       title,
       author,
       description: description || undefined,
-      cover_url,
       link,
       access,
     })

@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { validateBook } from '../schemas/book.schema'
 import { addBook as addBookService } from '../services/book.service'
 import { saveBookCategories } from '../services/category.service'
+import { uploadBookCover } from '../services/storage.service'
 import { BookRow } from '../types/book.type'
 
 export type AddBookResult = 
@@ -37,11 +38,36 @@ export async function addBook(formData: FormData): Promise<AddBookResult> {
 
     const bookData = validation.data
     
-    // Usa la función del servicio para agregar el libro
-    const { data, error } = await addBookService({
+    // Procesar la imagen de portada si está presente
+    const coverImageFile = formData.get('cover_image') as File
+    if (!coverImageFile || !(coverImageFile instanceof File) || !coverImageFile.size) {
+      return { error: 'La imagen de portada es requerida' }
+    }
+
+    // Cargar la imagen a Supabase Storage
+    const { url: coverUrl, error: uploadError } = await uploadBookCover(
+      coverImageFile,
+      session.userId
+    )
+
+    if (uploadError) {
+      console.error('Error al cargar la imagen:', uploadError)
+      return { error: 'Error al cargar la imagen: ' + uploadError.message }
+    }
+
+    if (!coverUrl) {
+      return { error: 'No se pudo obtener la URL de la imagen cargada' }
+    }
+
+    // Añadir la URL de la imagen al objeto de datos del libro
+    const bookWithCover = {
       ...bookData,
+      cover_url: coverUrl,
       user_id: session.userId
-    })
+    }
+    
+    // Usa la función del servicio para agregar el libro
+    const { data, error } = await addBookService(bookWithCover)
 
     if (error) {
       // Manejo específico para errores conocidos
