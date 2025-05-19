@@ -7,6 +7,35 @@ import Filter from "@/components/icons/Filter";
 import Close from "@/components/icons/Close";
 import More from "@/components/icons/More";
 import ArrowRight from "@/components/icons/ArrowRight";
+import { AVATARS } from "./consts/avatars";
+
+function ModalEditProfile() {
+  return (
+    <form action="">
+      <button type="button">
+        <Close />
+        Cerrar
+      </button>
+      <fieldset>
+        <legend>Editar perfil</legend>
+        <fieldset>
+          <legend>Avatar</legend>
+          {AVATARS.map((avatar) => (
+            <label key={avatar.id} htmlFor="">
+              <Image src={avatar.src} alt={avatar.alt} width={60} height={60} />
+              <input type="radio" name="avatar" />
+            </label>
+          ))}
+        </fieldset>
+        <label htmlFor="name">
+          Cambiar nombre
+          <input type="text" placeholder="Andrés Vizcaíno" name="name" />
+        </label>
+        <button>Guardar cambios</button>
+      </fieldset>
+    </form>
+  );
+}
 
 export default async function UserProfilePage() {
   return (
@@ -31,6 +60,7 @@ export default async function UserProfilePage() {
             <Add />
           </Link>
         </header>
+        <ModalEditProfile />
         <section>
           <section>
             <p>Empieza a construir tu lista personal de libros.</p>
