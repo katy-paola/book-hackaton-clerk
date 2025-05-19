@@ -1,13 +1,21 @@
 import Link from "next/link";
 import Add from "../../../components/icons/Add";
 
-export default function SecondaryHeader({ title }: { title: string }) {
+export default function SecondaryHeader({
+  title,
+  noHasAddLink,
+}: {
+  title: string;
+  noHasAddLink?: boolean;
+}) {
   return (
     <header>
       <h2>{title}</h2>
-      <Link href="/add" aria-label="Agregar libro">
-        <Add />
-      </Link>
+      {!noHasAddLink && (
+        <Link href="/add" aria-label="Agregar libro">
+          <Add />
+        </Link>
+      )}
     </header>
   );
 }

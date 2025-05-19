@@ -4,7 +4,7 @@ import Close from "@/components/icons/Close";
 import { AVATARS } from "./consts/avatars";
 import BookCollectionSection from "../books/components/BookCollectionSection";
 
-const EMPTY_BOOKS_LIST = {
+export const EMPTY_BOOKS_LIST = {
   message: "Empieza a construir tu lista personal de libros.",
   href: "/add-book-prueba",
   contentLink: "Agregar mi primer libro",

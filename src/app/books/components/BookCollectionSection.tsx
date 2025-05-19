@@ -11,18 +11,20 @@ interface BookCollectionProps {
     href?: string;
     contentLink?: string;
   };
+  noHasAddLink?: boolean
 }
 
 export default function BookCollectionSection({
   titleSection,
   emptyBooksList,
+  noHasAddLink,
 }: BookCollectionProps) {
 
   const {message, href, contentLink} = emptyBooksList
 
   return (
     <main>
-      <SecondaryHeader title={titleSection} />
+      <SecondaryHeader title={titleSection} noHasAddLink={noHasAddLink} />
       <section>
         <EmptyBooksList
           message={message}
