@@ -1,5 +1,6 @@
 import Link from "next/link";
 import More from "@/components/icons/More";
+import BookHeader from "./BookHeader";
 
 interface BookProps {
   id: string;
@@ -21,11 +22,12 @@ export default function BookCardItem({
 }: BookProps) {
   return (
     <article>
-      <header>
-        <h3>{title}</h3> - <span>{category}</span>
-        <p>{author}</p>
-        <small>{accessType}</small>
-      </header>
+      <BookHeader
+        title={title}
+        category={category}
+        author={author}
+        accessType={accessType}
+      />
       <div>
         <Link href={bookLink}>Ir al libro</Link>
         <div>
