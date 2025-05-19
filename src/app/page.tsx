@@ -1,6 +1,13 @@
 import BookCollectionSection from "./books/components/BookCollectionSection";
 import styles from "./page.module.css";
 
+const EMPTY_BOOKS_LIST = {
+  message:
+    "Aún no hay libros publicados, puedes empezar por crear tu lista personal.",
+  href: "/add-book-prueba",
+  contentLink: "Agregar mi primer libro",
+};
+
 export default function Home() {
   return (
     <section className={styles.page}>
@@ -11,7 +18,10 @@ export default function Home() {
         Crea tu colección personal, explora listas públicas y mantén a mano todo
         lo que quieres leer.
       </p>
-      <BookCollectionSection message="Aún no hay libros publicados, puedes empezar por crear tu lista personal." href="/add-book-prueba" contentLink="Agregar mi primer libro" />
+      <BookCollectionSection
+        titleSection="Libros publicados"
+        emptyBooksList={EMPTY_BOOKS_LIST}
+      />
     </section>
   );
 }

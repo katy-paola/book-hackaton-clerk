@@ -4,16 +4,25 @@ import SearchArea from "@/app/books/components/SearchArea";
 import { BOOKS } from "@/app/books/data-prueba/books-info";
 import BookCardItem from "./BookCardItem";
 
-interface EmptyBooksListProps {
-    message: string
-    href?: string
-    contentLink?: string
+interface BookCollectionProps {
+  titleSection: string;
+  emptyBooksList: {
+    message: string;
+    href?: string;
+    contentLink?: string;
+  };
 }
 
-export default function BookCollectionSection({message, href, contentLink}:EmptyBooksListProps) {
+export default function BookCollectionSection({
+  titleSection,
+  emptyBooksList,
+}: BookCollectionProps) {
+
+  const {message, href, contentLink} = emptyBooksList
+
   return (
     <main>
-      <SecondaryHeader title="Publicado por otros" />
+      <SecondaryHeader title={titleSection} />
       <section>
         <EmptyBooksList
           message={message}
