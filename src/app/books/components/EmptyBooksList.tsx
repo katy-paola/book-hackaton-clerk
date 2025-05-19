@@ -7,16 +7,18 @@ export default function EmptyBooksList({
   contentLink,
 }: {
   message: string;
-  href: string;
-  contentLink: string;
+  href?: string;
+  contentLink?: string;
 }) {
   return (
     <section>
       <p>{message}</p>
-      <Link href={href}>
-        <ArrowRight />
-        {contentLink}
-      </Link>
+      {href && (
+        <Link href={href}>
+          <ArrowRight />
+          {contentLink}
+        </Link>
+      )}
     </section>
   );
 }
