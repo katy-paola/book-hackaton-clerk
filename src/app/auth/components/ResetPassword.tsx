@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth, useSignIn } from "@clerk/nextjs";
 import type { NextPage } from "next";
 import { redirect, useRouter } from "next/navigation";
+import Close from "@/components/icons/Close";
 
 const ForgotPasswordPage: NextPage = () => {
   const [email, setEmail] = useState("");
@@ -80,11 +81,15 @@ const ForgotPasswordPage: NextPage = () => {
 
   return (
     <form onSubmit={!successfulCreation ? create : reset}>
+      <button type="button">
+        <Close />
+        Cerrar
+      </button>
       <fieldset>
-        <legend>¿Olvidaste tu contraseña</legend>
-        <p>Puedes restablecerla aquí</p>
         {!successfulCreation && (
           <>
+            <legend>¿Olvidaste tu contraseña</legend>
+            <p>Puedes restablecerla aquí</p>
             <label htmlFor="email">
               Correo
               <input
@@ -104,6 +109,7 @@ const ForgotPasswordPage: NextPage = () => {
 
         {successfulCreation && (
           <>
+            <legend>Restablecer contraseña</legend>
             <label htmlFor="password">
               Nueva contraseña
               <input
