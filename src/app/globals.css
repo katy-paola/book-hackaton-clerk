@@ -53,7 +53,7 @@ fieldset {
   padding: 2.4rem 1.6rem;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 10;
   width: 100%;
   background-color: var(--neutral-100-alpha);
   backdrop-filter: blur(8px);

@@ -19,7 +19,7 @@ export default function SearchArea() {
             <Search />
           </span>
         </div>
-        <button className="filter-icon-container">
+        <button className="filter-icon-container" aria-label="Botón de filtros">
           <Filter />
         </button>
       </div>

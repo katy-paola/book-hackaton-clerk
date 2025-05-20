@@ -27,22 +27,24 @@ export default function BookCollectionSection({
       <SecondaryHeader title={titleSection} noHasAddLink={noHasAddLink} />
       <EmptyBooksList message={message} href={href} contentLink={contentLink} />
       <SearchArea />
-      <p>Se encontraron 5 resultados para “Patrones de lectura”.</p>
-      <p>
+      <p className="results-message">
+        Se encontraron 5 resultados para “Patrones de lectura”.
+      </p>
+      <p className="results-message">
         No se encontraron resultados para “Patrones de lectura”. Intenta con
         otra palabra clave.
       </p>
-      <p>
+      <p className="results-message">
         No se encontraron resultados que coincidan con los filtros aplicados.
       </p>
       <div role="complementary" aria-label="Controles de filtros">
-        <button type="button">Limpiar filtros</button>
+        <button type="button" className="filter-reset-button">Limpiar filtros</button>
       </div>
-      <ul>
+      <ul className="books-list">
         {BOOKS.map((book) => (
           <li key={book.id}>
             <BookCardItem
-              id={book.id}
+              book_id={book.id}
               user_id={book.user_id}
               title={book.title}
               category={book.category}
