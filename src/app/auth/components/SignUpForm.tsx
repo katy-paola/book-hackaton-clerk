@@ -13,7 +13,7 @@ interface ClerkError {
 export default function Page() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
@@ -72,9 +72,9 @@ export default function Page() {
             id="sign-up-email"
             name="email"
             type="email"
-            value={email}
+            value={emailAddress}
             placeholder="ejemplo@correo.com"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmailAddress(e.target.value)}
           />
         </div>
         <div>
