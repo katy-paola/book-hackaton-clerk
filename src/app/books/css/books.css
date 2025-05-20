@@ -289,17 +289,11 @@
   border-color: var(--orange-200);
 }
 
-.books-item-header {
+.books-item-header,
+.book-details-header {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-}
-
-.book-title {
-  flex: 1;
-  font-size: 2rem;
-  font-weight: 500;
-  color: var(--neutral-700);
 }
 
 .book-category {
@@ -311,19 +305,30 @@
   border: 1px solid var(--orange-300);
 }
 
-.book-info {
+.book-title,
+.book-details-title {
+  flex: 1;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--neutral-700);
+}
+
+.book-info,
+.book-details-info {
   display: flex;
   align-items: center;
   gap: 1.2rem;
 }
 
-.book-author {
+.book-author,
+.book-details-author {
   font-size: 1.4rem;
   font-weight: 500;
   color: var(--neutral-500);
 }
 
-.book-access-type {
+.book-access-type,
+.book-details-access-type {
   display: flex;
   padding-inline: 0.6rem;
   border-radius: 1.6rem;
@@ -332,14 +337,16 @@
   color: var(--orange-700);
 }
 
-.book-ctas-container {
+.book-ctas-container,
+.book-details-ctas-container {
   position: relative;
   display: flex;
   justify-content: space-between;
   gap: 1.6rem;
 }
 
-.book-main-cta {
+.book-main-cta,
+.book-details-main-cta {
   flex: 1;
   padding: 0.8rem 1.6rem;
   font-size: 1.6rem;
@@ -359,7 +366,10 @@
   box-shadow: none;
 }
 
-.more-icon-container {
+.more-icon-container,
+.book-details-edit,
+.book-details-delete,
+.book-details-save {
   display: grid;
   place-items: center;
   width: 4rem;
@@ -404,4 +414,45 @@
 
 .book-more-menu-item:hover {
   background-color: var(--neutral-200);
+}
+
+.book-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 2.4rem 1.6rem;
+  padding-top: 10.2rem;
+}
+
+.book-details-title {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.book-details-category {
+  color: var(--neutral-500);
+}
+
+.book-details-author {
+  font-size: 1.6rem;
+}
+
+.book-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.book-details-description {
+  font-weight: 400;
+  color: var(--neutral-500);
+}
+
+.book-details-user {
+  font-weight: 400;
+  color: var(--neutral-500);
+}
+
+.book-details-user-link {
+  color: inherit;
 }
