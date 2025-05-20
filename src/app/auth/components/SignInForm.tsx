@@ -82,9 +82,11 @@ export default function SignInForm() {
             <p className="form-field-error-message" role="alert">
               El campo de contraseña no puede estar vacío
             </p>
-            <Link className="forgot-password-link" href="/auth/reset-password">
+            <button
+              className="forgot-password-button"
+            >
               Olvidé mi contraseña
-            </Link>
+            </button>
           </div>
           <button className="auth-form-submit-button" type="submit">
             Iniciar sesión
