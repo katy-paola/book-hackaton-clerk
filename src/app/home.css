@@ -1,0 +1,17 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 2.4rem 1.6rem;
+  padding-top: 10.2rem;
+}
+
+.main-title {
+  font-size: 2.4rem;
+  color: var(--neutral-700);
+}
+
+.main-description {
+  font-size: 2rem;
+  color: var(--neutral-500);
+}
