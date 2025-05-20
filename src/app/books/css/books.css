@@ -282,6 +282,7 @@
   background-color: var(--orange-100);
   border: 1px solid transparent;
   box-shadow: 0 2px 8px rgba(180, 176, 172, 30%);
+  cursor: pointer;
 }
 
 .books-item:hover {

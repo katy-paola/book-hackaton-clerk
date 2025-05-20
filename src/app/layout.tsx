@@ -85,12 +85,24 @@ export default function RootLayout({
             </nav>
           </header>
           {children}
-          <footer>
-            <p>
-              Hecho por <a href="#">@katy-paola</a> y <a href="#">@pipegoods</a>
+          <footer className="main-footer">
+            <p className="app-authors">
+              Hecho por{" "}
+              <a className="app-author" href="#">
+                @katy-paola
+              </a>{" "}
+              y{" "}
+              <a className="app-author" href="#">
+                @pipegoods
+              </a>
               .
             </p>
-            <Link href="#" aria-label="Volver arriba" title="Volver arriba">
+            <Link
+              className="to-top-link"
+              href="#"
+              aria-label="Volver arriba"
+              title="Volver arriba"
+            >
               <ArrowUp />
             </Link>
           </footer>

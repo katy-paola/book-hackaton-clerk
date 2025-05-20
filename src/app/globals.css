@@ -105,6 +105,45 @@ fieldset {
   background-color: var(--neutral-200);
 }
 
+.main-footer {
+  display: flex;
+  padding: 2.4rem 1.6rem;
+  min-height: 8.8rem;
+}
+
+.app-authors {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--neutral-500);
+}
+
+.app-author {
+  color: inherit;
+}
+
+.app-author:hover {
+  color: var(--neutral-700);
+}
+
+.to-top-link {
+  position: fixed;
+  right: 16px;
+  bottom: 24px;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.8rem;
+  color: var(--neutral-700);
+  background-color: var(--orange-500);
+  box-shadow: 1px 1px 0 var(--neutral-500);
+}
+
+.to-top-link:hover {
+  box-shadow: none;
+}
+
 /* Estilos para el componente de carga */
 .loading-container {
   padding: 20px;
