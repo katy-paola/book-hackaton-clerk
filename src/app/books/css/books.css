@@ -167,8 +167,36 @@
 }
 
 .item-categories {
+  position: relative;
   display: flex;
+  align-items: center;
   gap: 0.6rem;
+}
+
+.input-checkbox {
+  appearance: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--neutral-500);
+}
+
+.input-checkbox:checked {
+  border: 1px solid var(--orange-700);
+}
+
+.check-icon-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  display: grid;
+  opacity: 0;
+}
+
+.input-checkbox:checked ~ .check-icon-container {
+  opacity: 1;
+  color: var(--orange-700);
 }
 
 .all-categories-button {
@@ -203,4 +231,10 @@
   background-color: var(--orange-500);
   border: none;
   box-shadow: 1px 1px 0 var(--neutral-500);
+}
+
+.categories-filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
 }

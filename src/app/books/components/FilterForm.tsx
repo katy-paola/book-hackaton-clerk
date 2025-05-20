@@ -1,5 +1,7 @@
 import Close from "../../../components/icons/Close";
 import Search from "../../../components/icons/Search";
+import Checkbox from "./Checkbox";
+import { CATEGORIES, ACCESS_TYPES } from "../consts/checkboxes-data";
 
 export default function FilterForm() {
   return (
@@ -28,51 +30,15 @@ export default function FilterForm() {
             Seleccionadas (0)
           </small>
           <div className="list-categories">
-            <label className="item-categories" htmlFor="finanzas">
-              <input
-                id="finanzas"
-                type="checkbox"
-                name="finanzas"
-                value="finanzas"
+            {CATEGORIES.map((category) => (
+              <Checkbox
+                key={category.id}
+                id={`${category.id}-filter-form`}
+                name={category.name}
+                value={category.value}
+                label={category.label}
               />
-              Finanzas
-            </label>
-            <label className="item-categories" htmlFor="matematicas">
-              <input
-                id="matematicas"
-                type="checkbox"
-                name="matematicas"
-                value="matematicas"
-              />
-              Matemáticas
-            </label>
-            <label className="item-categories" htmlFor="programacion">
-              <input
-                id="programacion"
-                type="checkbox"
-                name="programacion"
-                value="programacion"
-              />
-              Programación
-            </label>
-            <label className="item-categories" htmlFor="autoayuda">
-              <input
-                id="autoayuda"
-                type="checkbox"
-                name="autoayuda"
-                value="autoayuda"
-              />
-              Autoayuda
-            </label>
-            <label className="item-categories" htmlFor="literatura">
-              <input
-                id="literatura"
-                type="checkbox"
-                name="literatura"
-                value="literatura"
-              />
-              Literatura
-            </label>
+            ))}
           </div>
           <button type="button" className="all-categories-button">
             Ver todas las categorías
@@ -81,19 +47,15 @@ export default function FilterForm() {
         <fieldset className="container-access-type">
           <legend className="filter-form-legend">Tipo de acceso</legend>
           <div className="list-categories">
-            <label className="item-categories" htmlFor="gratis">
-              <input id="gratis" type="checkbox" name="gratis" value="gratis" />
-              Gratis
-            </label>
-            <label className="item-categories" htmlFor="de-pago">
-              <input
-                id="de-pago"
-                type="checkbox"
-                name="de-pago"
-                value="de-pago"
+            {ACCESS_TYPES.map((category) => (
+              <Checkbox
+                key={category.id}
+                id={`${category.id}-access-type-filter-form`}
+                name={category.name}
+                value={category.value}
+                label={category.label}
               />
-              De pago
-            </label>
+            ))}
           </div>
         </fieldset>
         <button type="submit" className="form-filter-submit-button">
