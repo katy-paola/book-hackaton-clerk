@@ -5,6 +5,7 @@ import { useAuth, useSignIn } from "@clerk/nextjs";
 import type { NextPage } from "next";
 import { redirect, useRouter } from "next/navigation";
 import Close from "@/components/icons/Close";
+import FormFieldBase from "./FormFieldBase";
 
 const ForgotPasswordPage: NextPage = () => {
   const [email, setEmail] = useState("");
@@ -90,15 +91,15 @@ const ForgotPasswordPage: NextPage = () => {
           <>
             <legend>¿Olvidaste tu contraseña</legend>
             <p>Puedes restablecerla aquí</p>
-            <label htmlFor="email">
-              Correo
-              <input
-                type="email"
-                placeholder="ejemplo@correo.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
+            <FormFieldBase
+              label="Correo"
+              id="reset-password-email"
+              name="email"
+              type="email"
+              value={email}
+              placeholder="ejemplo@correo.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <div>
               <button>Enviar código</button>
               <button type="button">Cancelar</button>
@@ -110,33 +111,33 @@ const ForgotPasswordPage: NextPage = () => {
         {successfulCreation && (
           <>
             <legend>Restablecer contraseña</legend>
-            <label htmlFor="password">
-              Nueva contraseña
-              <input
-                type="password"
-                value={password}
-                placeholder="••••••••"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            <label htmlFor="confirm-password">
-              Nueva contraseña
-              <input
-                type="password"
-                value={confirmPassword}
-                placeholder="••••••••"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </label>
-            <label htmlFor="code">
-              Código de verificación
-              <input
-                type="code"
-                value={code}
-                placeholder="123456"
-                onChange={(e) => setCode(e.target.value)}
-              />
-            </label>
+            <FormFieldBase
+              label="Nueva contraseña"
+              id="new-password"
+              name="password"
+              type="password"
+              value={password}
+              placeholder="••••••••"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormFieldBase
+              label="Confirmar nueva contraseña"
+              id="confirm-new-password"
+              name="confirm-password"
+              type="password"
+              value={confirmPassword}
+              placeholder="••••••••"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <FormFieldBase
+              label="Código de verificación"
+              id="verification-code"
+              name="code"
+              type="number"
+              value={code}
+              placeholder="123456"
+              onChange={(e) => setCode(e.target.value)}
+            />
             <button>Restablecer contraseña</button>
             {error && <p>{error}</p>}
           </>
