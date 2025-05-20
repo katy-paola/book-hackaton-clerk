@@ -39,6 +39,7 @@ button {
 
 fieldset {
   display: contents;
+  border: none;
 }
 
 .body {

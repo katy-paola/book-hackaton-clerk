@@ -64,37 +64,45 @@ export default function ModalEditProfile({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="button" onClick={onClose}>
+    <form onSubmit={handleSubmit} className="modal-edit-profile">
+      <button className="close-button" type="button" onClick={onClose}>
         <Close />
         Cerrar
       </button>
 
       <fieldset>
-        <legend>Editar perfil</legend>
+        <legend className="modal-edit-profile-title">Editar perfil</legend>
 
         {error && <div className="error-message">{error}</div>}
 
-        <fieldset>
-          <legend>Avatar</legend>
-          <div className="avatar-grid">
+        <fieldset className="field-form">
+          <legend className="modal-edit-profile-legend">Cambiar avatar</legend>
+          <div className="avatar-picker">
             {AVATARS.map((avatar) => (
-              <label key={avatar.id}>
-                <img src={avatar.src} alt={avatar.alt} width={60} height={60} />
+              <label className="avatar-label" key={avatar.id}>
                 <input
+                  className="avatar-input"
                   type="radio"
                   name="avatar"
                   checked={selectedAvatarId === avatar.id}
                   onChange={() => handleAvatarSelect(avatar.id, avatar.src)}
+                />
+                <img
+                  className="avatar-option"
+                  src={avatar.src}
+                  alt={avatar.alt}
+                  width={60}
+                  height={60}
                 />
               </label>
             ))}
           </div>
         </fieldset>
 
-        <label htmlFor="name">
+        <label className="field-form" htmlFor="name">
           Cambiar nombre
           <input
+            className="field-form-input"
             type="text"
             id="name"
             name="name"
@@ -104,7 +112,11 @@ export default function ModalEditProfile({
           />
         </label>
 
-        <button type="submit" disabled={isLoading}>
+        <button
+          className="edit-profile-submit-button"
+          type="submit"
+          disabled={isLoading}
+        >
           {isLoading ? "Guardando..." : "Guardar cambios"}
         </button>
       </fieldset>
