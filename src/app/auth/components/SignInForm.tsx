@@ -53,9 +53,9 @@ export default function SignInForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <div>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <fieldset className="auth-form-fieldset">
+          <div className="form-field-container">
             <FormFieldBase
               label="Correo"
               id="sign-in-email"
@@ -65,9 +65,11 @@ export default function SignInForm() {
               placeholder="ejemplo@correo.com"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <p role="alert">El campo de correo no puede estar vacío</p>
+            <p className="form-field-error-message" role="alert">
+              El campo de correo no puede estar vacío
+            </p>
           </div>
-          <div>
+          <div className="form-field-container">
             <FormFieldBase
               label="Contraseña"
               id="sign-in-password"
@@ -77,15 +79,20 @@ export default function SignInForm() {
               placeholder="••••••••"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <p role="alert">El campo de contraseña no puede estar vacío</p>
-            <Link href="/auth/reset-password">Olvidé mi contraseña</Link>
+            <p className="form-field-error-message" role="alert">
+              El campo de contraseña no puede estar vacío
+            </p>
+            <Link className="forgot-password-link" href="/auth/reset-password">
+              Olvidé mi contraseña
+            </Link>
           </div>
-          <button type="submit">Iniciar sesión</button>
+          <button className="auth-form-submit-button" type="submit">
+            Iniciar sesión
+          </button>
         </fieldset>
-        <button>
-          <Link href="/auth/sign-up">
-            ¿No tienes cuenta? <span>Regístrate</span>{" "}
-          </Link>
+        <button className="no-account-button">
+          ¿No tienes cuenta?{" "}
+          <span className="no-account-button-link">Regístrate</span>.
         </button>
       </form>
       <ResetPassword />

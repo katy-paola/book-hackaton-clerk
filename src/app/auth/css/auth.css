@@ -1,4 +1,6 @@
 .auth-page {
+  display: flex;
+  flex-direction: column;
   padding-top: 10.2rem;
 }
 
@@ -35,4 +37,90 @@
   border: 1px solid transparent;
   border-top-color: var(--orange-700);
   border-right-color: var(--orange-700);
+}
+
+.auth-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 2.4rem 1.6rem;
+  background-color: var(--orange-100);
+}
+
+.auth-form-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field-base {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.form-field-base-input {
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  line-height: 1.5;
+  border: 1px solid var(--neutral-500);
+  color: var(--neutral-500);
+  outline: none;
+}
+
+.form-field-base-input:focus {
+  border: 1px solid var(--orange-700);
+}
+
+.form-field-error-message,
+.forgot-password-link {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--red-700);
+}
+
+.forgot-password-link {
+  color: var(--neutral-700);
+  text-decoration: underline;
+}
+
+.auth-form-submit-button {
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  color: var(--neutral-700);
+  background-color: var(--orange-500);
+  border: none;
+  box-shadow: 1px 1px 0 var(--neutral-500);
+}
+
+.auth-form-submit-button:hover {
+  box-shadow: none;
+}
+
+.no-account-button {
+  font-size: 1.4rem;
+  font-family: inherit;
+  background-color: transparent;
+  border: none;
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.no-account-button-link {
+  text-decoration: underline;
 }

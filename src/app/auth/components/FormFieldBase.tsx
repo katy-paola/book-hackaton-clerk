@@ -11,9 +11,10 @@ interface formFieldBaseProps {
 export default function FormFieldBase({ ...props }: formFieldBaseProps) {
   const { label, id, name, type, value, placeholder, onChange } = props;
   return (
-    <label htmlFor={id}>
+    <label className="form-field-base" htmlFor={id}>
       {label}
       <input
+      className="form-field-base-input"
         id={id}
         name={name}
         type={type}
