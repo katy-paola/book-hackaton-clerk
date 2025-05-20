@@ -92,9 +92,9 @@ export default function SignInForm() {
             Iniciar sesión
           </button>
         </fieldset>
-        <button className="no-account-button">
+        <button className="account-button">
           ¿No tienes cuenta?{" "}
-          <span className="no-account-button-link">Regístrate</span>.
+          <span className="account-button-link">Regístrate</span>.
         </button>
       </form>
       <ResetPassword />

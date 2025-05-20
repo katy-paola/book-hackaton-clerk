@@ -116,7 +116,7 @@
   box-shadow: none;
 }
 
-.no-account-button {
+.account-button {
   font-size: 1.4rem;
   font-family: inherit;
   background-color: transparent;
@@ -125,7 +125,7 @@
   color: var(--neutral-700);
 }
 
-.no-account-button-link {
+.account-button-link {
   text-decoration: underline;
 }
 
