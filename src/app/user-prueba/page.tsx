@@ -1,9 +1,11 @@
+"use client";
+
 import "./css/user.css";
 import Image from "next/image";
 import Edit from "@/components/icons/Edit";
-import Close from "@/components/icons/Close";
-import { AVATARS } from "./consts/avatars";
+import ModalEditProfile from "./components/ModalEditProfile";
 import BookCollectionSection from "../books/components/BookCollectionSection";
+import EditProfileClient from "./components/EditProfileClient";
 
 export const EMPTY_BOOKS_LIST = {
   message: "Empieza a construir tu lista personal de libros.",
@@ -11,54 +13,23 @@ export const EMPTY_BOOKS_LIST = {
   contentLink: "Agregar mi primer libro",
 };
 
+const CURRENT_USER = {
+  avatar: "./consts/avatars/hombre-gafas-cabello-ondulado.png",
+  email: "pipe.jaider@gmail.com",
+  id: "user_2xFFhuwrZm12KcvvCYiHj358F4F",
+  name: "Andrés Vizcaíno",
+};
+
 export default function UserProfilePage() {
   return (
     <section className="profile-container">
       <header>
-        <Image
-          src="/avatars/hombre-gafas-cabello-ondulado.png"
-          alt="Foto de Andrés Vizcaíno"
-          width={40}
-          height={40}
-        />
-        <h1>Andrés Vizcaíno</h1>
-        <button>
-          <Edit />
-        </button>
+        <EditProfileClient user={CURRENT_USER} />
       </header>
-      <ModalEditProfile />
       <BookCollectionSection
         titleSection="Mis libros"
         emptyBooksList={EMPTY_BOOKS_LIST}
       />
     </section>
-  );
-}
-
-function ModalEditProfile() {
-  return (
-    <form action="">
-      <button type="button">
-        <Close />
-        Cerrar
-      </button>
-      <fieldset>
-        <legend>Editar perfil</legend>
-        <fieldset>
-          <legend>Avatar</legend>
-          {AVATARS.map((avatar) => (
-            <label key={avatar.id} htmlFor="">
-              <Image src={avatar.src} alt={avatar.alt} width={60} height={60} />
-              <input type="radio" name="avatar" />
-            </label>
-          ))}
-        </fieldset>
-        <label htmlFor="name">
-          Cambiar nombre
-          <input type="text" placeholder="Andrés Vizcaíno" name="name" />
-        </label>
-        <button>Guardar cambios</button>
-      </fieldset>
-    </form>
   );
 }
