@@ -37,18 +37,18 @@ async function UserInfo({ userId }: { userId: string }) {
   }
 
   return (
-    <div className="user-profile">
-      <div className="user-header">
+    <section className="user-profile">
+      <header className="user-header">
         <img 
           src={user.avatar} 
           alt={`Avatar de ${user.name}`} 
           className="user-avatar"
         />
         <h2 className="user-name">{user.name}</h2>
-      </div>
+      </header>
       
       <EditProfileClient user={user} />
-    </div>
+    </section>
   )
 }
 
