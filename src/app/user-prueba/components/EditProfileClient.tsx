@@ -11,26 +11,29 @@ export default function EditProfileClient({ user }: { user: User }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   return (
-    <div className="profile-edit-section">
+    <>
       {isFormVisible ? (
         <ModalEditProfile user={user} onClose={() => setIsFormVisible(false)} />
       ) : (
         <button
           onClick={() => setIsFormVisible(true)}
-          className="edit-profile-button"
+          className="edit-profile-container"
         >
-          <img
-            src="/avatars/hombre-gafas-cabello-ondulado.png"
-            alt="Foto de Andrés Vizcaíno"
-            width={40}
-            height={40}
-          />
-          <h1>Andrés Vizcaíno</h1>
-          <span>
+          <div className="profile-user-info">
+            <img
+              className="profile-avatar"
+              src="/avatars/default-avatar.png"
+              alt="Foto de Andrés Vizcaíno"
+              width={40}
+              height={40}
+            />
+            <h1 className="profile-user-name">Andrés Vizcaíno</h1>
+          </div>
+          <span className="profile-edit-icon-container">
             <Edit />
           </span>
         </button>
       )}
-    </div>
+    </>
   );
 }

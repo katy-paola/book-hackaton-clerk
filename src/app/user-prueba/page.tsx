@@ -1,9 +1,6 @@
 "use client";
 
 import "./css/user.css";
-import Image from "next/image";
-import Edit from "@/components/icons/Edit";
-import ModalEditProfile from "./components/ModalEditProfile";
 import BookCollectionSection from "../books/components/BookCollectionSection";
 import EditProfileClient from "./components/EditProfileClient";
 
@@ -23,7 +20,7 @@ const CURRENT_USER = {
 export default function UserProfilePage() {
   return (
     <section className="profile-container">
-      <header>
+      <header className="profile-header">
         <EditProfileClient user={CURRENT_USER} />
       </header>
       <BookCollectionSection
