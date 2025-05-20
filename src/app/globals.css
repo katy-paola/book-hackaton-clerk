@@ -1,27 +1,30 @@
 :root {
   /* Colors */
+  --neutral-100: #fbfbfb;
+  --neutral-100-alpha: rgba(251, 251, 251, 0.9);
+  --neutral-300: #b4b0ac;
+  --neutral-200: #ebebeb;
   --neutral-500: #4e4e4e;
   --neutral-700: #2f2f2f;
-  --orange-700: #be6804;
-  --orange-500: #ef9731;
   --orange-100: #fff6ed;
-  --neutral-100: #fbfbfb;
   --orange-200: #ffe7ca;
-  --green-700: #05781a;
-  --blue-700: #08497d;
-  --green-500: #34be4d;
-  --red-700: #e30e0e;
-  --green-100: #edfff0;
-  --blue-500: #50a0e0;
-  --neutral-200: #ebebeb;
-  --blue-100: #edf7ff;
-  --yellow-700: #6d6400;
-  --red-500: #f96262;
-  --red-100: #fff6f6;
-  --neutral-300: #b4b0ac;
-  --yellow-500: #e9d718;
   --orange-300: #ffc37e;
+  --orange-500: #ef9731;
+  --orange-700: #be6804;
+  --green-100: #edfff0;
+  --green-500: #34be4d;
+  --green-700: #05781a;
+  --blue-100: #edf7ff;
+  --blue-500: #50a0e0;
+  --blue-700: #08497d;
+  --red-100: #fff6f6;
+  --red-500: #f96262;
+  --red-700: #e30e0e;
   --yellow-100: #fffcd7;
+  --yellow-500: #e9d718;
+  --yellow-700: #6d6400;
+
+  font-size: 10px;
 }
 
 * {
@@ -30,9 +33,70 @@
   margin: 0;
 }
 
-a {
-  color: inherit;
+button {
+  cursor: pointer;
+}
+
+.body {
+  font-size: 1.6rem;
+  background-color: var(--neutral-100);
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.4rem 1.6rem;
+  position: fixed;
+  width: 100%;
+  background-color: var(--neutral-100-alpha);
+  backdrop-filter: blur(8px);
+}
+
+.logo-container {
+  display: grid;
+}
+
+.menu-button {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.8rem;
+  color: var(--neutral-700);
+  background-color: var(--orange-100);
+  border: 2px solid var(--orange-200);
+}
+
+.menu-button:hover {
+  background-color: var(--orange-200);
+}
+
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: 88px;
+  left: 0;
+  width: 100%;
+  background-color: var(--neutral-100);
+}
+
+.nav-menu-ul {
+  list-style: none;
+}
+
+.nav-item {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  width: 100%;
+  font-weight: 500;
+  text-align: center;
+  color: var(--neutral-500);
   text-decoration: none;
+}
+
+.nav-item:hover {
+  background-color: var(--neutral-200);
 }
 
 /* Estilos para el componente de carga */
