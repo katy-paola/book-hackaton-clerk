@@ -6,6 +6,8 @@ import { getBooksByUser } from '@/app/books/services/book.service'
 import BookCard from '@/app/books/components/BookCard'
 import Loading from './loading'
 import EditProfileClient from './components/EditProfileClient'
+import SignOutButton from './components/SignOutButton'
+import { auth } from '@clerk/nextjs/server'
 
 // Componente que carga los libros del usuario
 async function UserBooks({ userId }: { userId: string }) {
@@ -54,12 +56,21 @@ async function UserInfo({ userId }: { userId: string }) {
 
 export default async function UserProfilePage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
+  const { userId } = await auth();
+  const isOwnProfile = userId === params.id;
+  
   return (
-    <div className="page-container">
+    <div className="page-container" style={{ paddingTop: '100px' }}>
       <div className="page-header">
         <Link href="/books" className="back-button">
           ← Volver al catálogo
         </Link>
+
+        {isOwnProfile && (
+          <div style={{ marginLeft: 'auto' }}>
+            <SignOutButton />
+          </div>
+        )}
       </div>
       
       <Suspense fallback={<Loading />}>
