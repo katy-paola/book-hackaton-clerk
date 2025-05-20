@@ -5,6 +5,7 @@ import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import ResetPassword from "./ResetPassword";
+import FormFieldBase from "./FormFieldBase";
 
 interface ClerkError {
   errors?: { message: string }[];
@@ -55,31 +56,27 @@ export default function SignInForm() {
       <form onSubmit={handleSubmit}>
         <fieldset>
           <div>
-            <label htmlFor="email">
-              Correo
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                id="email"
-                name="email"
-                type="email"
-                value={email}
-                placeholder="ejemplo@correo.com"
-              />
-            </label>
+            <FormFieldBase
+              label="Correo"
+              id="sign-in-email"
+              name="email"
+              type="email"
+              value={email}
+              placeholder="ejemplo@correo.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <p role="alert">El campo de correo no puede estar vacío</p>
           </div>
           <div>
-            <label htmlFor="password">
-              Contraseña
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                id="password"
-                name="password"
-                type="password"
-                value={password}
-                placeholder="••••••••"
-              />
-            </label>
+            <FormFieldBase
+              label="Contraseña"
+              id="sign-in-password"
+              name="password"
+              type="password"
+              value={password}
+              placeholder="••••••••"
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <p role="alert">El campo de contraseña no puede estar vacío</p>
             <Link href="/auth/reset-password">Olvidé mi contraseña</Link>
           </div>
