@@ -59,10 +59,14 @@ export default function Page() {
     } catch (err: any) {
       // Mejorando el manejo de errores de Clerk
       console.error("Error de registro:", err);
-      
+
       // Intentar extraer mensaje de error legible
       if (err && typeof err === "object") {
-        if ("errors" in err && Array.isArray(err.errors) && err.errors.length > 0) {
+        if (
+          "errors" in err &&
+          Array.isArray(err.errors) &&
+          err.errors.length > 0
+        ) {
           // Formato típico de errores de Clerk
           const clerkError = err.errors[0];
           setError(clerkError.message || "Error en el registro");
@@ -80,9 +84,9 @@ export default function Page() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <fieldset>
-        <div>
+    <form onSubmit={handleSubmit} className="auth-form">
+      <fieldset className="auth-form-fieldset">
+        <div className="form-field-container">
           <FormFieldBase
             label="Nombre"
             id="sign-up-name"
@@ -93,7 +97,7 @@ export default function Page() {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div>
+        <div className="form-field-container">
           <FormFieldBase
             label="Correo"
             id="sign-up-email"
@@ -103,6 +107,9 @@ export default function Page() {
             placeholder="ejemplo@correo.com"
             onChange={(e) => setEmailAddress(e.target.value)}
           />
+          <p className="form-field-error-message" role="alert">
+            El campo de correo no puede estar vacío
+          </p>
         </div>
         <div>
           <FormFieldBase
@@ -114,6 +121,9 @@ export default function Page() {
             placeholder="••••••••"
             onChange={(e) => setPassword(e.target.value)}
           />
+          <p className="form-field-error-message" role="alert">
+            El campo de contraseña no puede estar vacío
+          </p>
         </div>
         <div>
           <FormFieldBase
@@ -125,24 +135,32 @@ export default function Page() {
             placeholder="••••••••"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          <p className="form-field-error-message" role="alert">
+            Las contraseñas no coinciden
+          </p>
         </div>
-        
+
         {/* Mostrar mensaje de error */}
         {error && (
-          <div style={{ color: "red", margin: "10px 0" }}>
-            <p role="alert">{error}</p>
-          </div>
+          <p className="form-field-error-message" role="alert">
+            {error}
+          </p>
         )}
-        
+
         {/* CAPTCHA Widget */}
-        <div id="clerk-captcha" data-cl-theme="auto" data-cl-size="normal"></div>
-        
-        <button type="submit">Registrarme</button>
+        <div
+          id="clerk-captcha"
+          data-cl-theme="auto"
+          data-cl-size="normal"
+        ></div>
+
+        <button className="auth-form-submit-button" type="submit">
+          Registrarme
+        </button>
       </fieldset>
-      <button>
-        <Link href="/auth/sign-up">
-          ¿Ya tienes una cuenta? <span>Iniciar sesión</span>{" "}
-        </Link>
+      <button className="account-button">
+        ¿Ya tienes una cuenta?{" "}
+        <span className="account-button-link">Iniciar sesión</span>.
       </button>
     </form>
   );

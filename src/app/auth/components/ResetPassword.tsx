@@ -81,16 +81,25 @@ const ForgotPasswordPage: NextPage = () => {
   }
 
   return (
-    <form onSubmit={!successfulCreation ? create : reset}>
-      <button type="button">
+    <form
+      className="reset-password-form"
+      onSubmit={!successfulCreation ? create : reset}
+    >
+      <button className="close-button" type="button">
         <Close />
         Cerrar
       </button>
       <fieldset>
         {!successfulCreation && (
           <>
-            <legend>¿Olvidaste tu contraseña</legend>
-            <p>Puedes restablecerla aquí</p>
+            <div className="reset-password-legend-container">
+              <legend className="reset-password-title">
+                ¿Olvidaste tu contraseña?
+              </legend>
+              <p className="reset-password-description">
+                Puedes restablecerla aquí
+              </p>
+            </div>
             <FormFieldBase
               label="Correo"
               id="reset-password-email"
@@ -100,9 +109,16 @@ const ForgotPasswordPage: NextPage = () => {
               placeholder="ejemplo@correo.com"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <div>
-              <button>Enviar código</button>
-              <button type="button">Cancelar</button>
+            <div className="reset-password-buttons">
+              <button className="reset-password-button reset-password-code-button">
+                Enviar código
+              </button>
+              <button
+                className="reset-password-button reset-password-cancel-button"
+                type="button"
+              >
+                Cancelar
+              </button>
             </div>
             {error && <p>{error}</p>}
           </>
@@ -110,7 +126,9 @@ const ForgotPasswordPage: NextPage = () => {
 
         {successfulCreation && (
           <>
-            <legend>Restablecer contraseña</legend>
+            <legend className="reset-password-title">
+              Restablecer contraseña
+            </legend>
             <FormFieldBase
               label="Nueva contraseña"
               id="new-password"
@@ -138,7 +156,17 @@ const ForgotPasswordPage: NextPage = () => {
               placeholder="123456"
               onChange={(e) => setCode(e.target.value)}
             />
-            <button>Restablecer contraseña</button>
+            <div className="reset-password-buttons">
+              <button className="reset-password-button reset-password-code-button">
+                Restablecer contraseña
+              </button>
+              <button
+                className="reset-password-button reset-password-cancel-button"
+                type="button"
+              >
+                Cancelar
+              </button>
+            </div>
             {error && <p>{error}</p>}
           </>
         )}

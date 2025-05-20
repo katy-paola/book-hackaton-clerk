@@ -1,0 +1,217 @@
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10.2rem;
+}
+
+.auth-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-title {
+  padding: 0 1.6rem 2.4rem;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+
+.auth-tabs {
+  display: flex;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 1.6rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--neutral-700);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-bottom-color: var(--orange-700);
+}
+
+.active-tab {
+  background-color: var(--orange-100);
+  border: 1px solid transparent;
+  border-top-color: var(--orange-700);
+  border-right-color: var(--orange-700);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 2.4rem 1.6rem;
+  background-color: var(--orange-100);
+}
+
+.auth-form-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field-base {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.form-field-base-input {
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  line-height: 1.5;
+  border: 1px solid var(--neutral-500);
+  color: var(--neutral-500);
+  outline: none;
+}
+
+.form-field-base-input:focus {
+  border: 1px solid var(--orange-700);
+}
+
+.form-field-error-message,
+.forgot-password-link {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--red-700);
+}
+
+.forgot-password-button {
+  color: var(--neutral-700);
+  text-decoration: underline;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1.4rem;
+}
+
+.auth-form-submit-button {
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  color: var(--neutral-700);
+  background-color: var(--orange-500);
+  border: none;
+  box-shadow: 1px 1px 0 var(--neutral-500);
+}
+
+.auth-form-submit-button:hover {
+  box-shadow: none;
+}
+
+.account-button {
+  font-size: 1.4rem;
+  font-family: inherit;
+  background-color: transparent;
+  border: none;
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.account-button-link {
+  text-decoration: underline;
+}
+
+.reset-password-form {
+  visibility: hidden;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 16px;
+  right: 16px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 1.6rem;
+  background-color: var(--neutral-100);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 25%);
+}
+
+.close-button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: max-content;
+  background-color: transparent;
+  color: var(--neutral-700);
+  border: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.close-button:hover {
+  color: var(--orange-700);
+}
+
+.reset-password-legend-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.reset-password-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--neutral-700);
+}
+
+.reset-password-description {
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.field-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.reset-password-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.reset-password-button {
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  color: var(--neutral-700);
+  background-color: var(--orange-500);
+  border: 2px solid transparent;
+  box-shadow: 1px 1px 0 var(--neutral-500);
+}
+
+.reset-password-button:hover {
+  box-shadow: none;
+}
+
+.reset-password-cancel-button {
+  color: var(--orange-700);
+  background-color: transparent;
+  border-color: var(--orange-700);
+}
