@@ -4,6 +4,7 @@ import * as React from "react";
 import { useSignUp } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import FormFieldBase from "./FormFieldBase";
 
 interface ClerkError {
   errors?: { message: string }[];
@@ -12,7 +13,7 @@ interface ClerkError {
 export default function Page() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const [name, setName] = React.useState("");
-  const [emailAddress, setEmailAddress] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
@@ -55,56 +56,48 @@ export default function Page() {
     <form onSubmit={handleSubmit}>
       <fieldset>
         <div>
-          <label htmlFor="name">
-            Nombre
-            <input
-              id="name"
-              type="text"
-              name="name"
-              value={name}
-              placeholder="Juan Pérez"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
+          <FormFieldBase
+            label="Nombre"
+            id="sign-up-name"
+            name="name"
+            type="text"
+            value={name}
+            placeholder="Juan Pérez"
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
         <div>
-          <label htmlFor="email">
-            Correo
-            <input
-              id="email"
-              type="email"
-              name="email"
-              value={emailAddress}
-              placeholder="ejemplo@correo.com"
-              onChange={(e) => setEmailAddress(e.target.value)}
-            />
-          </label>
+          <FormFieldBase
+            label="Correo"
+            id="sign-up-email"
+            name="email"
+            type="email"
+            value={email}
+            placeholder="ejemplo@correo.com"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div>
-          <label htmlFor="password">
-            Contraseña
-            <input
-              id="password"
-              type="password"
-              name="password"
-              value={password}
-              placeholder="••••••••"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
+          <FormFieldBase
+            label="Contraseña"
+            id="sign-up-password"
+            name="password"
+            type="password"
+            value={password}
+            placeholder="••••••••"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <div>
-          <label htmlFor="confirmPassword">
-            Confirmar contraseña
-            <input
-              id="confirmPassword"
-              type="password"
-              name="confirmPassword"
-              value={confirmPassword}
-              placeholder="••••••••"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </label>
+          <FormFieldBase
+            label="Confirmar contraseña"
+            id="sign-up-password"
+            name="confirm-password"
+            type="password"
+            value={confirmPassword}
+            placeholder="••••••••"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
           <p role="alert">{error}</p>
         </div>
         <button type="submit">Registrarme</button>
