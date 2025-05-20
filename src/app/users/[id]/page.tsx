@@ -5,6 +5,7 @@ import { getUserById } from '@/app/users/services/user.service'
 import { getBooksByUser } from '@/app/books/services/book.service'
 import BookCard from '@/app/books/components/BookCard'
 import Loading from './loading'
+import EditProfileButton from './components/EditProfileButton'
 
 // Componente que carga los libros del usuario
 async function UserBooks({ userId }: { userId: string }) {
@@ -44,6 +45,7 @@ async function UserInfo({ userId }: { userId: string }) {
           className="user-avatar"
         />
         <h2 className="user-name">{user.name}</h2>
+        <EditProfileButton user={user} />
       </div>
     </div>
   )

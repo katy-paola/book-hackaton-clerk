@@ -142,19 +142,22 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
     
     console.log('Book successfully updated');
     
+    // Ensure we have a valid BookRow object
+    const fallbackBook: BookRow = {
+      id: bookId,
+      title: bookData.title,
+      author: bookData.author,
+      description: bookData.description || null,
+      cover_url: bookData.cover_url || '', // Ensure cover_url is a string
+      access: bookData.access,
+      link: bookData.link,
+      user_id: userId,
+      created_at: null
+    }
+    
     return { 
       success: true, 
-      data: updatedBook || { 
-        id: bookId,
-        title: bookData.title,
-        author: bookData.author,
-        description: bookData.description || null,
-        cover_url: bookData.cover_url,
-        access: bookData.access,
-        link: bookData.link,
-        user_id: userId,
-        created_at: null
-      }
+      data: updatedBook || fallbackBook
     }
   } catch (error) {
     console.error('Exception in editBook:', error);

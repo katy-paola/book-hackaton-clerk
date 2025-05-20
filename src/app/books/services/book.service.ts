@@ -43,9 +43,15 @@ export async function getAllBooks(): Promise<BookResponse> {
 export async function addBook(book: BookWithId): Promise<BookResponse> {
   try {
     const supabase = createServerSupabaseClient()
+    // Ensure cover_url is a string before inserting
+    const bookWithValidCoverUrl = {
+      ...book,
+      cover_url: book.cover_url || '' // Provide default empty string if undefined
+    }
+    
     const { data, error } = await supabase
       .from('books')
-      .insert(book)
+      .insert(bookWithValidCoverUrl)
       .select()
 
     if (error) {

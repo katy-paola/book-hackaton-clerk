@@ -1,3 +1,4 @@
+import 'server-only'
 import { Database } from '@/types/database.types'
 import { auth } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
