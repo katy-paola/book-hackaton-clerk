@@ -3,6 +3,7 @@ import EmptyBooksList from "@/app/books/components/EmptyBooksList";
 import SearchArea from "@/app/books/components/SearchArea";
 import { BOOKS } from "@/app/books/data-prueba/books-info";
 import BookCardItem from "./BookCardItem";
+import "../css/books.css";
 
 interface BookCollectionProps {
   titleSection: string;
@@ -11,7 +12,7 @@ interface BookCollectionProps {
     href?: string;
     contentLink?: string;
   };
-  noHasAddLink?: boolean
+  noHasAddLink?: boolean;
 }
 
 export default function BookCollectionSection({
@@ -19,20 +20,13 @@ export default function BookCollectionSection({
   emptyBooksList,
   noHasAddLink,
 }: BookCollectionProps) {
-
-  const {message, href, contentLink} = emptyBooksList
+  const { message, href, contentLink } = emptyBooksList;
 
   return (
-    <main>
+    <main className="book-collection-section">
       <SecondaryHeader title={titleSection} noHasAddLink={noHasAddLink} />
-      <section>
-        <EmptyBooksList
-          message={message}
-          href={href}
-          contentLink={contentLink}
-        />
-        <SearchArea />
-      </section>
+      <EmptyBooksList message={message} href={href} contentLink={contentLink} />
+      <SearchArea />
       <p>Se encontraron 5 resultados para “Patrones de lectura”.</p>
       <p>
         No se encontraron resultados para “Patrones de lectura”. Intenta con

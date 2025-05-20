@@ -11,10 +11,10 @@ export default function EmptyBooksList({
   contentLink?: string;
 }) {
   return (
-    <section>
-      <p>{message}</p>
+    <section className="empty-books-section">
+      <p className="empty-books-message">{message}</p>
       {href && (
-        <Link href={href}>
+        <Link href={href} className="empty-books-link">
           <ArrowRight />
           {contentLink}
         </Link>

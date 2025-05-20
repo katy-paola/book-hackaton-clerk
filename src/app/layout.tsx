@@ -18,6 +18,12 @@ const dmSansMedium = DM_Sans({
   display: "swap",
 });
 
+const dmSansSemibold = DM_Sans({
+  weight: "600",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "BooK - No pierdas tus libros por leer",
   description:
@@ -36,7 +42,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${dmSansRegular.className} ${dmSansMedium.className} body`}
+          className={`${dmSansRegular.className} ${dmSansMedium.className} ${dmSansSemibold.className} body`}
         >
           <header className="main-header">
             <Link href="/" className="logo-container" aria-label="Inicio">

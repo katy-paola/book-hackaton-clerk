@@ -37,6 +37,10 @@ button {
   cursor: pointer;
 }
 
+fieldset {
+  display: contents;
+}
+
 .body {
   font-size: 1.6rem;
   background-color: var(--neutral-100);
@@ -48,6 +52,8 @@ button {
   justify-content: space-between;
   padding: 2.4rem 1.6rem;
   position: fixed;
+  top: 0;
+  z-index: 2;
   width: 100%;
   background-color: var(--neutral-100-alpha);
   backdrop-filter: blur(8px);
