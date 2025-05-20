@@ -3,6 +3,7 @@ import EmptyBooksList from "@/app/books/components/EmptyBooksList";
 import SearchArea from "@/app/books/components/SearchArea";
 import { BOOKS } from "@/app/books/data-prueba/books-info";
 import BookCardItem from "./BookCardItem";
+import "../css/books.css";
 
 interface BookCollectionProps {
   titleSection: string;
@@ -11,7 +12,7 @@ interface BookCollectionProps {
     href?: string;
     contentLink?: string;
   };
-  noHasAddLink?: boolean
+  noHasAddLink?: boolean;
 }
 
 export default function BookCollectionSection({
@@ -19,36 +20,31 @@ export default function BookCollectionSection({
   emptyBooksList,
   noHasAddLink,
 }: BookCollectionProps) {
-
-  const {message, href, contentLink} = emptyBooksList
+  const { message, href, contentLink } = emptyBooksList;
 
   return (
-    <main>
+    <main className="book-collection-section">
       <SecondaryHeader title={titleSection} noHasAddLink={noHasAddLink} />
-      <section>
-        <EmptyBooksList
-          message={message}
-          href={href}
-          contentLink={contentLink}
-        />
-        <SearchArea />
-      </section>
-      <p>Se encontraron 5 resultados para “Patrones de lectura”.</p>
-      <p>
+      <EmptyBooksList message={message} href={href} contentLink={contentLink} />
+      <SearchArea />
+      <p className="results-message">
+        Se encontraron 5 resultados para “Patrones de lectura”.
+      </p>
+      <p className="results-message">
         No se encontraron resultados para “Patrones de lectura”. Intenta con
         otra palabra clave.
       </p>
-      <p>
+      <p className="results-message">
         No se encontraron resultados que coincidan con los filtros aplicados.
       </p>
       <div role="complementary" aria-label="Controles de filtros">
-        <button type="button">Limpiar filtros</button>
+        <button type="button" className="filter-reset-button">Limpiar filtros</button>
       </div>
-      <ul>
+      <ul className="books-list">
         {BOOKS.map((book) => (
           <li key={book.id}>
             <BookCardItem
-              id={book.id}
+              book_id={book.id}
               user_id={book.user_id}
               title={book.title}
               category={book.category}

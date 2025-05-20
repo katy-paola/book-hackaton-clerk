@@ -9,10 +9,10 @@ export default function SecondaryHeader({
   noHasAddLink?: boolean;
 }) {
   return (
-    <header>
-      <h2>{title}</h2>
+    <header className="secondary-header">
+      <h2 className="secondary-title">{title}</h2>
       {!noHasAddLink && (
-        <Link href="/add" aria-label="Agregar libro">
+        <Link href="/add" className="add-button" aria-label="Agregar libro">
           <Add />
         </Link>
       )}

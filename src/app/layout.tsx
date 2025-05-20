@@ -3,12 +3,23 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DM_Sans } from "next/font/google";
 import Link from "next/link";
-import Image from "next/image";
 import Menu from "@/components/icons/Menu";
 import ArrowUp from "@/components/icons/ArrowUp";
 
-const dmSans = DM_Sans({
+const dmSansRegular = DM_Sans({
   weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const dmSansMedium = DM_Sans({
+  weight: "500",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const dmSansSemibold = DM_Sans({
+  weight: "600",
   subsets: ["latin"],
   display: "swap",
 });
@@ -30,55 +41,68 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${dmSans.className}`}>
-          <header>
-            <Link href="/" aria-label="Inicio">
-              <Image
-                src="/logo.svg"
-                alt="Logo de BooK"
-                width={120}
-                height={40}
-              />
+        <body
+          className={`${dmSansRegular.className} ${dmSansMedium.className} ${dmSansSemibold.className} body`}
+        >
+          <header className="main-header">
+            <Link href="/" className="logo-container" aria-label="Inicio">
+              <img src="/logo.svg" alt="Logo de BooK" height={40} />
             </Link>
-            <nav>
-              <button aria-label="Abrir menú de navegación">
-                <Menu />
-              </button>
-              <ul>
+            <button
+              className="menu-button"
+              aria-label="Abrir menú de navegación"
+            >
+              <Menu />
+            </button>
+            <nav className="nav-menu">
+              <ul className="nav-menu-ul">
                 <li>
-                  <Link href="/">Explorar</Link>
+                  <Link className="nav-item" href="/">
+                    Explorar
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/users" className="profile-link">
+                  <Link className="nav-item" href="/sign-in">
+                    Ingresar
+                  </Link>
+                </li>
+                <li>
+                  <Link className="nav-item" href="/users">
                     Mi perfil
                   </Link>
                 </li>
                 <li>
-                  <Link href="/saved" className="nav-link">
+                  <Link className="nav-item" href="/saved">
                     Guardado
                   </Link>
                 </li>
                 <li>
-                  <Link href="/">Cerrar sesión</Link>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <Link href="/">Explorar</Link>
-                </li>
-                <li>
-                  <Link href="/sign-in">Ingresar</Link>
+                  <Link className="nav-item" href="/">
+                    Cerrar sesión
+                  </Link>
                 </li>
               </ul>
             </nav>
           </header>
           {children}
-          <footer>
-            <p>
-              Hecho por <a href="#">@katy-paola</a> y <a href="#">@pipegoods</a>
+          <footer className="main-footer">
+            <p className="app-authors">
+              Hecho por{" "}
+              <a className="app-author" href="#">
+                @katy-paola
+              </a>{" "}
+              y{" "}
+              <a className="app-author" href="#">
+                @pipegoods
+              </a>
               .
             </p>
-            <Link href="#" aria-label="Volver arriba" title="Volver arriba">
+            <Link
+              className="to-top-link"
+              href="#"
+              aria-label="Volver arriba"
+              title="Volver arriba"
+            >
               <ArrowUp />
             </Link>
           </footer>

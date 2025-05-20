@@ -1,3 +1,4 @@
+import "./css/user.css";
 import Image from "next/image";
 import Edit from "@/components/icons/Edit";
 import Close from "@/components/icons/Close";
@@ -12,7 +13,7 @@ export const EMPTY_BOOKS_LIST = {
 
 export default function UserProfilePage() {
   return (
-    <section>
+    <section className="profile-container">
       <header>
         <Image
           src="/avatars/hombre-gafas-cabello-ondulado.png"

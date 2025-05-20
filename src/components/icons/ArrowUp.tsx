@@ -9,7 +9,7 @@ export default function ArrowUp() {
     >
       <path
         d="M17.9998 15C17.9998 15 13.5809 9.00001 11.9998 9C10.4187 8.99999 5.99988 15 5.99988 15"
-        stroke="#616983"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

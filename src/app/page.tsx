@@ -1,5 +1,5 @@
 import BookCollectionSection from "./books/components/BookCollectionSection";
-import styles from "./page.module.css";
+import "./home.css";
 
 const EMPTY_BOOKS_LIST = {
   message:
@@ -10,16 +10,16 @@ const EMPTY_BOOKS_LIST = {
 
 export default function Home() {
   return (
-    <section className={styles.page}>
-      <h1>
-        Nunca pierdas un libro. Guarda y organiza tus lecturas fácilmente.
-      </h1>
-      <p>
-        Crea tu colección personal, explora listas públicas y mantén a mano todo
-        lo que quieres leer.
-      </p>
+    <section>
+      <section className="about">
+        <h1 className="main-title">BooK - No pierdas tus libros por leer</h1>
+        <p className="main-description">
+          Crea tu colección personal, explora listas públicas y mantén a mano
+          todo lo que quieres leer.
+        </p>
+      </section>
       <BookCollectionSection
-        titleSection="Libros publicados"
+        titleSection="Publicado por otros"
         emptyBooksList={EMPTY_BOOKS_LIST}
       />
     </section>

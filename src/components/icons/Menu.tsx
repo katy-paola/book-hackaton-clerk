@@ -9,7 +9,7 @@ export default function Menu() {
     >
       <path
         d="M4 5H20M4 12H20M4 19H20"
-        stroke="#616983"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -1,3 +1,4 @@
+import "../css/user.css";
 import BookCollectionSection from "@/app/books/components/BookCollectionSection";
 
 const EMPTY_BOOKS_LIST = {
@@ -8,10 +9,12 @@ const EMPTY_BOOKS_LIST = {
 
 export default function SavedPage() {
   return (
-    <BookCollectionSection
-      titleSection="Libros guardados"
-      emptyBooksList={EMPTY_BOOKS_LIST}
-      noHasAddLink
-    />
+    <section className="saved-container">
+      <BookCollectionSection
+        titleSection="Libros guardados"
+        emptyBooksList={EMPTY_BOOKS_LIST}
+        noHasAddLink
+      />
+    </section>
   );
 }

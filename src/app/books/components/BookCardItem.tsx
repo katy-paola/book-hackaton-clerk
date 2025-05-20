@@ -1,8 +1,11 @@
+"use client"
+
 import Link from "next/link";
 import More from "@/components/icons/More";
+import { redirect } from "next/navigation";
 
 interface BookProps {
-  id: string;
+  book_id: string;
   user_id: string;
   title: string;
   category: string;
@@ -12,45 +15,51 @@ interface BookProps {
 }
 
 export default function BookCardItem({
-  id,
+  book_id,
   title,
   category,
   author,
   accessType,
   bookLink,
 }: BookProps) {
+  const goBookDetails = () => {
+    redirect("/");
+  };
   return (
-    <article>
-      <header>
-        <h3>{title}</h3> - <span>{category}</span>
-        <p>{author}</p>
-        <small>{accessType}</small>
+    <article className="books-item" onClick={goBookDetails}>
+      <header className="books-item-header">
+        <span className="book-category">{category}</span>
+        <h3 className="book-title">{title}</h3>
+        <div className="book-info">
+          <p className="book-author">{author}</p>
+          <small className="book-access-type">{accessType}</small>
+        </div>
       </header>
-      <div>
-        <Link href={bookLink}>Ir al libro</Link>
+      <div className="book-ctas-container">
+        <Link href={bookLink} className="book-main-cta">
+          Ir al libro
+        </Link>
         <div>
-          <button
-            id="menu-actions-button-1"
-            aria-label="Más acciones"
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-controls="menu1"
-          >
+          <button className="more-icon-container" aria-label="Más acciones">
             <More />
           </button>
-          <ul role="menu" aria-labelledby="menu-actions-button-1" id="menu-1">
+          <ul className="book-more-menu" role="menu">
             <li role="menuitem">
-              <Link href={`/books/${id}`}>Ver detalles</Link>
+              <Link className="book-more-menu-item" href={`/books/${book_id}`}>
+                Ver detalles
+              </Link>
             </li>
             <li role="menuitem">
               {/* Si el libro ya está guardado, se muestra "Quitar libro". */}
-              <button>Guardar libro</button>
+              <button className="book-more-menu-item">Guardar libro</button>
             </li>
             <li role="menuitem">
-              <Link href="#">Editar</Link>
+              <Link className="book-more-menu-item" href="#">
+                Editar
+              </Link>
             </li>
             <li role="menuitem">
-              <button>Eliminar</button>
+              <button className="book-more-menu-item">Eliminar</button>
             </li>
           </ul>
         </div>
