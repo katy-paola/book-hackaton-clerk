@@ -11,19 +11,6 @@ export default function FilterForm() {
         Cerrar
       </button>
       <fieldset>
-        <label htmlFor="search-input" className="search-input-container">
-          <input
-            className="search-input"
-            id="search-input"
-            type="search"
-            name="search"
-            placeholder="Buscar libros"
-            aria-label="Buscar por título, autor, categoría, descripción o nombre de quien publicó"
-          />
-          <span className="search-icon-container">
-            <Search />
-          </span>
-        </label>
         <fieldset className="container-categories">
           <legend className="filter-form-legend">Categorías</legend>
           <small className="number-selected-categories">
