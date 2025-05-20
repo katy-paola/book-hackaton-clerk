@@ -30,4 +30,3 @@ export async function getUserById(id: string): Promise<UserResponse> {
   }
 }
 
-

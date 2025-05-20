@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { getAllCategories } from '@/app/books/services/category.service'
 import { addCategory } from '@/app/books/actions/add-category.action'
+import { fetchCategoriesAction } from '@/app/books/actions/fetch-categories.action'
 import { Tables } from '@/types/database.types'
 
 type CategoryRow = Tables<'categories'>
@@ -19,9 +19,11 @@ export default function CategoriesList() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await getAllCategories()
-        if (data) {
-          setCategories(data)
+        const result = await fetchCategoriesAction()
+        if (result.success && result.data) {
+          setCategories(result.data)
+        } else if (result.error) {
+          setError(result.error)
         }
       } catch (error) {
         setError('Error al cargar categorías')
