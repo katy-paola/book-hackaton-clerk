@@ -96,7 +96,9 @@ const ForgotPasswordPage: NextPage = () => {
               <legend className="reset-password-title">
                 ¿Olvidaste tu contraseña?
               </legend>
-              <p className="reset-password-description">Puedes restablecerla aquí</p>
+              <p className="reset-password-description">
+                Puedes restablecerla aquí
+              </p>
             </div>
             <FormFieldBase
               label="Correo"
@@ -108,8 +110,15 @@ const ForgotPasswordPage: NextPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <div className="reset-password-buttons">
-              <button className="reset-password-button reset-password-code-button">Enviar código</button>
-              <button className="reset-password-button reset-password-cancel-button" type="button">Cancelar</button>
+              <button className="reset-password-button reset-password-code-button">
+                Enviar código
+              </button>
+              <button
+                className="reset-password-button reset-password-cancel-button"
+                type="button"
+              >
+                Cancelar
+              </button>
             </div>
             {error && <p>{error}</p>}
           </>
@@ -117,7 +126,9 @@ const ForgotPasswordPage: NextPage = () => {
 
         {successfulCreation && (
           <>
-            <legend>Restablecer contraseña</legend>
+            <legend className="reset-password-title">
+              Restablecer contraseña
+            </legend>
             <FormFieldBase
               label="Nueva contraseña"
               id="new-password"
@@ -145,7 +156,17 @@ const ForgotPasswordPage: NextPage = () => {
               placeholder="123456"
               onChange={(e) => setCode(e.target.value)}
             />
-            <button>Restablecer contraseña</button>
+            <div className="reset-password-buttons">
+              <button className="reset-password-button reset-password-code-button">
+                Restablecer contraseña
+              </button>
+              <button
+                className="reset-password-button reset-password-cancel-button"
+                type="button"
+              >
+                Cancelar
+              </button>
+            </div>
             {error && <p>{error}</p>}
           </>
         )}
