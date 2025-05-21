@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from '@/app/ssr/client';
+import { createServerSupabaseClient } from '@/app/ssr/server';
 import {
   BookResponse,
   SingleBookResponse,

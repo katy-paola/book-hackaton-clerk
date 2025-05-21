@@ -2,7 +2,7 @@
 
 import { auth } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
-import { createServerSupabaseClient } from '@/app/ssr/client'
+import { createServerSupabaseClient } from '@/app/ssr/server'
 import { SaveBookResult } from '../types/saved.type'
 
 export async function toggleSaveBook(bookId: string): Promise<SaveBookResult> {

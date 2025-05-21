@@ -1,16 +1,9 @@
-import 'server-only'
-import { Database } from '@/types/database.types'
-import { auth } from '@clerk/nextjs/server'
-import { createClient } from '@supabase/supabase-js'
+import { Database } from '@/types/database.types';
+import { createClient } from '@supabase/supabase-js';
 
-export function createServerSupabaseClient() {
+export function createClientSupabaseClient() {
   return createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      async accessToken() {
-        return (await auth()).getToken()
-      },
-    },
-  )
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 }

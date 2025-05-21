@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from '@/app/ssr/client';
+import { createClientSupabaseClient } from '@/app/ssr/client';
 import { Tables } from '@/types/database.types';
 
 export type CategoryRow = Tables<'categories'>;
@@ -10,7 +10,7 @@ type CategoryResponse = {
 // Obtener todas las categorías disponibles
 export async function getAllCategories(): Promise<CategoryResponse> {
   try {
-    const supabase = createServerSupabaseClient();
+    const supabase = createClientSupabaseClient();
     const { data, error } = await supabase
       .from('categories')
       .select('*')
@@ -33,7 +33,7 @@ export async function saveBookCategories(
   categoryIds: string[]
 ): Promise<{ error: Error | null }> {
   try {
-    const supabase = createServerSupabaseClient();
+    const supabase = createClientSupabaseClient();
 
     // Crear array de objetos con las relaciones libro-categoría
     const bookCategoryRelations = categoryIds.map((categoryId) => ({
