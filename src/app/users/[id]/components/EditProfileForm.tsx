@@ -1,100 +1,108 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Close from '@/components/icons/Close'
-import { Tables } from '@/types/database.types'
-import { updateUserAction } from '../../actions/update-user.action'
-import { AVATARS } from './avatars'
+import { useState } from "react";
+import Close from "@/components/icons/Close";
+import { Tables } from "@/types/database.types";
+import { updateUserAction } from "../../actions/update-user.action";
+import { AVATARS } from "./avatars";
 
-type User = Tables<'users'>
+type User = Tables<"users">;
 
 interface EditProfileFormProps {
-  user: User
-  onClose: () => void
+  user: User;
+  onClose: () => void;
 }
 
-export default function EditProfileForm({ user, onClose }: EditProfileFormProps) {
+export default function EditProfileForm({
+  user,
+  onClose,
+}: EditProfileFormProps) {
   const [formData, setFormData] = useState({
     name: user.name,
-    avatar: user.avatar
-  })
+    avatar: user.avatar,
+  });
   const [selectedAvatarId, setSelectedAvatarId] = useState<string | null>(
-    AVATARS.find(avatar => avatar.src === user.avatar)?.id || null
-  )
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+    AVATARS.find((avatar) => avatar.src === user.avatar)?.id || null
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleAvatarSelect = (avatarId: string, avatarSrc: string) => {
-    setSelectedAvatarId(avatarId)
-    setFormData(prev => ({ ...prev, avatar: avatarSrc }))
-  }
+    setSelectedAvatarId(avatarId);
+    setFormData((prev) => ({ ...prev, avatar: avatarSrc }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
     try {
       const result = await updateUserAction(user.id, {
         name: formData.name,
-        avatar: formData.avatar
-      })
+        avatar: formData.avatar,
+      });
 
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error);
       }
 
-      onClose()
-      window.location.reload()
+      onClose();
+      window.location.reload();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al actualizar el perfil')
+      setError(
+        err instanceof Error ? err.message : "Error al actualizar el perfil"
+      );
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="button" onClick={onClose}>
+    <form onSubmit={handleSubmit} className="modal-edit-profile">
+      <button className="close-button" type="button" onClick={onClose}>
         <Close />
         Cerrar
       </button>
-      
+
       <fieldset>
-        <legend>Editar perfil</legend>
-        
+        <legend className="modal-edit-profile-title">Editar perfil</legend>
+
         {error && <div className="error-message">{error}</div>}
-        
-        <fieldset>
-          <legend>Avatar</legend>
-          <div className="avatar-grid">
+
+        <fieldset className="field-form">
+          <legend className="modal-edit-profile-legend">Cambiar avatar</legend>
+          <div className="avatar-picker">
             {AVATARS.map((avatar) => (
-              <label key={avatar.id}>
+              <label className="avatar-label" key={avatar.id}>
+                <input
+                  className="avatar-input"
+                  type="radio"
+                  name="avatar"
+                  checked={selectedAvatarId === avatar.id}
+                  onChange={() => handleAvatarSelect(avatar.id, avatar.src)}
+                />
                 <img
+                  className="avatar-option"
                   src={avatar.src}
                   alt={avatar.alt}
                   width={60}
                   height={60}
                 />
-                <input 
-                  type="radio" 
-                  name="avatar"
-                  checked={selectedAvatarId === avatar.id}
-                  onChange={() => handleAvatarSelect(avatar.id, avatar.src)}
-                />
               </label>
             ))}
           </div>
         </fieldset>
-        
-        <label htmlFor="name">
+
+        <label className="field-form" htmlFor="name">
           Cambiar nombre
           <input
+            className="field-form-input"
             type="text"
             id="name"
             name="name"
@@ -103,11 +111,15 @@ export default function EditProfileForm({ user, onClose }: EditProfileFormProps)
             required
           />
         </label>
-        
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Guardando...' : 'Guardar cambios'}
+
+        <button
+          className="edit-profile-submit-button"
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? "Guardando..." : "Guardar cambios"}
         </button>
       </fieldset>
     </form>
-  )
-} 
+  );
+}

@@ -1,29 +1,39 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Tables } from '@/types/database.types'
-import EditProfileForm from './EditProfileForm'
+import { useState } from "react";
+import { Tables } from "@/types/database.types";
+import EditProfileForm from "./EditProfileForm";
+import Edit from "@/components/icons/Edit";
 
-type User = Tables<'users'>
+type User = Tables<"users">;
 
 export default function EditProfileClient({ user }: { user: User }) {
-  const [isFormVisible, setIsFormVisible] = useState(false)
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   return (
     <div className="profile-edit-section">
       {isFormVisible ? (
-        <EditProfileForm 
-          user={user} 
-          onClose={() => setIsFormVisible(false)} 
-        />
+        <EditProfileForm user={user} onClose={() => setIsFormVisible(false)} />
       ) : (
-        <button 
+        <button
           onClick={() => setIsFormVisible(true)}
-          className="edit-profile-button"
+          className="edit-profile-container"
         >
-          Editar perfil
+          <div className="profile-user-info">
+            <img
+              className="profile-avatar"
+              src="/avatars/default-avatar.png"
+              alt="Foto de Andrés Vizcaíno"
+              width={40}
+              height={40}
+            />
+            <h1 className="profile-user-name">Andrés Vizcaíno</h1>
+          </div>
+          <span className="profile-edit-icon-container">
+            <Edit />
+          </span>
         </button>
       )}
     </div>
-  )
-} 
+  );
+}
