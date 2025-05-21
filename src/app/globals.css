@@ -46,6 +46,7 @@ fieldset {
   display: grid;
   grid-template-rows: 1fr auto;
   font-size: 1.6rem;
+  min-height: 100dvh;
   background-color: var(--neutral-100);
 }
 
@@ -168,7 +169,6 @@ fieldset {
   font-weight: 400;
 }
 .not-found-link {
-  flex: 1;
   padding: 0.8rem 1.6rem;
   font-size: 1.6rem;
   font-weight: 600;
@@ -278,10 +278,14 @@ fieldset {
 
 @media screen and (width >= 640px) {
   .main-header,
-  .main-footer {
+  .main-footer,
+  .not-found-container {
     padding-inline: 8rem;
   }
   .to-top-link {
     right: 80px;
+  }
+  .not-found-link {
+    width: max-content;
   }
 }
