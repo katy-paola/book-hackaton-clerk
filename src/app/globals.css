@@ -275,3 +275,13 @@ fieldset {
     transform: translateX(100%);
   }
 }
+
+@media screen and (width >= 640px) {
+  .main-header,
+  .main-footer {
+    padding-inline: 8rem;
+  }
+  .to-top-link {
+    right: 80px;
+  }
+}

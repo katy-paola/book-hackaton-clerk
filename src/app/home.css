@@ -16,3 +16,11 @@
   font-size: 2rem;
   color: var(--neutral-500);
 }
+
+@media screen and (width >= 640px) {
+  .about {
+    padding-inline: 8rem;
+    text-align: center;
+    text-wrap: balance;
+  }
+}

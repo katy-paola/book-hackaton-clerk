@@ -456,3 +456,12 @@
 .book-details-user-link {
   color: inherit;
 }
+
+@media screen and (width >= 640px) {
+  .book-collection-section {
+    padding-inline: 8rem;
+  }
+  .form-filter-submit-button{
+    width: max-content;
+  }
+}
