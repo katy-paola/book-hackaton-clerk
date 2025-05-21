@@ -41,7 +41,7 @@ export default async function BookCollectionSection({
       <SearchArea categories={categories || []} />
 
       {isEmpty ? (
-        <>
+        <div className='results-container'>
           {searchQuery && (
             <p className="results-message">
               No se encontraron resultados para "{searchQuery}".
@@ -72,9 +72,9 @@ export default async function BookCollectionSection({
             href={href}
             contentLink={contentLink}
           />
-        </>
+        </div>
       ) : (
-        <>
+        <div className='results-container'>
           {searchQuery && (
             <p className="results-message">
               Se encontraron {books.length} resultados para "
@@ -97,7 +97,7 @@ export default async function BookCollectionSection({
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
     </main>
   );

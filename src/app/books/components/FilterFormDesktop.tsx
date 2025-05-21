@@ -1,46 +1,36 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Close from '../../../components/icons/Close';
-import Checkbox from './Checkbox';
-import { ACCESS_TYPES } from '../consts/checkboxes-data';
-import { CategoryRow } from '../services/category.service';
-import {
-  useSearchParams,
-  usePathname,
-  useRouter,
-} from 'next/navigation';
+import { useState, useEffect } from "react";
+import Close from "../../../components/icons/Close";
+import Checkbox from "./Checkbox";
+import { ACCESS_TYPES } from "../consts/checkboxes-data";
+import { CategoryRow } from "../services/category.service";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 interface FilterFormProps {
   categories: CategoryRow[];
 }
 
-export default function FilterForm({ categories }: FilterFormProps) {
+export default function FilterFormDesktop({ categories }: FilterFormProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
   // Local state for tracking selected filters
-  const [selectedCategories, setSelectedCategories] = useState<
-    string[]
-  >([]);
-  const [selectedAccessTypes, setSelectedAccessTypes] = useState<
-    string[]
-  >([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedAccessTypes, setSelectedAccessTypes] = useState<string[]>([]);
 
   // State to control whether to show all categories or just the first 5
   const [showAllCategories, setShowAllCategories] = useState(false);
 
   // Initialize state from URL params
   useEffect(() => {
-    const categoriesParam = searchParams.get('categories');
-    const accessParam = searchParams.get('access');
+    const categoriesParam = searchParams.get("categories");
+    const accessParam = searchParams.get("access");
 
-    setSelectedCategories(
-      categoriesParam ? categoriesParam.split(',') : []
-    );
+    setSelectedCategories(categoriesParam ? categoriesParam.split(",") : []);
 
-    setSelectedAccessTypes(accessParam ? accessParam.split(',') : []);
+    setSelectedAccessTypes(accessParam ? accessParam.split(",") : []);
   }, [searchParams]);
 
   const handleCheckboxChange = (categoryId: string) => {
@@ -73,18 +63,16 @@ export default function FilterForm({ categories }: FilterFormProps) {
 
     // Add selected categories to params
     if (selectedCategories.length > 0) {
-      params.set('categories', selectedCategories.join(','));
+      params.set("categories", selectedCategories.join(","));
     }
 
     // Add selected access types to params
     if (selectedAccessTypes.length > 0) {
-      params.set('access', selectedAccessTypes.join(','));
+      params.set("access", selectedAccessTypes.join(","));
     }
 
     // Update URL without causing a full page reload using Next.js 15 features
-    const url = params.toString()
-      ? `${pathname}?${params}`
-      : pathname;
+    const url = params.toString() ? `${pathname}?${params}` : pathname;
     router.push(url, { scroll: false });
   };
 
@@ -106,7 +94,7 @@ export default function FilterForm({ categories }: FilterFormProps) {
 
   return (
     <form
-      className="filter-form"
+      className="filter-form-desktop"
       aria-label="Filtrar libros"
       onSubmit={handleSubmit}
     >
@@ -139,15 +127,13 @@ export default function FilterForm({ categories }: FilterFormProps) {
               onClick={toggleShowAllCategories}
             >
               {showAllCategories
-                ? 'Mostrar menos categorías'
-                : 'Ver todas las categorías'}
+                ? "Mostrar menos categorías"
+                : "Ver todas las categorías"}
             </button>
           )}
         </fieldset>
         <fieldset className="container-access-type">
-          <legend className="filter-form-legend">
-            Tipo de acceso
-          </legend>
+          <legend className="filter-form-legend">Tipo de acceso</legend>
           <small className="number-selected-categories">
             Seleccionados ({selectedAccessTypes.length})
           </small>
@@ -160,9 +146,7 @@ export default function FilterForm({ categories }: FilterFormProps) {
                 value={category.value}
                 label={category.label}
                 checked={selectedAccessTypes.includes(category.value)}
-                onChange={() =>
-                  handleCheckboxAccessType(category.value)
-                }
+                onChange={() => handleCheckboxAccessType(category.value)}
               />
             ))}
           </div>
