@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BOOK
 
-## Getting Started
+Una aplicación web moderna para entusiastas de la lectura que permite descubrir, guardar y gestionar sus libros guardados.
 
-First, run the development server:
+## Descripción
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Aplicación de Libros es una plataforma que permite a los usuarios explorar libros de diversas categorías, guardar sus favoritos y gestionar sus listas de lectura. Construida con tecnologías modernas que incluyen Next.js, Clerk para autenticación y Supabase para la funcionalidad de base de datos.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Características
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Autenticación de usuarios y gestión de perfiles
+- Exploración y búsqueda de libros
+- Organización de libros por categorías
+- Guardar libros favoritos en colección personal
+- Páginas de perfil de usuario
+- Diseño responsivo para todos los dispositivos
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tecnologías
 
-## Learn More
+- Next.js 15 con App Router
+- React 19
+- TypeScript
+- Clerk para autenticación
+- Supabase para base de datos
 
-To learn more about Next.js, take a look at the following resources:
+## Despliegue
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Requisitos previos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Node.js 18 o superior
+- npm o yarn
+- Cuenta de Clerk (para autenticación)
+- Cuenta de Supabase (para base de datos)
 
-## Deploy on Vercel
+### Instalación
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clonar el repositorio:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```
+   git clone https://github.com/katy-paola/book-hackaton-clerk.git
+   cd book-hackaton-clerk
+   ```
+
+2. Instalar dependencias:
+
+   ```
+   npm install
+   ```
+
+3. Configurar variables de entorno:
+   Crear un archivo `.env` en el directorio raíz con las siguientes variables:
+
+   ```
+   # Autenticación de Clerk
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=tu_clave_publica
+   CLERK_SECRET_KEY=tu_clave_secreta
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/auth
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/auth
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+   # Supabase
+   NEXT_PUBLIC_SUPABASE_URL=tu_url_de_supabase
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_clave_anonima_de_supabase
+   SUPABASE_SERVICE_ROLE_KEY=tu_clave_de_servicio_de_supabase
+   ```
+
+4. Ejecutar el servidor de desarrollo:
+
+   ```
+   npm run dev
+   ```
+
+5. Abrir [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+### Despliegue en producción
+
+1. Construir la aplicación:
+
+   ```
+   npm run build
+   ```
+
+2. Iniciar el servidor de producción:
+   ```
+   npm start
+   ```
+
+## Diseño
+
+[Enlace al diseño en Figma](https://www.figma.com/design/C7ZgnEHXqpqy5pCuNeBZKx/BooK---Hackaton-Clerk?node-id=27-683&t=D0ft8M5OFdQuxyb6-1)
+
+## Demo en vivo
+
+[Ver la aplicación en vivo](https://book-hackaton-clerk.vercel.app/)
+
+## Autores
+
+- [Katy Barboza](https://github.com/katy-paola)
+- [Andrés Vizcaíno](https://github.com/pipegoods)
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
