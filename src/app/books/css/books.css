@@ -545,10 +545,15 @@
 }
 
 @media screen and (width >= 640px) {
-  .book-collection-section {
+  .book-collection-section,
+  .book-details-container {
     padding-inline: 8rem;
   }
   .form-filter-submit-button {
     width: max-content;
+  }
+  .book-details-cover {
+    width: 100%;
+    height: auto;
   }
 }
