@@ -24,8 +24,10 @@ export default function FormStepTwo() {
       <fieldset className="form-field-container container-access-types">
         <legend className="access-type-legend">Tipo de acceso</legend>
         <div className="list-access-types">
+          {/* 
           <RadioButton label="Gratis" />
           <RadioButton label="De pago" />
+          */}
         </div>
       </fieldset>
       <div className="form-field-container">

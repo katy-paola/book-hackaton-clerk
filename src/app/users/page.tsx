@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 export default async function CurrentUserProfilePage() {
   const session = await auth()
   
-  // Si no hay usuario autenticado, redirigir al catálogo
+  // Si no hay usuario autenticado, redirigir a la página de autenticación
   if (!session.userId) {
     redirect('/auth')
   }

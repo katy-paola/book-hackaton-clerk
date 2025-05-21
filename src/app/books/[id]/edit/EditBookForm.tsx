@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { editBook } from '@/app/books/actions'
-import CategorySelectorWrapper from '@/app/books/components/CategorySelectorWrapper'
-import { useFormStatus } from 'react-dom'
-import { Tables } from '@/types/database.types'
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { editBook } from "@/app/books/actions/edit-book.action";
+import CategorySelectorWrapper from "@/app/books/components/CategorySelectorWrapper";
+import { useFormStatus } from "react-dom";
+import { Tables } from "@/types/database.types";
 
-type BookRow = Tables<'books'>
+type BookRow = Tables<"books">;
 
 type EditBookFormProps = {
   book: BookRow & {
@@ -15,25 +15,25 @@ type EditBookFormProps = {
       categories: {
         id: string;
         name: string;
-      }
+      };
     }[];
-  }
-}
+  };
+};
 
 // Componente para el botón de envío con estado de carga
 function SubmitButton() {
-  const { pending } = useFormStatus()
-  
+  const { pending } = useFormStatus();
+
   return (
-    <button 
-      type="submit" 
-      className="button" 
+    <button
+      type="submit"
+      className="button"
       disabled={pending}
       aria-disabled={pending}
     >
-      {pending ? 'Guardando...' : 'Guardar Cambios'}
+      {pending ? "Guardando..." : "Guardar Cambios"}
     </button>
-  )
+  );
 }
 
 // Estado inicial con tipo apropiado para el formulario
@@ -44,69 +44,70 @@ type FormState = {
 };
 
 export default function EditBookForm({ book }: EditBookFormProps) {
-  const router = useRouter()
-  
+  const router = useRouter();
+
   // Extraer los IDs de categorías del libro
-  const initialCategories = book.book_categories 
-    ? book.book_categories.map(bc => bc.categories.id) 
-    : []
-  
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(initialCategories)
-  
+  const initialCategories = book.book_categories
+    ? book.book_categories.map((bc) => bc.categories.id)
+    : [];
+
+  const [selectedCategories, setSelectedCategories] =
+    useState<string[]>(initialCategories);
+
   // Estado del formulario
   const [formState, setFormState] = useState<FormState>({
-    error: null, 
-    success: false, 
-    data: null
+    error: null,
+    success: false,
+    data: null,
   });
 
   // Efecto para redireccionar después de un envío exitoso
   useEffect(() => {
     if (formState.success) {
-      router.push('/books')
-      router.refresh()
+      router.push("/books");
+      router.refresh();
     }
   }, [formState.success, router]);
 
   // Función para manejar la acción del formulario
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     // Obtener el formulario y crear FormData
     const form = e.currentTarget;
     const formData = new FormData(form);
-    
+
     // Agregar las categorías seleccionadas al FormData
-    selectedCategories.forEach(categoryId => {
-      formData.append('categories', categoryId);
+    selectedCategories.forEach((categoryId) => {
+      formData.append("categories", categoryId);
     });
-    
+
     // Logs para depuración
-    console.log('Book ID:', book.id);
-    console.log('Form data entries:');
+    console.log("Book ID:", book.id);
+    console.log("Form data entries:");
     for (const [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);
     }
-    console.log('Selected categories:', selectedCategories);
-    
+    console.log("Selected categories:", selectedCategories);
+
     // Llamar a la acción del servidor
     try {
       const result = await editBook(book.id, formData);
-      
-      console.log('Edit result:', result);
-      
-      if ('error' in result) {
+
+      console.log("Edit result:", result);
+
+      if ("error" in result) {
         setFormState({ error: result.error, success: false, data: null });
-        console.error('Error from server:', result.error);
+        console.error("Error from server:", result.error);
       } else {
         setFormState({ error: null, success: true, data: result.data });
       }
     } catch (error) {
-      console.error('Exception caught:', error);
-      setFormState({ 
-        error: 'Error al procesar el formulario', 
-        success: false, 
-        data: null 
+      console.error("Exception caught:", error);
+      setFormState({
+        error: "Error al procesar el formulario",
+        success: false,
+        data: null,
       });
     }
   };
@@ -117,9 +118,11 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         {formState.error && (
           <div className="message error">{formState.error}</div>
         )}
-        
+
         <div className="form-group">
-          <label className="form-label" htmlFor="title">Título</label>
+          <label className="form-label" htmlFor="title">
+            Título
+          </label>
           <input
             type="text"
             id="title"
@@ -129,9 +132,11 @@ export default function EditBookForm({ book }: EditBookFormProps) {
             defaultValue={book.title}
           />
         </div>
-        
+
         <div className="form-group">
-          <label className="form-label" htmlFor="author">Autor</label>
+          <label className="form-label" htmlFor="author">
+            Autor
+          </label>
           <input
             type="text"
             id="author"
@@ -141,20 +146,24 @@ export default function EditBookForm({ book }: EditBookFormProps) {
             defaultValue={book.author}
           />
         </div>
-        
+
         <div className="form-group">
-          <label className="form-label" htmlFor="description">Descripción</label>
+          <label className="form-label" htmlFor="description">
+            Descripción
+          </label>
           <textarea
             id="description"
             name="description"
             className="form-input"
             rows={4}
-            defaultValue={book.description || ''}
+            defaultValue={book.description || ""}
           />
         </div>
-        
+
         <div className="form-group">
-          <label className="form-label" htmlFor="cover_url">URL de Portada</label>
+          <label className="form-label" htmlFor="cover_url">
+            URL de Portada
+          </label>
           <input
             type="url"
             id="cover_url"
@@ -167,7 +176,9 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         </div>
 
         <div className="form-group">
-          <label className="form-label" htmlFor="link">Enlace del Libro</label>
+          <label className="form-label" htmlFor="link">
+            Enlace del Libro
+          </label>
           <input
             type="url"
             id="link"
@@ -178,9 +189,11 @@ export default function EditBookForm({ book }: EditBookFormProps) {
             defaultValue={book.link}
           />
         </div>
-        
+
         <div className="form-group">
-          <label className="form-label" htmlFor="access">Tipo de Acceso</label>
+          <label className="form-label" htmlFor="access">
+            Tipo de Acceso
+          </label>
           <select
             id="access"
             name="access"
@@ -191,10 +204,10 @@ export default function EditBookForm({ book }: EditBookFormProps) {
             <option value="paid">De pago</option>
           </select>
         </div>
-        
+
         <div className="form-group">
           <label className="form-label">Categorías</label>
-          <CategorySelectorWrapper 
+          <CategorySelectorWrapper
             onChange={setSelectedCategories}
             selectedIds={selectedCategories}
           />
@@ -202,8 +215,8 @@ export default function EditBookForm({ book }: EditBookFormProps) {
 
         <div className="form-actions">
           <SubmitButton />
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="button button-secondary"
             onClick={() => router.back()}
           >
@@ -212,5 +225,5 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         </div>
       </form>
     </div>
-  )
-} 
+  );
+}
