@@ -219,11 +219,23 @@
   border-color: var(--orange-700);
 }
 
-.input-file{
-    opacity: 0;
-    position: absolute;
+.input-file {
+  opacity: 0;
+  position: absolute;
 }
 
-.default-img-file{
+.default-img-file {
   cursor: pointer;
+}
+
+@media screen and (width >= 640px) {
+  .add-book-title,
+  .add-form {
+    padding-inline: 8rem;
+  }
+  .add-form-next-button,
+  .add-form-submit-button {
+    width: max-content;
+    align-self: flex-end;
+  }
 }

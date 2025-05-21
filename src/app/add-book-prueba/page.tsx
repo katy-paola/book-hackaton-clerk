@@ -12,7 +12,7 @@ export default function AddBookForm() {
         <h1 className="add-book-title">Publicar nuevo libro</h1>
       </header>
       <form className="add-form">
-        {/* <FormStepOne />*/}
+        <FormStepOne />
         <FormStepTwo />
       </form>
     </main>

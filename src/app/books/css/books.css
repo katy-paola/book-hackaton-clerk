@@ -546,7 +546,8 @@
 
 @media screen and (width >= 640px) {
   .book-collection-section,
-  .book-details-container {
+  .book-details-container,
+  .add-book-page {
     padding-inline: 8rem;
   }
   .form-filter-submit-button {
