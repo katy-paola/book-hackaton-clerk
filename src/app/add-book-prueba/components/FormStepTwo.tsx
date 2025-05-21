@@ -1,53 +1,47 @@
 import ArrowLeft from "@/components/icons/ArrowLeft";
-import Image from "next/image";
+import RadioButton from "@/app/books/components/RadioButton";
 
 export default function FormStepTwo() {
   return (
-    <form>
-      <fieldset>
-        <button>
-          <ArrowLeft />
-          Anterior
-        </button>
-        <div className="form-group">
-          <label className="form-label" htmlFor="title">
-            Autor
-            <input
-              type="text"
-              id="title"
-              name="title"
-              placeholder="Ej.: James Clear"
-              className="form-input"
-              required
-            />
-          </label>
+    <fieldset className="form-fieldset">
+      <button type="button" className="prev-button">
+        <ArrowLeft />
+        Anterior
+      </button>
+      <div className="form-field-container">
+        <label className="form-field-base" htmlFor="title">
+          Autor
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Ej.: James Clear"
+            className="form-field-base-input"
+            required
+          />
+        </label>
+      </div>
+      <fieldset className="form-field-container container-access-types">
+        <legend className="access-type-legend">Tipo de acceso</legend>
+        <div className="list-access-types">
+          <RadioButton label="Gratis" />
+          <RadioButton label="De pago" />
         </div>
-        <fieldset>
-          <legend>Tipo de acceso</legend>
-          <label htmlFor="">
-            <input type="radio" name="access-type" id="" />
-            Gratis
-          </label>
-          <label htmlFor="">
-            <input type="radio" name="access-type" id="" />
-            De pago
-          </label>
-        </fieldset>
-        <div>
-          <label htmlFor="">
-            Foto de Portada
-            <input type="file" name="" id="" />
-            <Image
-              src="/input-file-placeholder.png"
-              alt=""
-              width={80}
-              height={100}
-            />
-          </label>
-        </div>
-
-        <button>Publicar</button>
       </fieldset>
-    </form>
+      <div className="form-field-container">
+        <label className="form-field-base">
+          Foto de portada
+          <input className="input-file" type="file" name="cover-photo" />
+          <img
+            src="/input-file-placeholder.png"
+            alt=""
+            width={80}
+            height={100}
+            className="default-img-file"
+          />
+        </label>
+      </div>
+      <button className="add-form-submit-button">Publicar</button>
+    </fieldset>
   );
 }

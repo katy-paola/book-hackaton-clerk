@@ -3,7 +3,6 @@
 import * as React from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import ResetPassword from "./ResetPassword";
 import FormFieldBase from "./FormFieldBase";
 

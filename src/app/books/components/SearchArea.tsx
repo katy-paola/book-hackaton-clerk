@@ -13,7 +13,7 @@ export default function SearchArea() {
             type="text"
             name="search"
             placeholder="Buscar libros..."
-            aria-label="Buscar por título, autor, categoría, descripción o nombre de quien publicó"
+            aria-label="Buscar por título, autor, descripción o nombre de quien publicó"
           />
           <span className="search-icon-container">
             <Search />
