@@ -1,8 +1,13 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import More from "@/components/icons/More";
 import { redirect } from "next/navigation";
+import { useState } from "react";
+import { useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
+import { isBookSaved } from "../services/saved.service";
 
 interface BookProps {
   book_id: string;
@@ -16,14 +21,34 @@ interface BookProps {
 
 export default function BookCardItem({
   book_id,
+  user_id,
   title,
   category,
   author,
   accessType,
   bookLink,
 }: BookProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { signOut } = useClerk();
+  const { user, isSignedIn } = useUser();
+  const router = useRouter();
+  const isBookOwner = isSignedIn && user.id === user_id;
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const saveBook = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (!isSignedIn) {
+      redirect("/auth");
+    } else {
+      return;
+    }
+  };
+
   const goBookDetails = () => {
-    redirect("/");
+    redirect(`/books/${book_id}`);
   };
   return (
     <article className="books-item" onClick={goBookDetails}>
@@ -36,32 +61,66 @@ export default function BookCardItem({
         </div>
       </header>
       <div className="book-ctas-container">
-        <Link href={bookLink} className="book-main-cta">
+        <Link
+          href={bookLink}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className="book-main-cta"
+        >
           Ir al libro
         </Link>
         <div>
-          <button className="more-icon-container" aria-label="Más acciones">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMenu();
+            }}
+            className="more-icon-container"
+            aria-label="Más acciones"
+          >
             <More />
           </button>
-          <ul className="book-more-menu" role="menu">
-            <li role="menuitem">
-              <Link className="book-more-menu-item" href={`/books/${book_id}`}>
-                Ver detalles
-              </Link>
-            </li>
-            <li role="menuitem">
-              {/* Si el libro ya está guardado, se muestra "Quitar libro". */}
-              <button className="book-more-menu-item">Guardar libro</button>
-            </li>
-            <li role="menuitem">
-              <Link className="book-more-menu-item" href="#">
-                Editar
-              </Link>
-            </li>
-            <li role="menuitem">
-              <button className="book-more-menu-item">Eliminar</button>
-            </li>
-          </ul>
+          {isMenuOpen && (
+            <ul className="book-more-menu" role="menu">
+              <li role="menuitem">
+                <Link
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  className="book-more-menu-item"
+                  href={`/books/${book_id}`}
+                >
+                  Ver detalles
+                </Link>
+              </li>
+              {isBookOwner ? (
+                <>
+                  <li role="menuitem">
+                    <Link
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="book-more-menu-item"
+                      href={`/books/${book_id}/edit`}
+                    >
+                      Editar
+                    </Link>
+                  </li>
+                  <li role="menuitem">
+                    <button className="book-more-menu-item">Eliminar</button>
+                  </li>
+                </>
+              ) : (
+                <li role="menuitem">
+                  {/* Si el libro ya está guardado, se muestra "Quitar libro". */}
+                  <button onClick={saveBook} className="book-more-menu-item">
+                    Guardar libro
+                  </button>
+                </li>
+              )}
+            </ul>
+          )}
         </div>
       </div>
     </article>
