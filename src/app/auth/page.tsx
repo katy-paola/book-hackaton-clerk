@@ -20,14 +20,14 @@ export default function AuthPage() {
           <button
             type="button"
             onClick={() => setAuthType("sign-in")}
-            className="auth-tab active-tab"
+            className={`auth-tab ${authType === "sign-in" && "active-tab"}`}
           >
             Inicia sesión
           </button>
           <button
             type="button"
             onClick={() => setAuthType("sign-up")}
-            className="auth-tab"
+            className={`auth-tab ${authType === "sign-un" && "active-tab"}`}
           >
             Regístrate
           </button>
