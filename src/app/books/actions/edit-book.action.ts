@@ -2,7 +2,7 @@
 
 import { auth } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
-import { createServerSupabaseClient } from '@/app/ssr/client'
+import { createServerSupabaseClient } from '@/app/ssr/server'
 import { validateBook } from '../schemas/book.schema'
 import { Tables } from '@/types/database.types'
 

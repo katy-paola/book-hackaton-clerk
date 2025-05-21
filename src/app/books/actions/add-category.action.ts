@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@clerk/nextjs/server'
-import { createServerSupabaseClient } from '@/app/ssr/client'
+import { createServerSupabaseClient } from '@/app/ssr/server'
 import { Tables } from '@/types/database.types'
 
 type CategoryRow = Tables<'categories'>

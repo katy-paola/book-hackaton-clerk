@@ -1,32 +1,21 @@
-"use client";
+'use client';
 
-import "./css/user.css";
-import BookCollectionSection from "../books/components/BookCollectionSection";
-import EditProfileClient from "./components/EditProfileClient";
+import './css/user.css';
+import UserProfileClient from './components/UserProfileClient';
+import { BookWithIdAndCategories } from '../books/types/book.type';
+import { getAllCategories } from '../books/services/category.service';
 
-const CURRENT_USER = {
-  avatar: "./consts/avatars/hombre-gafas-cabello-ondulado.png",
-  email: "pipe.jaider@gmail.com",
-  id: "user_2xFFhuwrZm12KcvvCYiHj358F4F",
-  name: "Andrés Vizcaíno",
-};
+// Mock data until we implement real data fetching
+const MOCK_BOOKS: BookWithIdAndCategories[] = [];
 
-export default function UserProfilePage() {
-  const EMPTY_BOOKS_LIST = {
-    message: "Empieza a construir tu lista personal de libros.",
-    href: "/add-book-prueba",
-    contentLink: "Agregar mi primer libro",
-  };
+// Server component
+export default async function UserProfilePage() {
+  const { data: categories } = await getAllCategories();
 
   return (
-    <section className="profile-container">
-      <header className="profile-header">
-        <EditProfileClient user={CURRENT_USER} />
-      </header>
-      <BookCollectionSection
-        titleSection="Mis libros"
-        emptyBooksList={EMPTY_BOOKS_LIST}
-      />
-    </section>
+    <UserProfileClient
+      books={MOCK_BOOKS}
+      categories={categories || []}
+    />
   );
 }

@@ -1,6 +1,6 @@
 'use server'
 
-import { createServerSupabaseClient } from '@/app/ssr/client'
+import { createServerSupabaseClient } from '@/app/ssr/server'
 import { TablesUpdate } from '@/types/database.types'
 
 export async function updateUserAction(

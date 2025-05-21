@@ -1,12 +1,14 @@
+'use client';
+
 import SecondaryHeader from '@/app/books/components/SecondaryHeader';
 import EmptyBooksList from '@/app/books/components/EmptyBooksList';
 import SearchArea from '@/app/books/components/SearchArea';
 import BookCardItem from './BookCardItem';
 import { BookWithIdAndCategories } from '../types/book.type';
 import '../css/books.css';
-import { getAllCategories } from '../services/category.service';
+import { CategoryRow } from '../services/category.service';
 
-interface BookCollectionProps {
+interface BookCollectionClientProps {
   titleSection: string;
   emptyBooksList: {
     message: string;
@@ -17,19 +19,19 @@ interface BookCollectionProps {
   books: BookWithIdAndCategories[];
   searchQuery?: string;
   hasActiveFilters?: boolean;
+  categories: CategoryRow[];
 }
 
-export default async function BookCollectionSection({
+export default function BookCollectionSectionClient({
   titleSection,
   emptyBooksList,
   noHasAddLink,
   books,
   searchQuery,
   hasActiveFilters,
-}: BookCollectionProps) {
+  categories,
+}: BookCollectionClientProps) {
   const { message, href, contentLink } = emptyBooksList;
-  const { data: categories, error: categoriesError } =
-    await getAllCategories();
   const isEmpty = books.length === 0;
 
   return (
