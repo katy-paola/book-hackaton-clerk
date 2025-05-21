@@ -169,26 +169,57 @@ export async function addBook(
   book: BookWithId
 ): Promise<{ data: BookWithId[] | null; error: Error | null }> {
   try {
+    console.log('Attempting to add book with data:', JSON.stringify(book, null, 2));
+    
     const supabase = createServerSupabaseClient();
-    // Ensure cover_url is a string before inserting
-    const bookWithValidCoverUrl = {
-      ...book,
-      cover_url: book.cover_url || '', // Provide default empty string if undefined
+    
+    // Validar campos requeridos
+    if (!book.title || !book.user_id) {
+      const error = new Error('Título y usuario son campos requeridos');
+      console.error('Validation error:', error.message);
+      return { data: null, error };
+    }
+    
+    // Crear un objeto con los campos requeridos
+    const bookData = {
+      title: book.title,
+      author: book.author || 'Autor desconocido',
+      description: book.description || null,
+      cover_url: book.cover_url || '',
+      link: book.link || '', // Asegurar que link sea string vacío en lugar de null
+      access: book.access || 'free',
+      user_id: book.user_id,
+      created_at: book.created_at || new Date().toISOString()
     };
-
+    
+    console.log('Book data after validation:', JSON.stringify(bookData, null, 2));
+    
     const { data, error } = await supabase
       .from('books')
-      .insert(bookWithValidCoverUrl)
-      .select();
-
+      .insert(bookData)
+      .select()
+      .single();
+    
     if (error) {
+      console.error('Supabase error when adding book:', {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint
+      });
       throw error;
     }
-
-    return { data, error: null };
+    
+    console.log('Successfully added book with ID:', data?.id);
+    return { data: data ? [data] : null, error: null };
+    
   } catch (error) {
-    console.error('Error adding book:', error);
-    return { data: null, error: error as Error };
+    const errorMessage = error instanceof Error ? error.message : 'Error desconocido al agregar el libro';
+    console.error('Error adding book:', errorMessage, error);
+    return { 
+      data: null, 
+      error: error instanceof Error ? error : new Error(errorMessage) 
+    };
   }
 }
 

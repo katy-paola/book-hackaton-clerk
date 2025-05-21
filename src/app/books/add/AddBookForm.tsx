@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { addBook } from '../actions'
+import { addBook } from '../actions/add-book.action'
 import CategorySelectorWrapper from '../components/CategorySelectorWrapper'
 import { useFormStatus } from 'react-dom'
 

@@ -4,7 +4,7 @@ import { auth } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
 import { validateBook } from '../schemas/book.schema';
 import { addBook as addBookService } from '../services/book.service';
-import { saveBookCategories } from '../services/category.service';
+import { getCategoryByName, saveBookCategories } from '../services/category.service';
 import { uploadBookCover } from '../services/storage.service';
 import { BookRow, BookWithId } from '../types/book.type';
 
@@ -15,21 +15,49 @@ export type AddBookResult =
 export async function addBook(
   formData: FormData
 ): Promise<AddBookResult> {
+  console.log('=== INICIO addBook ===');
+  
   try {
     // Verifica autenticación usando Clerk
     const session = await auth();
     if (!session.userId) {
-      return {
-        error: 'Debes iniciar sesión para agregar un libro',
-      };
+      const errorMsg = 'Debes iniciar sesión para agregar un libro';
+      console.error(errorMsg);
+      return { error: errorMsg };
     }
 
-    // Obtener categorías seleccionadas
-    const categoryIds = formData.getAll('categories') as string[];
+    // Mostrar datos del formulario para depuración
+    const formDataObj: Record<string, any> = {};
+    formData.forEach((value, key) => {
+      formDataObj[key] = value;
+    });
+    console.log('Datos del formulario recibidos:', formDataObj);
 
-    // Validar que al menos hay una categoría seleccionada
-    if (!categoryIds.length) {
-      return { error: 'Debes seleccionar al menos una categoría' };
+    // Obtener el ID de la categoría seleccionada
+    const categoryId = formData.get('category') as string;
+    console.log('ID de categoría del formulario:', categoryId);
+
+    // Validar que se haya seleccionado una categoría
+    if (!categoryId) {
+      const errorMsg = 'No se proporcionó un ID de categoría';
+      console.error(errorMsg);
+      return { error: 'Debes seleccionar una categoría' };
+    }
+
+    // Verificar que el ID de la categoría sea un UUID válido
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    const isValidUuid = uuidRegex.test(categoryId);
+    
+    console.log('Validación de UUID:', {
+      categoryId,
+      isValidUuid,
+      length: categoryId.length
+    });
+    
+    if (!isValidUuid) {
+      const errorMsg = `ID de categoría inválido: ${categoryId}`;
+      console.error(errorMsg);
+      return { error: 'La categoría seleccionada no es válida' };
     }
 
     // Valida los datos del formulario básicos del libro
@@ -96,19 +124,64 @@ export async function addBook(
     }
 
     if (data && data.length > 0) {
-      // Guardar las relaciones libro-categorías
       const bookId = data[0].id;
-      const { error: categoriesError } = await saveBookCategories(
-        bookId,
-        categoryIds
-      );
+      console.log('=== INICIO guardado de relación libro-categoría ===');
+      console.log('Book ID:', bookId, 'Category ID:', categoryId);
+      
+      // Verificar nuevamente que el categoryId sea un UUID válido
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      if (!uuidRegex.test(categoryId)) {
+        const errorMsg = `ID de categoría no válido al guardar la relación: ${categoryId}`;
+        console.error(errorMsg);
+        return { 
+          error: 'El ID de categoría proporcionado no es válido. Por favor, actualiza el libro para asignar una categoría válida.' 
+        };
+      }
+      
+      try {
+        console.log('Iniciando guardado de relación libro-categoría...');
+        const { error: categoriesError } = await saveBookCategories(bookId, [categoryId]);
 
-      if (categoriesError) {
-        console.error(
-          'Error al guardar categorías:',
-          categoriesError
-        );
-        // No fallamos completamente, el libro se guarda pero las categorías pueden fallar
+        if (categoriesError) {
+          // Log detallado del error
+          const errorDetails = categoriesError instanceof Error 
+            ? { message: categoriesError.message, stack: categoriesError.stack }
+            : categoriesError;
+            
+          console.error('Error al guardar la relación libro-categoría:', {
+            bookId,
+            categoryId,
+            error: errorDetails,
+            timestamp: new Date().toISOString()
+          });
+          
+          // No fallamos completamente, permitimos que el libro se cree sin categoría
+          // pero informamos al usuario que debe actualizar el libro
+          return { 
+            error: `Libro creado exitosamente, pero hubo un problema al asignar la categoría. ` +
+                  `Por favor, actualiza el libro para asignar una categoría. ` +
+                  `(Error: ${categoriesError.message || 'Error desconocido'})`
+          };
+        }
+        
+        console.log('Relación libro-categoría guardada exitosamente');
+        console.log('=== FIN guardado de relación libro-categoría (éxito) ===');
+        
+      } catch (error) {
+        const errorObj = error as Error;
+        console.error('EXCEPCIÓN inesperada al guardar la relación libro-categoría:', {
+          message: errorObj.message,
+          stack: errorObj.stack,
+          bookId,
+          categoryId,
+          timestamp: new Date().toISOString()
+        });
+        
+        // Similar al caso anterior, no rompemos el flujo por un error en la relación
+        return { 
+          error: 'Libro creado exitosamente, pero hubo un error inesperado al guardar la categoría. ' +
+                'Por favor, actualiza el libro para asignar una categoría.'
+        };
       }
     }
 

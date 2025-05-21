@@ -4,7 +4,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@clerk/nextjs'
-import { deleteBook } from '../actions'
 
 type BookActionProps = {
   bookId: string;
@@ -27,31 +26,31 @@ export default function BookCardActions({ bookId, userId }: BookActionProps) {
     return null;
   }
   
-  const handleDelete = async () => {
-    // Confirmar la eliminación
-    if (!confirm('¿Estás seguro de que deseas eliminar este libro?')) {
-      return;
-    }
+  // const handleDelete = async () => {
+  //   // Confirmar la eliminación
+  //   if (!confirm('¿Estás seguro de que deseas eliminar este libro?')) {
+  //     return;
+  //   }
     
-    setIsDeleting(true);
-    setError(null);
+  //   setIsDeleting(true);
+  //   setError(null);
     
-    try {
-      const result = await deleteBook(bookId);
+  //   try {
+  //     const result = await deleteBook(bookId);
       
-      if ('error' in result) {
-        setError(result.error);
-      } else {
-        // Recargar la página para mostrar los cambios
-        router.refresh();
-      }
-    } catch (error) {
-      setError('Error al eliminar el libro');
-      console.error(error);
-    } finally {
-      setIsDeleting(false);
-    }
-  };
+  //     if ('error' in result) {
+  //       setError(result.error);
+  //     } else {
+  //       // Recargar la página para mostrar los cambios
+  //       router.refresh();
+  //     }
+  //   } catch (error) {
+  //     setError('Error al eliminar el libro');
+  //     console.error(error);
+  //   } finally {
+  //     setIsDeleting(false);
+  //   }
+  // };
   
   return (
     <div className="owner-actions">
@@ -64,7 +63,6 @@ export default function BookCardActions({ bookId, userId }: BookActionProps) {
       </Link>
       
       <button
-        onClick={handleDelete}
         disabled={isDeleting}
         className="delete-button"
         title="Eliminar libro"
