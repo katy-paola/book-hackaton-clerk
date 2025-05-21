@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useAuth, useSignIn } from "@clerk/nextjs";
-import type { NextPage } from "next";
 import { redirect, useRouter } from "next/navigation";
 import Close from "@/components/icons/Close";
 import FormFieldBase from "./FormFieldBase";

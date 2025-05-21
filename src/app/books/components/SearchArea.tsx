@@ -89,7 +89,7 @@ export default function SearchArea({ categories }: SearchAreaProps) {
           <Filter />
         </button>
       </div>
-
+      <FilterFormDesktop categories={categories} />
       {/* Drawer de filtros */}
       <div
         className={`filter-drawer-overlay ${isDrawerOpen ? "open" : ""}`}
