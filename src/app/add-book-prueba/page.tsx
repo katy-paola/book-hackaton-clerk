@@ -1,16 +1,21 @@
 "use client";
 
+import "./css/add.css";
+
 import FormStepOne from "./components/FormStepOne";
 import FormStepTwo from "./components/FormStepTwo";
 
 export default function AddBookForm() {
   return (
-    <main>
-      <header>
-        <h1>Publicar nuevo libro</h1>
+    <main className="add-book-page">
+      <header className="add-book-header">
+        <h1 className="add-book-title">Publicar nuevo libro</h1>
       </header>
-      <FormStepOne />
-      <FormStepTwo />
+      <form className="add-form">
+        <FormStepOne />
+        {/* 
+      <FormStepTwo />*/}
+      </form>
     </main>
   );
 }

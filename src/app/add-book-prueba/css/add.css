@@ -1,0 +1,149 @@
+.add-book-page {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10.2rem;
+}
+
+.add-book-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-book-title {
+  padding: 0 1.6rem;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 2.4rem 1.6rem;
+}
+
+.form-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field-container-categories {
+  gap: 0.8rem;
+}
+
+.form-field-base {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.form-field-base-input {
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  line-height: 1.5;
+  border: 1px solid var(--neutral-500);
+  color: var(--neutral-500);
+  outline: none;
+}
+
+.form-field-base-input:focus {
+  border: 1px solid var(--orange-700);
+}
+
+.categories-select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.input-select-container {
+  position: relative;
+  flex: 1;
+  border-radius: 0.8rem;
+  border: 1px solid var(--neutral-500);
+  color: var(--neutral-500);
+}
+
+.input-select-container:focus-within {
+  border-color: var(--orange-700);
+}
+
+.input-select {
+  padding: 0.8rem 1.6rem;
+  padding-right: 4rem;
+  width: 100%;
+  border: none;
+  border-radius: 0.8rem;
+  outline: none;
+  color: inherit;
+  font-size: 1.6rem;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.input-select::placeholder {
+  font-family: inherit;
+  color: inherit;
+}
+
+.input-select-icon-button {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: transparent;
+  border: none;
+}
+
+.input-select:focus ~ .input-select-container {
+  color: var(--orange-700);
+}
+
+.add-form-next-button,
+.add-form-submit-button {
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  color: var(--neutral-700);
+  background-color: var(--orange-500);
+  border: none;
+  box-shadow: 1px 1px 0 var(--neutral-500);
+}
+
+.add-form-next-button:hover,
+.add-form-submit-button:hover {
+  box-shadow: none;
+}
+
+.select-list-categories {
+  list-style: none;
+}
+
+.select-list-category {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--neutral-500);
+}
+
+.select-list-category:hover {
+  background-color: var(--orange-100);
+}
