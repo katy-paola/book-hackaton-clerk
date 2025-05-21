@@ -598,6 +598,10 @@
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
+    gap: 3.2rem;
+    padding-inline: 16rem;
+    max-width: 1024px;
+    margin-inline: auto;
   }
   .secondary-header {
     grid-column: 2 / -1;
@@ -636,10 +640,14 @@
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    right: 200px;
-    left: 200px;
+    right: calc(50vw - 512px + 16rem);
+    left: calc(50vw - 512px + 16rem);
     z-index: 12;
     background-color: var(--neutral-100);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 25%);
+  }
+  .list-categories {
+    max-height: 159px;
+    flex-wrap: wrap;
   }
 }
