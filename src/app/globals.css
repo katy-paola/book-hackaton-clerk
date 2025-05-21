@@ -151,6 +151,10 @@ fieldset {
   display: grid;
 }
 
+.menu-responsive {
+  display: contents;
+}
+
 .menu-button {
   display: grid;
   place-items: center;
@@ -168,6 +172,13 @@ fieldset {
 
 .menu-button:hover {
   background-color: var(--orange-200);
+}
+
+.menu-desktop {
+  display: none;
+  background-color: var(--neutral-100);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: max-height 0.3s ease-in-out;
 }
 
 .nav-menu {
@@ -404,5 +415,20 @@ fieldset {
   }
   .to-top-link {
     right: calc(50vw - 512px + 16rem);
+  }
+  .menu-responsive {
+    display: none;
+  }
+  .menu-desktop {
+    position: static;
+    display: flex;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .menu-desktop .nav-menu-ul {
+    display: flex;
+  }
+  .menu-desktop .nav-menu-ul .nav-item-li {
+    width: max-content;
   }
 }
