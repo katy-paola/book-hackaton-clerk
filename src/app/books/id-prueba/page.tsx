@@ -3,6 +3,7 @@ import Delete from "@/components/icons/Delete";
 import Edit from "@/components/icons/Edit";
 import Save from "@/components/icons/Save";
 import Link from "next/link";
+import DeleteModal from "./components/DeleteModal";
 
 export default function BookDetailsPage() {
   return (
@@ -51,6 +52,7 @@ export default function BookDetailsPage() {
           </a>
         </p>
       </section>
+      <DeleteModal />
     </main>
   );
 }

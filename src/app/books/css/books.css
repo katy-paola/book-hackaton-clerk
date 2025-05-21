@@ -456,3 +456,99 @@
 .book-details-user-link {
   color: inherit;
 }
+
+.reset-password-form {
+  visibility: hidden;
+  position: fixed;
+  top: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 50%;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 1.6rem;
+  background-color: var(--neutral-100);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 25%);
+}
+
+.close-button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: max-content;
+  background-color: transparent;
+  color: var(--neutral-700);
+  border: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.close-button:hover {
+  color: var(--orange-700);
+}
+
+.reset-password-legend-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.reset-password-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--neutral-700);
+}
+
+.reset-password-description {
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.field-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
+.reset-password-buttons {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.reset-password-button {
+  flex: 1;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  color: var(--neutral-700);
+  background-color: var(--orange-500);
+  border: 2px solid transparent;
+  box-shadow: 1px 1px 0 var(--neutral-500);
+}
+
+.reset-password-button:hover {
+  box-shadow: none;
+}
+
+.reset-password-cancel-button {
+  color: var(--orange-700);
+  background-color: transparent;
+  border-color: var(--orange-700);
+}
+
+@media screen and (width >= 640px) {
+  .book-collection-section {
+    padding-inline: 8rem;
+  }
+  .form-filter-submit-button {
+    width: max-content;
+  }
+}
