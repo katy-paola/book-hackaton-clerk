@@ -431,7 +431,6 @@
   flex-direction: column;
   border-radius: 0.8rem;
   list-style: none;
-  visibility: hidden;
   background-color: var(--neutral-100);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 10%);
   overflow: hidden;
