@@ -27,7 +27,7 @@
 
 @media screen and (width >= 1024px) {
   .about {
-    padding-inline: 16rem;
+    padding: 18rem 16rem 8rem;
     max-width: 1024px;
     margin-inline: auto;
   }

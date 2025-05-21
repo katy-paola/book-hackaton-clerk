@@ -1,3 +1,17 @@
+html {
+  min-height: 100%;
+  height: 100vh;
+}
+
+body {
+  min-height: 100vh;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  font-size: 1.6rem;
+  background-color: var(--neutral-100);
+}
+
 :root {
   /* Colors */
   --neutral-100: #fbfbfb;
@@ -25,6 +39,7 @@
   --yellow-700: #6d6400;
 
   font-size: 10px;
+  min-height: 100vh;
 }
 
 * {
@@ -40,14 +55,6 @@ button {
 fieldset {
   display: contents;
   border: none;
-}
-
-.body {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  font-size: 1.6rem;
-  min-height: 100dvh;
-  background-color: var(--neutral-100);
 }
 
 .main-header {
