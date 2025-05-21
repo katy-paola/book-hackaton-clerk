@@ -41,7 +41,8 @@ export default function SearchArea({ categories }: SearchAreaProps) {
             className="search-input"
             type="text"
             placeholder="Buscar libros..."
-            aria-label="Buscar por título, autor, categoría, descripción o nombre de quien publicó"
+
+            aria-label="Buscar por título, autor, descripción o nombre de quien publicó"
             onChange={(e) => {
               handleSearch(e.target.value);
             }}
