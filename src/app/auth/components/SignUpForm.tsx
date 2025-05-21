@@ -1,18 +1,17 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { useSignUp } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import FormFieldBase from "./FormFieldBase";
+import * as React from 'react';
+import { useSignUp } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import FormFieldBase from './FormFieldBase';
 
 export default function Page() {
   const { isLoaded, signUp, setActive } = useSignUp();
-  const [name, setName] = React.useState("");
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [name, setName] = React.useState('');
+  const [emailAddress, setEmailAddress] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [error, setError] = React.useState('');
 
   const router = useRouter();
 
@@ -21,10 +20,10 @@ export default function Page() {
     if (!isLoaded) return;
 
     // Limpiar error previo
-    setError("");
+    setError('');
 
     if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden");
+      setError('Las contraseñas no coinciden');
       return;
     }
 
@@ -33,52 +32,42 @@ export default function Page() {
       const result = await signUp.create({
         emailAddress,
         password,
+        firstName: name,
       });
 
-      // Si el registro fue exitoso y necesitamos agregar el nombre
-      if (result.status !== "complete" && name) {
-        try {
-          // Actualizar el nombre del usuario después de crear la cuenta
-          await signUp.update({
-            firstName: name,
-          });
-        } catch (nameErr) {
-          console.log("Error al agregar nombre:", nameErr);
-          // Continuamos con el proceso aunque no se pudo agregar el nombre
-        }
-      }
-
-      if (result.status === "complete") {
+      if (result.status === 'complete') {
         await setActive({ session: result.createdSessionId });
-        router.push("/"); // Redirige a home o dashboard
+        router.push('/'); // Redirige a home o dashboard
       } else {
         // Mostrar el estado resultante para depuración
-        console.log("Estado de registro:", result.status);
-        setError("No se pudo completar el registro. Intente nuevamente.");
+        console.log('Estado de registro:', result.status);
+        setError(
+          'No se pudo completar el registro. Intente nuevamente.'
+        );
       }
     } catch (err: any) {
       // Mejorando el manejo de errores de Clerk
-      console.error("Error de registro:", err);
+      console.error('Error de registro:', err);
 
       // Intentar extraer mensaje de error legible
-      if (err && typeof err === "object") {
+      if (err && typeof err === 'object') {
         if (
-          "errors" in err &&
+          'errors' in err &&
           Array.isArray(err.errors) &&
           err.errors.length > 0
         ) {
           // Formato típico de errores de Clerk
           const clerkError = err.errors[0];
-          setError(clerkError.message || "Error en el registro");
-        } else if ("message" in err) {
+          setError(clerkError.message || 'Error en el registro');
+        } else if ('message' in err) {
           // Error general con mensaje
           setError(err.message);
         } else {
           // Fallback para otros casos
-          setError("Error al procesar el registro");
+          setError('Error al procesar el registro');
         }
       } else {
-        setError("Ocurrió un error inesperado");
+        setError('Ocurrió un error inesperado');
       }
     }
   };
@@ -159,7 +148,7 @@ export default function Page() {
         </button>
       </fieldset>
       <button className="account-button">
-        ¿Ya tienes una cuenta?{" "}
+        ¿Ya tienes una cuenta?{' '}
         <span className="account-button-link">Iniciar sesión</span>.
       </button>
     </form>
