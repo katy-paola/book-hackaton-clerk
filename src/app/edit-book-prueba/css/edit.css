@@ -227,3 +227,15 @@
 .default-img-file {
   cursor: pointer;
 }
+
+@media screen and (width >= 640px) {
+  .edit-book-title,
+  .edit-form {
+    padding-inline: 8rem;
+  }
+  .edit-form-next-button,
+  .edit-form-submit-button {
+    width: max-content;
+    align-self: flex-end;
+  }
+}
