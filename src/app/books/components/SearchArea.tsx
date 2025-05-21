@@ -117,12 +117,10 @@ export default function SearchArea({ categories }: SearchAreaProps) {
               onShowAllCategories={showCategoriesView}
             />
           ) : (
-            <CategoriesFilterForm
-              categories={categories}
-            />
+            <CategoriesFilterForm categories={categories} />
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
