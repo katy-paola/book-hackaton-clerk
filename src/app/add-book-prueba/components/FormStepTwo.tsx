@@ -1,6 +1,4 @@
-import "../css/add.css";
 import ArrowLeft from "@/components/icons/ArrowLeft";
-import Image from "next/image";
 import RadioButton from "@/app/books/components/RadioButton";
 
 export default function FormStepTwo() {
@@ -34,11 +32,12 @@ export default function FormStepTwo() {
         <label className="form-field-base">
           Foto de portada
           <input className="input-file" type="file" name="cover-photo" />
-          <Image
+          <img
             src="/input-file-placeholder.png"
             alt=""
             width={80}
             height={100}
+            className="default-img-file"
           />
         </label>
       </div>

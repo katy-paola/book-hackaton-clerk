@@ -1,22 +1,22 @@
-.add-book-page {
+.edit-book-page {
   display: flex;
   flex-direction: column;
   padding-top: 10.2rem;
 }
 
-.add-book-header {
+.edit-book-header {
   display: flex;
   flex-direction: column;
 }
 
-.add-book-title {
+.edit-book-title {
   padding: 0 1.6rem;
   font-size: 2.4rem;
   font-weight: 600;
   color: var(--neutral-700);
 }
 
-.add-form {
+.edit-form {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -114,8 +114,8 @@
   color: var(--orange-700);
 }
 
-.add-form-next-button,
-.add-form-submit-button {
+.edit-form-next-button,
+.edit-form-submit-button {
   font-size: 1.6rem;
   font-weight: 600;
   font-family: inherit;
@@ -128,8 +128,8 @@
   box-shadow: 1px 1px 0 var(--neutral-500);
 }
 
-.add-form-next-button:hover,
-.add-form-submit-button:hover {
+.edit-form-next-button:hover,
+.edit-form-submit-button:hover {
   box-shadow: none;
 }
 
@@ -219,11 +219,11 @@
   border-color: var(--orange-700);
 }
 
-.input-file{
-    opacity: 0;
-    position: absolute;
+.input-file {
+  opacity: 0;
+  position: absolute;
 }
 
-.default-img-file{
+.default-img-file {
   cursor: pointer;
 }
