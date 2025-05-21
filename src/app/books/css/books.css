@@ -657,9 +657,7 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
     gap: 3.2rem;
-    padding-inline: 16rem;
-    max-width: 1024px;
-    margin-inline: auto;
+    padding-inline: calc(50vw - 512px + 16rem);
   }
   .secondary-header {
     grid-column: 2 / -1;
