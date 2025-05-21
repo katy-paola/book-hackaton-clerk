@@ -160,6 +160,10 @@ fieldset {
   color: var(--neutral-700);
   background-color: var(--orange-100);
   border: 2px solid var(--orange-200);
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
 .menu-button:hover {
@@ -169,10 +173,24 @@ fieldset {
 .nav-menu {
   display: none;
   position: absolute;
-  top: 88px;
+  top: 100%;
   left: 0;
-  width: 100%;
+  right: 0;
   background-color: var(--neutral-100);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.nav-menu.open {
+  display: block;
+  max-height: 500px; /* Ajusta según sea necesario */
+}
+
+.nav-menu-ul {
+  padding: 1rem 0;
+  margin: 0;
 }
 
 .nav-menu-ul {
