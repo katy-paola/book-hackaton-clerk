@@ -156,3 +156,10 @@
 .edit-profile-submit-button:hover {
   box-shadow: none;
 }
+
+@media screen and (width >= 640px) {
+  .edit-profile-container,
+  .modal-edit-profile {
+    padding-inline: 8rem;
+  }
+}
