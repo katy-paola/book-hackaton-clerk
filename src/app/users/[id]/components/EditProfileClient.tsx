@@ -22,12 +22,12 @@ export default function EditProfileClient({ user }: { user: User }) {
           <div className="profile-user-info">
             <img
               className="profile-avatar"
-              src="/avatars/default-avatar.png"
-              alt="Foto de Andrés Vizcaíno"
+              src={user.avatar}
+              alt={`Avatar de ${user.name}`}
               width={40}
               height={40}
             />
-            <h1 className="profile-user-name">Andrés Vizcaíno</h1>
+            <h1 className="profile-user-name">{user.name}</h1>
           </div>
           <span className="profile-edit-icon-container">
             <Edit />
