@@ -54,8 +54,8 @@ Aplicación de Libros es una plataforma que permite a los usuarios explorar libr
    # Autenticación de Clerk
    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=tu_clave_publica
    CLERK_SECRET_KEY=tu_clave_secreta
-   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/auth/sign-in
-   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/auth/sign-up
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/auth
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/auth
    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
