@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from '@/app/ssr/client';
+import { createServerSupabaseClient } from '@/app/ssr/server';
 import { v4 as uuidv4 } from 'uuid';
 
 const BUCKET_NAME = 'books-covers';

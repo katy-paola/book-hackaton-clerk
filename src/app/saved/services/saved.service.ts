@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from '@/app/ssr/client'
+import { createServerSupabaseClient } from '@/app/ssr/server'
 import { auth } from '@clerk/nextjs/server'
 import { Tables } from '@/types/database.types'
 
