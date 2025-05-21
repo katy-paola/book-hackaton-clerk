@@ -6,7 +6,7 @@ export default async function CurrentUserProfilePage() {
   
   // Si no hay usuario autenticado, redirigir al catálogo
   if (!session.userId) {
-    redirect('/books')
+    redirect('/auth')
   }
   
   // Redirigir al perfil del usuario actual
