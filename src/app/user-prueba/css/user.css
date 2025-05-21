@@ -163,3 +163,10 @@
     padding-inline: 8rem;
   }
 }
+
+@media screen and (width >= 1024px) {
+  .edit-profile-container,
+  .modal-edit-profile {
+    padding-inline: 16rem;
+  }
+}

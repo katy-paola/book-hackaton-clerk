@@ -56,6 +56,10 @@
   text-decoration: none;
 }
 
+.empty-books-link:hover {
+  color: var(--orange-700);
+}
+
 .search-area-container {
   display: contents;
 }
