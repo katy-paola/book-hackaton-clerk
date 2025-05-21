@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Close from "../../../components/icons/Close";
 import Search from "../../../components/icons/Search";
 import Filter from "../../../components/icons/Filter";
-import Close from "../../../components/icons/Close";
 import FilterForm from "./FilterForm";
+import FilterFormDesktop from "./FilterFormDesktop";
 import CategoriesFilterForm from "./CategoriesFilterForm";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
@@ -62,7 +63,7 @@ export default function SearchArea({ categories }: SearchAreaProps) {
   }, 300);
 
   return (
-    <>
+    <div className="search-area-container">
       <div role="search" className="search-area">
         <div className="search-input-container">
           <input

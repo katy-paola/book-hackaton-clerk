@@ -372,3 +372,18 @@ fieldset {
     width: max-content;
   }
 }
+
+@media screen and (width >= 1024px) {
+  .main-header,
+  .main-footer {
+    padding-inline: calc(50vw - 512px + 16rem);
+  }
+  .not-found-container {
+    padding-inline: 16rem;
+    max-width: 1024px;
+    margin-inline: auto;
+  }
+  .to-top-link {
+    right: calc(50vw - 512px + 16rem);
+  }
+}

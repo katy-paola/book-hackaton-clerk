@@ -32,6 +32,10 @@
   box-shadow: none;
 }
 
+.results-container {
+  display: contents;
+}
+
 .empty-books-section {
   display: flex;
   flex-direction: column;
@@ -50,6 +54,14 @@
   font-weight: 600;
   color: var(--neutral-700);
   text-decoration: none;
+}
+
+.empty-books-link:hover {
+  color: var(--orange-700);
+}
+
+.search-area-container {
+  display: contents;
 }
 
 .search-area {
@@ -117,6 +129,12 @@
 
 .filter-form {
   display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.filter-form-desktop {
+  display: none;
   flex-direction: column;
   gap: 2.4rem;
 }
@@ -576,5 +594,64 @@
   .book-details-cover {
     width: 100%;
     height: auto;
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .book-collection-section {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 3.2rem;
+    padding-inline: 16rem;
+    max-width: 1024px;
+    margin-inline: auto;
+  }
+  .secondary-header {
+    grid-column: 2 / -1;
+    grid-row: 1 / 2;
+  }
+  .search-area-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+  }
+  .results-container {
+    grid-column: 2 / -1;
+    grid-row: 2 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+  .filter-form {
+    display: none;
+  }
+  .filter-form-desktop {
+    display: flex;
+  }
+  .form-filter-submit-button {
+    align-self: flex-end;
+  }
+  .filter-icon-container,
+  .close-button-main-filter {
+    display: none;
+  }
+  .categories-filter-form {
+    visibility: hidden;
+    padding: 1.6rem;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(50vw - 512px + 16rem);
+    left: calc(50vw - 512px + 16rem);
+    z-index: 12;
+    background-color: var(--neutral-100);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 25%);
+  }
+  .list-categories {
+    max-height: 159px;
+    flex-wrap: wrap;
   }
 }
