@@ -1,15 +1,13 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Close from '../../../components/icons/Close';
-import Search from '../../../components/icons/Search';
-import { CategoryRow } from '../services/category.service';
-import Checkbox from './Checkbox';
-import {
-  useSearchParams,
-  usePathname,
-  useRouter,
-} from 'next/navigation';
+import { useState, useEffect } from "react";
+import Close from "../../../components/icons/Close";
+import Search from "../../../components/icons/Search";
+import { CategoryRow } from "../services/category.service";
+import Checkbox from "./Checkbox";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import ArrowLeft from "@/components/icons/ArrowLeft";
+import ArrowRight from "@/components/icons/ArrowRight";
 
 interface CategoriesFilterFormProps {
   categories: CategoryRow[];
@@ -23,21 +21,17 @@ export default function CategoriesFilterForm({
   const router = useRouter();
 
   // Local state for tracking selected categories
-  const [selectedCategories, setSelectedCategories] = useState<
-    string[]
-  >([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   // State for search term
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const categoriesPerPage = 10;
 
   // Initialize state from URL params
   useEffect(() => {
-    const categoriesParam = searchParams.get('categories');
-    setSelectedCategories(
-      categoriesParam ? categoriesParam.split(',') : []
-    );
+    const categoriesParam = searchParams.get("categories");
+    setSelectedCategories(categoriesParam ? categoriesParam.split(",") : []);
   }, [searchParams]);
 
   const handleCheckboxChange = (categoryId: string) => {
@@ -58,19 +52,17 @@ export default function CategoriesFilterForm({
 
     // Add selected categories to params
     if (selectedCategories.length > 0) {
-      params.set('categories', selectedCategories.join(','));
+      params.set("categories", selectedCategories.join(","));
     }
 
     // Preserve any other existing parameters (like access)
-    const accessParam = searchParams.get('access');
+    const accessParam = searchParams.get("access");
     if (accessParam) {
-      params.set('access', accessParam);
+      params.set("access", accessParam);
     }
 
     // Update URL without causing a full page reload
-    const url = params.toString()
-      ? `${pathname}?${params}`
-      : pathname;
+    const url = params.toString() ? `${pathname}?${params}` : pathname;
     router.push(url, { scroll: false });
   };
 
@@ -81,9 +73,7 @@ export default function CategoriesFilterForm({
   };
 
   // Handle search input changes
-  const handleSearchChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
     // Reset to first page when searching
     setCurrentPage(1);
@@ -95,9 +85,7 @@ export default function CategoriesFilterForm({
   );
 
   // Calculate total pages
-  const totalPages = Math.ceil(
-    filteredCategories.length / categoriesPerPage
-  );
+  const totalPages = Math.ceil(filteredCategories.length / categoriesPerPage);
 
   // Get current page's categories
   const currentCategories = filteredCategories.slice(
@@ -125,9 +113,7 @@ export default function CategoriesFilterForm({
         Cerrar
       </button>
       <fieldset className="container-categories">
-        <legend className="filter-form-legend">
-          Todas las categorías
-        </legend>
+        <legend className="filter-form-legend">Todas las categorías</legend>
         <label
           htmlFor="search-categories-input"
           className="search-input-container"
@@ -150,8 +136,8 @@ export default function CategoriesFilterForm({
           Seleccionadas ({selectedCategories.length})
           {filteredCategories.length > 0 && (
             <span className="categories-count">
-              {' '}
-              | Mostrando {currentCategories.length} de{' '}
+              {" "}
+              | Mostrando {currentCategories.length} de{" "}
               {filteredCategories.length}
             </span>
           )}
@@ -178,7 +164,7 @@ export default function CategoriesFilterForm({
               onClick={goToPrevPage}
               disabled={currentPage === 1}
             >
-              Anterior
+              <ArrowLeft />
             </button>
             <span className="page-indicator">
               Página {currentPage} de {totalPages}
@@ -189,7 +175,7 @@ export default function CategoriesFilterForm({
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
             >
-              Siguiente
+              <ArrowRight />
             </button>
           </div>
         )}

@@ -213,6 +213,26 @@
   color: var(--orange-700);
 }
 
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+  width: 100%;
+  font-weight: 400;
+  color: var(--neutral-500);
+}
+
+.pagination-button {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.8rem;
+  background-color: transparent;
+  border: 1px solid var(--neutral-700);
+}
+
 .container-access-type {
   display: flex;
   flex-direction: column;
