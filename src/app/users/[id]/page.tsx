@@ -51,21 +51,22 @@ async function UserInfo({
 
   return (
     <section className="profile-container">
-      <header className="profile-header"></header>
-      {isOwnProfile ? (
-        <EditProfileClient user={user} />
-      ) : (
-        <div className="profile-user-info">
-          <img
-            className="profile-avatar"
-            src={user.avatar}
-            alt={`Avatar de ${user.name}`}
-            width={40}
-            height={40}
-          />
-          <h1 className="profile-user-name">{user.name}</h1>
-        </div>
-      )}
+      <header className="profile-header">
+        {isOwnProfile ? (
+          <EditProfileClient user={user} />
+        ) : (
+          <div className="edit-profile-container">
+            <img
+              className="profile-avatar"
+              src={user.avatar}
+              alt={`Avatar de ${user.name}`}
+              width={40}
+              height={40}
+            />
+            <h1 className="profile-user-name">{user.name}</h1>
+          </div>
+        )}
+      </header>
     </section>
   );
 }
