@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DM_Sans } from "next/font/google";
 import Link from "next/link";
-import Menu from "@/components/icons/Menu";
+import Header from "@/components/Header";
 import ArrowUp from "@/components/icons/ArrowUp";
 
 const dmSansRegular = DM_Sans({
@@ -44,46 +44,7 @@ export default function RootLayout({
         <body
           className={`${dmSansRegular.className} ${dmSansMedium.className} ${dmSansSemibold.className} body`}
         >
-          <header className="main-header">
-            <Link href="/" className="logo-container" aria-label="Inicio">
-              <img src="/logo.svg" alt="Logo de BooK" height={40} />
-            </Link>
-            <button
-              className="menu-button"
-              aria-label="Abrir menú de navegación"
-            >
-              <Menu />
-            </button>
-            <nav className="nav-menu">
-              <ul className="nav-menu-ul">
-                <li>
-                  <Link className="nav-item" href="/">
-                    Explorar
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-item" href="/sign-in">
-                    Ingresar
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-item" href="/users">
-                    Mi perfil
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-item" href="/saved">
-                    Guardado
-                  </Link>
-                </li>
-                <li>
-                  <Link className="nav-item" href="/">
-                    Cerrar sesión
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </header>
+          <Header />
           {children}
           <footer className="main-footer">
             <p className="app-authors">
