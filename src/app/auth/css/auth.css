@@ -130,7 +130,6 @@
 }
 
 .reset-password-form {
-  visibility: hidden;
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
@@ -214,4 +213,21 @@
   color: var(--orange-700);
   background-color: transparent;
   border-color: var(--orange-700);
+}
+
+@media screen and (width >= 640px) {
+  .auth-title,
+  .auth-form {
+    padding-inline: 8rem;
+  }
+  .reset-password-form {
+    left: 80px;
+    right: 80px;
+  }
+  .reset-password-buttons {
+    flex-direction: row;
+  }
+  .reset-password-button {
+    flex: 1;
+  }
 }

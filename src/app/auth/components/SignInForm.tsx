@@ -5,6 +5,7 @@ import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import ResetPassword from "./ResetPassword";
 import FormFieldBase from "./FormFieldBase";
+import { useEffect } from "react";
 
 interface ClerkError {
   errors?: { message: string }[];
@@ -16,6 +17,15 @@ export default function SignInForm() {
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
   const router = useRouter();
+
+  const [showModal, setShowModal] = React.useState(false);
+
+  useEffect(() => {
+    const handleClose = () => setShowModal(false);
+    window.addEventListener("closeResetPasswordModal", handleClose);
+    return () =>
+      window.removeEventListener("closeResetPasswordModal", handleClose);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,7 +92,9 @@ export default function SignInForm() {
               El campo de contraseña no puede estar vacío
             </p>
             <button
+              type="button"
               className="forgot-password-button"
+              onClick={() => setShowModal(true)}
             >
               Olvidé mi contraseña
             </button>
@@ -96,7 +108,7 @@ export default function SignInForm() {
           <span className="account-button-link">Regístrate</span>.
         </button>
       </form>
-      <ResetPassword />
+      {showModal && <ResetPassword />}
     </>
   );
 }

@@ -7,7 +7,7 @@ import { redirect, useRouter } from "next/navigation";
 import Close from "@/components/icons/Close";
 import FormFieldBase from "./FormFieldBase";
 
-const ForgotPasswordPage: NextPage = () => {
+const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,7 +29,12 @@ const ForgotPasswordPage: NextPage = () => {
     return null;
   }
 
-  // Send the password reset code to the user's email
+  // Custom event to notify parent to close modal
+  const handleClose = () => {
+    const event = new CustomEvent("closeResetPasswordModal");
+    window.dispatchEvent(event);
+  };
+
   async function create(e: React.FormEvent) {
     e.preventDefault();
     await signIn
@@ -47,9 +52,6 @@ const ForgotPasswordPage: NextPage = () => {
       });
   }
 
-  // Reset the user's password.
-  // Upon successful reset, the user will be
-  // signed in and redirected to the home page
   async function reset(e: React.FormEvent) {
     e.preventDefault();
 
@@ -65,8 +67,6 @@ const ForgotPasswordPage: NextPage = () => {
       })
       .then((result) => {
         if (result.status === "complete") {
-          // Set the active session to
-          // the newly created session (user is now signed in)
           setActive({ session: result.createdSessionId });
           setError("");
           redirect("/auth");
@@ -85,7 +85,11 @@ const ForgotPasswordPage: NextPage = () => {
       className="reset-password-form"
       onSubmit={!successfulCreation ? create : reset}
     >
-      <button className="close-button" type="button">
+      <button
+        className="close-button"
+        type="button"
+        onClick={handleClose}
+      >
         <Close />
         Cerrar
       </button>
@@ -116,6 +120,7 @@ const ForgotPasswordPage: NextPage = () => {
               <button
                 className="reset-password-button reset-password-cancel-button"
                 type="button"
+                onClick={handleClose}
               >
                 Cancelar
               </button>
@@ -163,6 +168,7 @@ const ForgotPasswordPage: NextPage = () => {
               <button
                 className="reset-password-button reset-password-cancel-button"
                 type="button"
+                onClick={handleClose}
               >
                 Cancelar
               </button>
