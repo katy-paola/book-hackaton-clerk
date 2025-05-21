@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useClerk, useUser } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useClerk, useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Menu from "@/components/icons/Menu";
 import Close from "@/components/icons/Close";
@@ -19,7 +19,7 @@ export default function Header() {
 
   const handleSignOut = async () => {
     await signOut();
-    router.push('/');
+    router.push("/");
   };
 
   return (
@@ -27,20 +27,85 @@ export default function Header() {
       <Link href="/" className="logo-container" aria-label="Inicio">
         <img src="/logo.svg" alt="Logo de BooK" height={40} />
       </Link>
-      <button
-        className="menu-button"
-        aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-        aria-expanded={isMenuOpen}
-        onClick={toggleMenu}
-      >
-        {isMenuOpen ? <Close /> : <Menu />}
-      </button>
-      <nav className={`nav-menu ${isMenuOpen ? 'open' : ''}`}>
+      <div className="menu-responsive">
+        <button
+          className="menu-button"
+          aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={isMenuOpen}
+          onClick={toggleMenu}
+        >
+          {isMenuOpen ? <Close /> : <Menu />}
+        </button>
+        <nav className={`nav-menu ${isMenuOpen ? "open" : ""}`}>
+          <ul className="nav-menu-ul">
+            {/* Siempre visible */}
+            <li>
+              <Link
+                className="nav-item"
+                href="/"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Explorar
+              </Link>
+            </li>
+
+            {/* Mostrar solo si NO está autenticado */}
+            {!isSignedIn && (
+              <li>
+                <Link
+                  className="nav-item"
+                  href="/auth"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Ingresar
+                </Link>
+              </li>
+            )}
+
+            {/* Mostrar solo si está autenticado */}
+            {isSignedIn && (
+              <>
+                <li>
+                  <Link
+                    className="nav-item"
+                    href="/users"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Mi perfil
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="nav-item"
+                    href="/saved"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Guardado
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    onClick={() => {
+                      handleSignOut();
+                      setIsMenuOpen(false);
+                    }}
+                    className="nav-item"
+                    type="button"
+                  >
+                    Cerrar sesión
+                  </a>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+      </div>
+      <nav className={`menu-desktop`}>
         <ul className="nav-menu-ul">
           {/* Siempre visible */}
-          <li>
-            <Link 
-              className="nav-item" 
+          <li className="nav-item-li">
+            <Link
+              className="nav-item"
               href="/"
               onClick={() => setIsMenuOpen(false)}
             >
@@ -50,9 +115,9 @@ export default function Header() {
 
           {/* Mostrar solo si NO está autenticado */}
           {!isSignedIn && (
-            <li>
-              <Link 
-                className="nav-item" 
+            <li className="nav-item-li">
+              <Link
+                className="nav-item"
                 href="/auth"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -64,33 +129,32 @@ export default function Header() {
           {/* Mostrar solo si está autenticado */}
           {isSignedIn && (
             <>
-              <li>
-                <Link 
-                  className="nav-item" 
+              <li className="nav-item-li">
+                <Link
+                  className="nav-item"
                   href="/users"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Mi perfil
                 </Link>
               </li>
-              <li>
-                <Link 
-                  className="nav-item" 
+              <li className="nav-item-li">
+                <Link
+                  className="nav-item"
                   href="/saved"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Guardado
                 </Link>
               </li>
-              <li>
-                <a 
+              <li className="nav-item-li">
+                <a
                   onClick={() => {
                     handleSignOut();
                     setIsMenuOpen(false);
                   }}
                   className="nav-item"
-                  type='button'
-       
+                  type="button"
                 >
                   Cerrar sesión
                 </a>

@@ -692,8 +692,7 @@
   .close-button-main-filter {
     display: none;
   }
-  .categories-filter-form {
-    visibility: hidden;
+  .categories-filter-container-desktop {
     padding: 1.6rem;
     position: fixed;
     top: 50%;

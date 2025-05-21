@@ -6,6 +6,7 @@ import Checkbox from "./Checkbox";
 import { ACCESS_TYPES } from "../consts/checkboxes-data";
 import { CategoryRow } from "../services/category.service";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import CategoriesFilterFormDesktop from "./CategoriesFilterFormDesktop";
 
 interface FilterFormProps {
   categories: CategoryRow[];
@@ -84,7 +85,7 @@ export default function FilterFormDesktop({ categories }: FilterFormProps) {
 
   // Toggle showing all categories
   const toggleShowAllCategories = () => {
-    setShowAllCategories((prev) => !prev);
+    setShowAllCategories(!showAllCategories);
   };
 
   // Get the categories to display (all or just the first 5)
@@ -93,72 +94,80 @@ export default function FilterFormDesktop({ categories }: FilterFormProps) {
     : categories.slice(0, 5);
 
   return (
-    <form
-      className="filter-form-desktop"
-      aria-label="Filtrar libros"
-      onSubmit={handleSubmit}
-    >
-      <button type="button" className="close-button close-button-main-filter">
-        <Close />
-        Cerrar
-      </button>
-      <fieldset>
-        <fieldset className="container-categories">
-          <legend className="filter-form-legend">Categorías</legend>
-          <small className="number-selected-categories">
-            Seleccionadas ({selectedCategories.length})
-          </small>
-          <div className="list-categories">
-            {displayedCategories.map((category) => (
-              <Checkbox
-                key={category.id}
-                id={`${category.id}-filter-form`}
-                value={category.name}
-                label={category.name}
-                checked={selectedCategories.includes(category.id)}
-                onChange={() => handleCheckboxChange(category.id)}
-              />
-            ))}
-          </div>
-          {categories.length > 5 && (
-            <button
-              type="button"
-              className="all-categories-button"
-              onClick={toggleShowAllCategories}
-            >
-              {showAllCategories
-                ? "Mostrar menos categorías"
-                : "Ver todas las categorías"}
-            </button>
-          )}
-        </fieldset>
-        <fieldset className="container-access-type">
-          <legend className="filter-form-legend">Tipo de acceso</legend>
-          <small className="number-selected-categories">
-            Seleccionados ({selectedAccessTypes.length})
-          </small>
-          <div className="list-categories">
-            {ACCESS_TYPES.map((category) => (
-              <Checkbox
-                key={category.id}
-                id={`${category.id}-access-type-filter-form`}
-                name={category.name}
-                value={category.value}
-                label={category.label}
-                checked={selectedAccessTypes.includes(category.value)}
-                onChange={() => handleCheckboxAccessType(category.value)}
-              />
-            ))}
-          </div>
-        </fieldset>
-        <button
-          type="button"
-          className="form-filter-submit-button"
-          onClick={applyFilters}
-        >
-          Aplicar filtros
+    <>
+      <form
+        className="filter-form-desktop"
+        aria-label="Filtrar libros"
+        onSubmit={handleSubmit}
+      >
+        <button type="button" className="close-button close-button-main-filter">
+          <Close />
+          Cerrar
         </button>
-      </fieldset>
-    </form>
+        <fieldset>
+          <fieldset className="container-categories">
+            <legend className="filter-form-legend">Categorías</legend>
+            <small className="number-selected-categories">
+              Seleccionadas ({selectedCategories.length})
+            </small>
+            <div className="list-categories">
+              {displayedCategories.map((category) => (
+                <Checkbox
+                  key={category.id}
+                  id={`${category.id}-filter-form`}
+                  value={category.name}
+                  label={category.name}
+                  checked={selectedCategories.includes(category.id)}
+                  onChange={() => handleCheckboxChange(category.id)}
+                />
+              ))}
+            </div>
+            {categories.length > 5 && (
+              <button
+                type="button"
+                className="all-categories-button"
+                onClick={toggleShowAllCategories}
+              >
+                {showAllCategories
+                  ? "Mostrar menos categorías"
+                  : "Ver todas las categorías"}
+              </button>
+            )}
+          </fieldset>
+          <fieldset className="container-access-type">
+            <legend className="filter-form-legend">Tipo de acceso</legend>
+            <small className="number-selected-categories">
+              Seleccionados ({selectedAccessTypes.length})
+            </small>
+            <div className="list-categories">
+              {ACCESS_TYPES.map((category) => (
+                <Checkbox
+                  key={category.id}
+                  id={`${category.id}-access-type-filter-form`}
+                  name={category.name}
+                  value={category.value}
+                  label={category.label}
+                  checked={selectedAccessTypes.includes(category.value)}
+                  onChange={() => handleCheckboxAccessType(category.value)}
+                />
+              ))}
+            </div>
+          </fieldset>
+          <button
+            type="button"
+            className="form-filter-submit-button"
+            onClick={applyFilters}
+          >
+            Aplicar filtros
+          </button>
+        </fieldset>
+      </form>
+      {showAllCategories && (
+        <CategoriesFilterFormDesktop
+          categories={categories}
+          setShowAllCategories={setShowAllCategories}
+        />
+      )}
+    </>
   );
 }

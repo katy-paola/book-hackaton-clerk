@@ -32,11 +32,8 @@
   border-bottom-color: var(--orange-700);
 }
 
-.active-tab {
+.auth-tab:hover {
   background-color: var(--orange-100);
-  border: 1px solid transparent;
-  border-top-color: var(--orange-700);
-  border-right-color: var(--orange-700);
 }
 
 .auth-form {
@@ -229,5 +226,32 @@
   }
   .reset-password-button {
     flex: 1;
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .auth-title {
+    padding-inline: calc(50vw - 512px + 16rem);
+  }
+  .auth-form {
+    margin-inline: calc(50vw - 512px + 16rem);
+  }
+  .auth-form > fieldset {
+    padding-inline: 0;
+  }
+  .auth-form-submit-button {
+    width: max-content;
+    align-self: flex-end;
+  }
+  .auth-header {
+    padding-inline: calc(50vw - 512px + 16rem);
+  }
+  .auth-tabs,
+  .auth-title {
+    padding-inline: 0;
+  }
+  .reset-password-form {
+    left: calc(50vw - 512px + 16rem);
+    right: calc(50vw - 512px + 16rem);
   }
 }
