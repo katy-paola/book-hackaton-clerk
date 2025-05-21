@@ -13,9 +13,11 @@ import {
 
 interface FilterFormProps {
   categories: CategoryRow[];
+  onClose?: () => void;
+  onShowAllCategories: () => void;
 }
 
-export default function FilterForm({ categories }: FilterFormProps) {
+export default function FilterForm({ categories, onClose, onShowAllCategories }: FilterFormProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -86,6 +88,9 @@ export default function FilterForm({ categories }: FilterFormProps) {
       ? `${pathname}?${params}`
       : pathname;
     router.push(url, { scroll: false });
+    
+    // Restablecer el scroll del body cuando se aplican los filtros
+    document.body.style.overflow = 'auto';
   };
 
   // Prevent default form submission
@@ -105,16 +110,12 @@ export default function FilterForm({ categories }: FilterFormProps) {
     : categories.slice(0, 5);
 
   return (
-    <form
-      className="filter-form"
-      aria-label="Filtrar libros"
-      onSubmit={handleSubmit}
-    >
-      <button type="button" className="close-button close-button-main-filter">
-        <Close />
-        Cerrar
-      </button>
-      <fieldset>
+    <div className="filter-form-container">
+      <form
+        className="filter-form"
+        aria-label="Filtrar libros"
+        onSubmit={handleSubmit}
+      >
         <fieldset className="container-categories">
           <legend className="filter-form-legend">Categorías</legend>
           <small className="number-selected-categories">
@@ -136,11 +137,9 @@ export default function FilterForm({ categories }: FilterFormProps) {
             <button
               type="button"
               className="all-categories-button"
-              onClick={toggleShowAllCategories}
+              onClick={onShowAllCategories}
             >
-              {showAllCategories
-                ? 'Mostrar menos categorías'
-                : 'Ver todas las categorías'}
+              Ver todas las categorías
             </button>
           )}
         </fieldset>
@@ -167,14 +166,16 @@ export default function FilterForm({ categories }: FilterFormProps) {
             ))}
           </div>
         </fieldset>
-        <button
-          type="button"
-          className="form-filter-submit-button"
-          onClick={applyFilters}
-        >
-          Aplicar filtros
-        </button>
-      </fieldset>
-    </form>
+        <div className="filter-form-actions">
+          <button
+            type="button"
+            className="filter-form-submit book-main-cta"
+            onClick={applyFilters}
+          >
+            Aplicar filtros
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

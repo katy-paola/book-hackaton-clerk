@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Close from "../../../components/icons/Close";
 import Search from "../../../components/icons/Search";
 import { CategoryRow } from "../services/category.service";
 import Checkbox from "./Checkbox";
@@ -26,7 +25,7 @@ export default function CategoriesFilterForm({
   const [searchTerm, setSearchTerm] = useState("");
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const categoriesPerPage = 10;
+  const categoriesPerPage = 11;
 
   // Initialize state from URL params
   useEffect(() => {
@@ -64,6 +63,9 @@ export default function CategoriesFilterForm({
     // Update URL without causing a full page reload
     const url = params.toString() ? `${pathname}?${params}` : pathname;
     router.push(url, { scroll: false });
+    
+    // Restablecer el scroll del body cuando se aplican los filtros
+    document.body.style.overflow = "auto";
   };
 
   // Prevent default form submission
@@ -103,21 +105,20 @@ export default function CategoriesFilterForm({
   };
 
   return (
-    <form
-      className="categories-filter-form"
-      aria-label="Ver todas las categorías"
-      onSubmit={handleSubmit}
-    >
-      <button type="button" className="close-button">
-        <Close />
-        Cerrar
-      </button>
-      <fieldset className="container-categories">
-        <legend className="filter-form-legend">Todas las categorías</legend>
-        <label
-          htmlFor="search-categories-input"
-          className="search-input-container"
-        >
+    <div className="categories-filter-container">
+      <div className="categories-filter-header">
+        <h2 className="categories-filter-title">Todas las categorías</h2>
+      </div>
+      <form
+        className="categories-filter-form"
+        aria-label="Filtrar por categorías"
+        onSubmit={handleSubmit}
+      >
+        <fieldset className="container-categories">
+          <label
+            htmlFor="search-categories-input"
+            className="search-input-container"
+          >
           <input
             className="search-input"
             id="search-categories-input"
@@ -186,8 +187,9 @@ export default function CategoriesFilterForm({
           onClick={applyFilters}
         >
           Aplicar
-        </button>
-      </fieldset>
-    </form>
+          </button>
+        </fieldset>
+      </form>
+    </div>
   );
 }
