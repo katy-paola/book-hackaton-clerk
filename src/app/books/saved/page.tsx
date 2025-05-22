@@ -1,13 +1,11 @@
 import { Suspense } from "react";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import Loading from "./loading";
-import EmptyBooksList from "../books/components/EmptyBooksList";
-import BookCardItem from "../books/components/BookCardItem";
-import { getCategories } from "../books/actions";
-import BookCollectionSectionClient from "../books/components/BookCollectionSectionClient";
-import { getAllBooks } from "../books/services/book.service";
+import EmptyBooksList from "../components/EmptyBooksList";
+import { getCategories } from "../actions";
+import BookCollectionSectionClient from "../components/BookCollectionSectionClient";
+import { getAllBooks } from "../services/book.service";
 
 const EMPTY_BOOKS_LIST = {
   message: "No tienes libros guardados aún.",
@@ -68,12 +66,10 @@ export default async function SavedBooksPage() {
   }
 
   return (
-    <div className="page-container">
-      <section className="saved-container">
-        <Suspense fallback={<Loading />}>
-          <SavedBooksList />
-        </Suspense>
-      </section>
-    </div>
+    <section className="saved-container">
+      <Suspense fallback={<Loading />}>
+        <SavedBooksList />
+      </Suspense>
+    </section>
   );
 }

@@ -1,8 +1,6 @@
-import console from "console";
-import BookCollectionSection from "./books/components/BookCollectionSection";
-import { getAllBooks } from "./books/services/book.service";
 import "./home.css";
-import { Suspense } from "react";
+import console from "console";
+import { getAllBooks } from "./books/services/book.service";
 import BookCollectionSectionClient from "./books/components/BookCollectionSectionClient";
 import { getCategories } from "./books/actions";
 
@@ -49,9 +47,9 @@ export default async function Home(props: {
 
       <BookCollectionSectionClient
         titleSection="Publicado por otros"
+        emptyBooksList={EMPTY_BOOKS_LIST}
         books={books || []}
         searchQuery={query}
-        emptyBooksList={EMPTY_BOOKS_LIST}
         categories={allCategories}
       />
     </section>

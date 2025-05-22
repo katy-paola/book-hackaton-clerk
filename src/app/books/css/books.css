@@ -32,6 +32,10 @@
   box-shadow: none;
 }
 
+.saved-container {
+  padding-top: 11.2rem;
+}
+
 .results-container {
   display: contents;
 }
