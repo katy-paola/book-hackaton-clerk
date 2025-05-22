@@ -58,7 +58,7 @@ export default function BookCardItem({
         <h3 className="book-title">{title}</h3>
         <div className="book-info">
           <p className="book-author">{author}</p>
-          <small className="book-access-type">{accessType}</small>
+          <small className="book-access-type">{accessType === "free" ? "Gratis" : "De pago"}</small>
         </div>
       </header>
       <div className="book-ctas-container">
