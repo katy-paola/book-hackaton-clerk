@@ -53,6 +53,10 @@ export default function EditBookForm({ book }: EditBookFormProps) {
 
   const [selectedCategories, setSelectedCategories] =
     useState<string[]>(initialCategories);
+  
+  // Estado para previsualización de imagen
+  const [imagePreview, setImagePreview] = useState<string>(book.cover_url || "");
+  const [newImageSelected, setNewImageSelected] = useState<boolean>(false);
 
   // Estado del formulario
   const [formState, setFormState] = useState<FormState>({
@@ -69,6 +73,19 @@ export default function EditBookForm({ book }: EditBookFormProps) {
     }
   }, [formState.success, router]);
 
+  // Función para manejar cambio de imagen
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setNewImageSelected(true);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   // Función para manejar la acción del formulario
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,6 +98,11 @@ export default function EditBookForm({ book }: EditBookFormProps) {
     selectedCategories.forEach((categoryId) => {
       formData.append("categories", categoryId);
     });
+
+    // Si no se seleccionó una nueva imagen, conservar la URL existente
+    if (!newImageSelected && book.cover_url) {
+      formData.append("cover_url", book.cover_url);
+    }
 
     // Logs para depuración
     console.log("Book ID:", book.id);
@@ -161,18 +183,29 @@ export default function EditBookForm({ book }: EditBookFormProps) {
         </div>
 
         <div className="form-group">
-          <label className="form-label" htmlFor="cover_url">
-            URL de Portada
+          <label className="form-label" htmlFor="cover">
+            Portada del Libro
           </label>
+          {imagePreview && (
+            <div className="image-preview mb-2">
+              <img 
+                src={imagePreview} 
+                alt="Vista previa de portada" 
+                style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'contain' }}
+              />
+            </div>
+          )}
           <input
-            type="url"
-            id="cover_url"
-            name="cover_url"
+            type="file"
+            id="cover"
+            name="cover"
+            accept="image/*"
             className="form-input"
-            placeholder="https://ejemplo.com/imagen.jpg"
-            required
-            defaultValue={book.cover_url}
+            onChange={handleImageChange}
           />
+          <small className="text-gray-500">
+            {book.cover_url ? "Sube una nueva imagen para reemplazar la actual" : "Selecciona una imagen para la portada"}
+          </small>
         </div>
 
         <div className="form-group">

@@ -77,7 +77,7 @@ export default async function UserProfilePage(props: {
   const params = await props.params;
   const { userId } = await auth();
   const isOwnProfile = userId === params.id;
-  const { data: books, error } = await getBooksByUser(params.id);
+  const { data: books } = await getBooksByUser(params.id);
   const categories = await getCategories();
 
   const EMPTY_BOOKS_LIST = {
@@ -91,6 +91,7 @@ export default async function UserProfilePage(props: {
       <Suspense fallback={<Loading />}>
         <UserInfo userId={params.id} isOwnProfile={isOwnProfile} />
       </Suspense>
+
       <Suspense fallback={<Loading />}>
         <BookCollectionSectionClient
           titleSection="Mis libros"

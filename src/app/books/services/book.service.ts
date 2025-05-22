@@ -225,90 +225,31 @@ export async function addBook(
 
 // Función para obtener libros de un usuario específico
 export async function getBooksByUser(
-  userId: string,
-  query?: string
+  userId: string
 ): Promise<BookResponse> {
   try {
     const supabase = createServerSupabaseClient();
 
-    // Si hay un término de búsqueda, usar la función RPC con unaccent
-    if (query && query.trim() !== '') {
-      const searchTerm = query.trim().toLowerCase();
-
-      // Usar la función RPC personalizada con unaccent
-      const { data, error } = await supabase.rpc(
-        'search_user_books_with_unaccent' as any,
-        {
-          user_id_param: userId,
-          search_term: searchTerm,
-        }
-      );
-
-      if (error) {
-        throw error;
-      }
-
-      // Si no hay resultados, devolver array vacío
-      if (!data || !Array.isArray(data) || data.length === 0) {
-        return { data: [], error: null };
-      }
-
-      // Obtener los IDs de los libros encontrados
-      const bookIds = data.map((book: any) => book.id);
-
-      // Obtener datos completos con relaciones para los libros encontrados
-      const { data: booksWithRelations, error: relationsError } =
-        await supabase
-          .from('books')
-          .select(
-            `
-          *,
-          users:user_id(name, avatar),
-          book_categories(
-            categories(id, name)
-          )
+    // Consulta para obtener libros de un usuario específico
+    const { data, error } = await supabase
+      .from('books')
+      .select(
         `
-          )
-          .in('id', bookIds)
-          .eq('user_id', userId)
-          .order('created_at', { ascending: false });
-
-      if (relationsError) {
-        throw relationsError;
-      }
-
-      return {
-        data: booksWithRelations as BookWithIdAndCategories[],
-        error: null,
-      };
-    } else {
-      // Si no hay búsqueda, usar la consulta normal
-      let supabaseQuery = supabase
-        .from('books')
-        .select(
-          `
-          *,
-          users:user_id(name, avatar),
-          book_categories(
-            categories(id, name)
-          )
-        `
+        *,
+        users:user_id(name, avatar),
+        book_categories(
+          categories(id, name)
         )
-        .eq('user_id', userId);
+      `
+      )
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
 
-      // Apply sorting
-      supabaseQuery = supabaseQuery.order('created_at', {
-        ascending: false,
-      });
-
-      const { data, error } = await supabaseQuery;
-
-      if (error) {
-        throw error;
-      }
-
-      return { data: data as BookWithIdAndCategories[], error: null };
+    if (error) {
+      throw error;
     }
+
+    return { data: data as BookWithIdAndCategories[], error: null };
   } catch (error) {
     console.error('Error fetching user books:', error);
     return { data: null, error: error as Error };
