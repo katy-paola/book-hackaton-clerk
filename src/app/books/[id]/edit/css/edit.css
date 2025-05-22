@@ -19,7 +19,7 @@
 .edit-form {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 2.4rem;
   padding: 2.4rem 1.6rem;
 }
 
@@ -272,6 +272,7 @@
 
 .edit-book-cancel {
   flex: 1;
+  padding: 0.8rem 1.6rem;
   font-size: inherit;
   font-weight: 600;
   font-family: inherit;
@@ -295,5 +296,39 @@
   .edit-form-submit-button {
     width: max-content;
     align-self: flex-end;
+  }
+}
+
+@media screen and (width >= 1024px) {
+  .edit-book-title {
+    padding-top: 1.6rem;
+  }
+  .edit-book-title,
+  .edit-form {
+    padding-inline: calc(50vw - 512px + 16rem);
+  }
+  .form-fieldset {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .form-field-container {
+    width: calc(50% - 1.2rem);
+  }
+  .form-field-container.description {
+    width: 100%;
+  }
+  .form-fieldset:last-of-type .form-field-container {
+    width: calc(100% / 3 - 1.6rem);
+  }
+  .form-field-container.cover {
+    width: 100%;
+    order: 1;
+  }
+  .edit-book-buttons {
+    width: 100%;
+    order: 2;
+  }
+  .edit-book-buttons button {
+    flex: initial;
   }
 }

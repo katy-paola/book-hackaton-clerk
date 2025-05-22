@@ -181,7 +181,7 @@ export default function EditBookForm({ book }: EditBookFormProps) {
             </label>
           </div>
         </fieldset>
-        <div className="form-field-container">
+        <div className="form-field-container cover">
           <label className="form-field-base">
             Portada del libro
             <input
@@ -274,7 +274,7 @@ function StepOne({ book }: EditBookFormProps) {
             />
           </div>
         */}
-      <div className="form-field-container">
+      <div className="form-field-container description">
         <label className="form-field-base" htmlFor="description">
           Descripción
           <textarea

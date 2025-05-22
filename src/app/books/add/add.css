@@ -239,3 +239,10 @@
     align-self: flex-end;
   }
 }
+
+@media screen and (width >= 1024px) {
+  .edit-book-title,
+  .edit-form {
+    padding-inline: calc(50vw - 512px + 16rem);
+  }
+}
