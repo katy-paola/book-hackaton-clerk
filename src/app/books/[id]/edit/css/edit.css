@@ -116,6 +116,7 @@
 
 .edit-form-next-button,
 .edit-form-submit-button {
+  flex: 1;
   font-size: 1.6rem;
   font-weight: 600;
   font-family: inherit;
