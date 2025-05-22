@@ -43,6 +43,12 @@ fieldset {
   border: none;
 }
 
+textarea {
+  resize: vertical;
+  min-height: 6rem;
+  max-height: 12rem;
+}
+
 .body {
   display: grid;
   grid-template-rows: 1fr auto;
