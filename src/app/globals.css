@@ -301,6 +301,10 @@ fieldset {
   box-shadow: 1px 1px 0 var(--neutral-500);
 }
 
+.not-found-link:hover {
+  box-shadow: none;
+}
+
 /* Estilos para el componente de carga */
 .loading-container {
   padding: 20px;
@@ -414,9 +418,15 @@ fieldset {
     padding-inline: calc(50vw - 512px + 16rem);
   }
   .not-found-container {
+    justify-content: center;
+    align-items: center;
     padding-inline: 16rem;
     max-width: 1024px;
     margin-inline: auto;
+  }
+  .not-found-container {
+    text-align: center;
+    max-width: 64ch;
   }
   .to-top-link {
     right: calc(50vw - 512px + 16rem);
