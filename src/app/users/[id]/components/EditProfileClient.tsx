@@ -18,6 +18,7 @@ export default function EditProfileClient({ user }: { user: User }) {
         <button
           onClick={() => setIsFormVisible(true)}
           className="edit-profile-container"
+          title="Editar perfil"
         >
           <div className="profile-user-info">
             <img
