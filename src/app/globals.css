@@ -208,6 +208,10 @@ fieldset {
   list-style: none;
 }
 
+.nav-item-li {
+  cursor: pointer;
+}
+
 .nav-item {
   display: inline-block;
   padding: 0.8rem 1.6rem;

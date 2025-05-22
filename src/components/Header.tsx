@@ -71,7 +71,7 @@ export default function Header() {
                     href="/users"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Mi perfil
+                    Mis libros
                   </Link>
                 </li>
                 <li>
@@ -135,7 +135,7 @@ export default function Header() {
                   href="/users"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Mi perfil
+                  Mis libros
                 </Link>
               </li>
               <li className="nav-item-li">

@@ -231,7 +231,7 @@
 @media screen and (width >= 640px) {
   .add-book-title,
   .add-form {
-    padding-inline: 8rem;
+    padding-inline: 0;
   }
   .add-form-next-button,
   .add-form-submit-button {

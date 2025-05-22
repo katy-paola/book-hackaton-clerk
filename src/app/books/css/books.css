@@ -365,6 +365,12 @@
   color: var(--neutral-500);
 }
 
+.text-select-category {
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--neutral-700);
+}
+
 .book-access-type,
 .book-details-access-type {
   display: flex;
