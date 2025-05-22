@@ -4,8 +4,8 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 const isPublicRoute = createRouteMatcher([
   "/auth(.*)",
   "/",
-  "/books/[id]", // Ruta pública: detalles del libro
-  "/users/[id]", // Ruta pública: perfil de usuario
+  /^\/books\/[^\/]+$/, // Coincide con /books/cualquier-cosa (pero NO /books/123/edit)
+  /^\/users\/[^\/]+$/, // Coincide con /users/cualquier-cosa (pero NO /users/123/edit)
   "/users",
 ]);
 
