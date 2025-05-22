@@ -1,4 +1,4 @@
-# 📚BOOK
+# 📚BooK
 
 Una aplicación web moderna para entusiastas de la lectura que permite descubrir, guardar y gestionar sus libros guardados.
 
