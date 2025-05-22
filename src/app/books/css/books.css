@@ -683,6 +683,8 @@
     grid-column: 1 / 2;
     grid-row: 1 / -1;
     position: sticky;
+    z-index: 15;
+    max-width: 22.7rem;
     top: 12rem;
     align-self: start;
   }
