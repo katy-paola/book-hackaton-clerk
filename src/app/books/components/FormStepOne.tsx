@@ -84,14 +84,14 @@ export default function FormStepOne({
           <div>Cargando categorías...</div>
         ) : (
           <>
-            <div className="w-full">
+            <div className="">
               <CategoriesSelectOne 
                 options={categories} 
                 onSelect={handleCategorySelect}
                 selectedValue={formData.category}
               />
               {!formData.category && (
-                <p className="text-red-500 text-sm mt-1">Por favor selecciona una categoría</p>
+                <p className="text-select-category">Por favor selecciona una categoría</p>
               )}
             </div>
             <input

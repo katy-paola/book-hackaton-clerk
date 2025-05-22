@@ -75,7 +75,7 @@ export default function FormStepTwo({
 
       <div className="form-field-container">
         <label className="form-field-base" htmlFor="link">
-          Enlace de compra
+          Enlace
           <input
             type="url"
             id="link"

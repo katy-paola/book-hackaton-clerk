@@ -1,11 +1,15 @@
 "use client";
 
+import "./css/edit.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { editBook } from "@/app/books/actions/edit-book.action";
 import CategorySelectorWrapper from "@/app/books/components/CategorySelectorWrapper";
 import { useFormStatus } from "react-dom";
 import { Tables } from "@/types/database.types";
+import CategoriesSelect from "@/app/edit-book-prueba/components/CategoriesSelect";
+import { options } from "@/app/edit-book-prueba/components/FormStepOne";
+import ArrowLeft from "@/components/icons/ArrowLeft";
 
 type BookRow = Tables<"books">;
 
@@ -27,11 +31,11 @@ function SubmitButton() {
   return (
     <button
       type="submit"
-      className="button"
+      className="edit-form-submit-button"
       disabled={pending}
       aria-disabled={pending}
     >
-      {pending ? "Guardando..." : "Guardar Cambios"}
+      {pending ? "Guardando..." : "Guardar cambios"}
     </button>
   );
 }
@@ -53,9 +57,11 @@ export default function EditBookForm({ book }: EditBookFormProps) {
 
   const [selectedCategories, setSelectedCategories] =
     useState<string[]>(initialCategories);
-  
+
   // Estado para previsualización de imagen
-  const [imagePreview, setImagePreview] = useState<string>(book.cover_url || "");
+  const [imagePreview, setImagePreview] = useState<string>(
+    book.cover_url || ""
+  );
   const [newImageSelected, setNewImageSelected] = useState<boolean>(false);
 
   // Estado del formulario
@@ -68,7 +74,7 @@ export default function EditBookForm({ book }: EditBookFormProps) {
   // Efecto para redireccionar después de un envío exitoso
   useEffect(() => {
     if (formState.success) {
-      router.push("/books");
+      router.push("/users");
       router.refresh();
     }
   }, [formState.success, router]);
@@ -135,128 +141,153 @@ export default function EditBookForm({ book }: EditBookFormProps) {
   };
 
   return (
-    <div className="card">
-      <form onSubmit={handleSubmit}>
-        {formState.error && (
-          <div className="message error">{formState.error}</div>
-        )}
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="title">
-            Título
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            className="form-input"
-            required
-            defaultValue={book.title}
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="author">
+    <form onSubmit={handleSubmit} className="edit-form">
+      {formState.error && (
+        <div className="message error">{formState.error}</div>
+      )}
+      <StepOne book={book} />
+      <fieldset className="form-fieldset">
+        <button type="button" className="prev-button">
+          <ArrowLeft />
+          Anterior
+        </button>
+        <div className="form-field-container">
+          <label className="form-field-base" htmlFor="author">
             Autor
+            <input
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Ej.: James Clear"
+              className="form-field-base-input"
+              required
+              defaultValue={book.author}
+            />
           </label>
-          <input
-            type="text"
-            id="author"
-            name="author"
-            className="form-input"
-            required
-            defaultValue={book.author}
-          />
         </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="description">
-            Descripción
+        <fieldset className="form-field-container container-access-types">
+          <legend className="access-type-legend">Tipo de acceso</legend>
+          <div className="input-select-access-container">
+            <label className="label-select" htmlFor="access">
+              <select
+                id="access"
+                name="access"
+                className="select"
+                defaultValue={book.access}
+              >
+                <option value="free">Gratis</option>
+                <option value="paid">De pago</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+        <div className="form-field-container">
+          <label className="form-field-base">
+            Portada del libro
+            <input
+              type="file"
+              id="cover"
+              name="cover"
+              accept="image/*"
+              className="input-file"
+              onChange={handleImageChange}
+            />
+            {imagePreview && (
+              <div className="image-preview mb-2">
+                <img
+                  src={imagePreview}
+                  alt="Vista previa de portada"
+                  style={{
+                    maxWidth: "200px",
+                    maxHeight: "200px",
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
+            )}
           </label>
-          <textarea
-            id="description"
-            name="description"
-            className="form-input"
-            rows={4}
-            defaultValue={book.description || ""}
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="cover">
-            Portada del Libro
-          </label>
-          {imagePreview && (
-            <div className="image-preview mb-2">
-              <img 
-                src={imagePreview} 
-                alt="Vista previa de portada" 
-                style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'contain' }}
-              />
-            </div>
-          )}
-          <input
-            type="file"
-            id="cover"
-            name="cover"
-            accept="image/*"
-            className="form-input"
-            onChange={handleImageChange}
-          />
-          <small className="text-gray-500">
-            {book.cover_url ? "Sube una nueva imagen para reemplazar la actual" : "Selecciona una imagen para la portada"}
+          <small className="text-input-image">
+            {book.cover_url
+              ? "Sube una nueva imagen para reemplazar la actual"
+              : "Selecciona una imagen para la portada"}
           </small>
         </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="link">
+        <div className="form-field-container">
+          <label className="form-field-base" htmlFor="link">
             Enlace del Libro
+            <input
+              type="url"
+              id="link"
+              name="link"
+              className="form-field-base-input"
+              required
+              placeholder="https://ejemplo.com/libro"
+              defaultValue={book.link}
+            />
           </label>
-          <input
-            type="url"
-            id="link"
-            name="link"
-            className="form-input"
-            required
-            placeholder="https://ejemplo.com/libro"
-            defaultValue={book.link}
-          />
         </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="access">
-            Tipo de Acceso
-          </label>
-          <select
-            id="access"
-            name="access"
-            className="form-input"
-            defaultValue={book.access}
-          >
-            <option value="free">Gratuito</option>
-            <option value="paid">De pago</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label className="form-label">Categorías</label>
-          <CategorySelectorWrapper
-            onChange={setSelectedCategories}
-            selectedIds={selectedCategories}
-          />
-        </div>
-
-        <div className="form-actions">
+        <div className="edit-book-buttons">
           <SubmitButton />
           <button
             type="button"
-            className="button button-secondary"
+            className="edit-book-cancel"
             onClick={() => router.back()}
           >
             Cancelar
           </button>
         </div>
-      </form>
-    </div>
+      </fieldset>
+    </form>
+  );
+}
+
+//COMPONENTES FORMULARIO POR PASOS
+
+function StepOne({ book }: EditBookFormProps) {
+  return (
+    <fieldset className="form-fieldset">
+      <div className="form-field-container">
+        <label className="form-field-base" htmlFor="title">
+          Título
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Ej.: Hábitos atómicos"
+            className="form-field-base-input"
+            required
+            defaultValue={book.title}
+          />
+        </label>
+      </div>
+      <div className="form-field-container form-field-container-categories">
+        <CategoriesSelect options={options} />
+      </div>
+      {/* 
+          <div className="form-field-container  form-field-container-categories">
+            <label className="form-label">Categorías</label>
+            <CategorySelectorWrapper
+              onChange={setSelectedCategories}
+              selectedIds={selectedCategories}
+            />
+          </div>
+        */}
+      <div className="form-field-container">
+        <label className="form-field-base" htmlFor="description">
+          Descripción
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Ej.: Este libro innovador nos revela exactamente cómo esos cambios minúsculos pueden crecer hasta llegar a cambiar nuestra carrera profesional, nuestras relaciones y todos los aspectos de nuestra vida."
+            className="form-field-base-input"
+            rows={3}
+            defaultValue={book.description || ""}
+          />
+        </label>
+      </div>
+      <button className="edit-form-next-button">Siguiente</button>
+    </fieldset>
   );
 }

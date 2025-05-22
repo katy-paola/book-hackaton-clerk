@@ -9,12 +9,12 @@ export default function FormStepTwo() {
         Anterior
       </button>
       <div className="form-field-container">
-        <label className="form-field-base" htmlFor="title">
+        <label className="form-field-base" htmlFor="author">
           Autor
           <input
             type="text"
-            id="title"
-            name="title"
+            id="author"
+            name="author"
             placeholder="Ej.: James Clear"
             className="form-field-base-input"
             required

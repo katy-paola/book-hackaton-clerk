@@ -1,6 +1,6 @@
 import CategoriesSelect from "./CategoriesSelect";
 
-const options = [
+export const options = [
   "Finanzas",
   "Matemáticas",
   "Autoayuda",
