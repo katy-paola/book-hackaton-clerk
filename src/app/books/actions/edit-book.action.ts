@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { createServerSupabaseClient } from '@/app/ssr/server'
 import { validateBook } from '../schemas/book.schema'
 import { Tables } from '@/types/database.types'
+import { uploadBookCover } from '../services/storage.service'
 
 type BookRow = Tables<'books'>
 
@@ -20,7 +21,7 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
     // Log form data
     console.log('Form data entries:');
     for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
+      console.log(`${key}: ${typeof value === 'object' ? 'File object' : value}`);
     }
     
     // Verificar autenticación
@@ -48,7 +49,7 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
     // Primero verificamos que el libro pertenezca al usuario actual
     const { data: book, error: fetchError } = await supabase
       .from('books')
-      .select('user_id')
+      .select('user_id, cover_url')
       .eq('id', bookId)
       .single()
     
@@ -67,9 +68,40 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
       return { error: 'No tienes permiso para editar este libro' }
     }
     
-    // Actualizar datos del libro
+    // Obtener los datos del libro
     const bookData = validation.data
-    console.log('Book data to update:', bookData);
+    
+    // Procesar la imagen de portada si se seleccionó una nueva
+    let coverUrl = bookData.cover_url || book.cover_url;
+    
+    const coverFile = formData.get('cover') as File;
+    if (coverFile && coverFile instanceof File && coverFile.size > 0) {
+      console.log('Processing new cover image:', coverFile.name);
+      
+      // Cargar la nueva imagen a Supabase Storage
+      const { url: newCoverUrl, error: uploadError } = await uploadBookCover(coverFile, userId);
+      
+      if (uploadError) {
+        console.error('Error uploading cover image:', uploadError);
+        return { error: 'Error al cargar la imagen de portada: ' + uploadError.message };
+      }
+      
+      if (newCoverUrl) {
+        console.log('New cover URL:', newCoverUrl);
+        coverUrl = newCoverUrl;
+      } else {
+        console.log('No cover URL received from upload');
+        return { error: 'No se pudo obtener la URL de la imagen cargada' };
+      }
+    } else {
+      console.log('Using existing cover URL:', coverUrl);
+    }
+    
+    // Actualizar datos del libro con la URL de la portada
+    console.log('Book data to update:', {
+      ...bookData,
+      cover_url: coverUrl
+    });
     
     // First update the book without retrieving data
     const { error: updateError } = await supabase
@@ -78,7 +110,7 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
         title: bookData.title,
         author: bookData.author,
         description: bookData.description,
-        cover_url: bookData.cover_url,
+        cover_url: coverUrl,
         access: bookData.access,
         link: bookData.link,
       })
@@ -148,7 +180,7 @@ export async function editBook(bookId: string, formData: FormData): Promise<Edit
       title: bookData.title,
       author: bookData.author,
       description: bookData.description || null,
-      cover_url: bookData.cover_url || '', // Ensure cover_url is a string
+      cover_url: coverUrl || '', // Use the updated cover URL
       access: bookData.access,
       link: bookData.link,
       user_id: userId,
