@@ -111,18 +111,19 @@
 }
 
 .avatar-option {
+  cursor: pointer;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   border: 3px solid transparent;
 }
 
-.avatar-option:hover {
-  border-color: var(--neutral-500);
-}
-
 .avatar-input:checked ~ .avatar-option {
   border-color: var(--orange-500);
+}
+
+.avatar-option:hover {
+  border-color: var(--neutral-500);
 }
 
 .field-form-input {
@@ -162,11 +163,22 @@
   .modal-edit-profile {
     padding-inline: 8rem;
   }
+  .avatar-picker {
+    gap: 2.4rem;
+    padding: 2.4rem;
+  }
+  .edit-profile-submit-button {
+    width: max-content;
+    align-self: flex-end;
+  }
 }
 
 @media screen and (width >= 1024px) {
   .edit-profile-container,
   .modal-edit-profile {
     padding-inline: calc(50vw - 512px + 16rem);
+  }
+  .avatar-picker {
+    grid-template-columns: repeat(8, 1fr);
   }
 }
