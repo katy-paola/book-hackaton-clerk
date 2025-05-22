@@ -147,10 +147,10 @@ export default function EditBookForm({ book }: EditBookFormProps) {
       )}
       <StepOne book={book} />
       <fieldset className="form-fieldset">
-        <button type="button" className="prev-button">
+        {/* <button type="button" className="prev-button">
           <ArrowLeft />
           Anterior
-        </button>
+        </button> */}
         <div className="form-field-container">
           <label className="form-field-base" htmlFor="author">
             Autor
@@ -215,7 +215,7 @@ export default function EditBookForm({ book }: EditBookFormProps) {
 
         <div className="form-field-container">
           <label className="form-field-base" htmlFor="link">
-            Enlace del Libro
+            Enlace del libro
             <input
               type="url"
               id="link"
@@ -287,7 +287,7 @@ function StepOne({ book }: EditBookFormProps) {
           />
         </label>
       </div>
-      <button className="edit-form-next-button">Siguiente</button>
+      {/* <button type="button" className="edit-form-next-button">Siguiente</button> */}
     </fieldset>
   );
 }
