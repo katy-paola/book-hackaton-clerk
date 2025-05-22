@@ -28,12 +28,18 @@
   font-family: inherit;
   color: var(--neutral-700);
   background-color: transparent;
-  border: 1px solid transparent;
-  border-bottom-color: var(--orange-700);
+  border-color: transparent;
+  border-bottom: 1px solid var(--orange-200);
 }
 
 .auth-tab:hover {
   background-color: var(--orange-100);
+}
+
+.active-tab {
+  background-color: var(--orange-100);
+  border: 1px solid var(--orange-200);
+  border-bottom: none;
 }
 
 .auth-form {
@@ -42,6 +48,8 @@
   gap: 1.6rem;
   padding: 2.4rem 1.6rem;
   background-color: var(--orange-100);
+  border: 1px solid var(--orange-200);
+  border-top-color: transparent;
 }
 
 .auth-form-fieldset {
@@ -238,6 +246,9 @@
   }
   .auth-form > fieldset {
     padding-inline: 0;
+    min-width: 36rem;
+    max-width: 48rem;
+    margin-inline: auto;
   }
   .auth-form-submit-button {
     width: max-content;

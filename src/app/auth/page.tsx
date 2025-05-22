@@ -7,6 +7,8 @@ import { useState } from "react";
 
 export default function AuthPage() {
   const [authType, setAuthType] = useState("sign-in");
+  const [activeSignIn, setActiveSignIn] = useState(true);
+  const [activeSignUp, setActiveSignUp] = useState(false);
 
   return (
     <section className="auth-page">
@@ -19,15 +21,23 @@ export default function AuthPage() {
         <div className="auth-tabs">
           <button
             type="button"
-            onClick={() => setAuthType("sign-in")}
-            className={`auth-tab ${authType === "sign-in" && "active-tab"}`}
+            onClick={() => {
+              setAuthType("sign-in");
+              setActiveSignIn(true);
+              setActiveSignUp(false);
+            }}
+            className={`auth-tab ${activeSignIn && "active-tab"}`}
           >
             Inicia sesión
           </button>
           <button
             type="button"
-            onClick={() => setAuthType("sign-up")}
-            className={`auth-tab ${authType === "sign-un" && "active-tab"}`}
+            onClick={() => {
+              setAuthType("sign-up");
+              setActiveSignUp(true);
+              setActiveSignIn(false);
+            }}
+            className={`auth-tab ${activeSignUp && "active-tab"}`}
           >
             Regístrate
           </button>

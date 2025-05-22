@@ -21,6 +21,7 @@ export default function FormFieldBase({ ...props }: formFieldBaseProps) {
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        required
       />
     </label>
   );

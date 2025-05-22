@@ -500,7 +500,6 @@
 
 .reset-password-form,
 .delete-modal-container {
-  visibility: hidden;
   position: fixed;
   top: 50%;
   left: 50%;

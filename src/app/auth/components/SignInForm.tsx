@@ -74,9 +74,9 @@ export default function SignInForm() {
               placeholder="ejemplo@correo.com"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <p className="form-field-error-message" role="alert">
+            {/*  <p className="form-field-error-message" role="alert">
               El campo de correo no puede estar vacío
-            </p>
+            </p> */}
           </div>
           <div className="form-field-container">
             <FormFieldBase
@@ -88,9 +88,9 @@ export default function SignInForm() {
               placeholder="••••••••"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <p className="form-field-error-message" role="alert">
+            {/* <p className="form-field-error-message" role="alert">
               El campo de contraseña no puede estar vacío
-            </p>
+            </p> */}
             <button
               type="button"
               className="forgot-password-button"
