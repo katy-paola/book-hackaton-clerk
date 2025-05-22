@@ -678,6 +678,9 @@
     gap: 2.4rem;
     grid-column: 1 / 2;
     grid-row: 1 / -1;
+    position: sticky;
+    top: 12rem;
+    align-self: start;
   }
   .results-container {
     grid-column: 2 / -1;
