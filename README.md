@@ -1,4 +1,4 @@
-# BOOK
+# 📚BOOK
 
 Una aplicación web moderna para entusiastas de la lectura que permite descubrir, guardar y gestionar sus libros guardados.
 
@@ -98,6 +98,21 @@ Aplicación de Libros es una plataforma que permite a los usuarios explorar libr
 
 - [Katy Barboza](https://github.com/katy-paola)
 - [Andrés Vizcaíno](https://github.com/pipegoods)
+
+## Próximas Features
+Actualmente, algunas funcionalidades ya están implementadas en el backend, pero aún no se han conectado completamente al frontend. Estas son las próximas tareas a desarrollar:
+
+### Redirección personalizada para usuarios no autenticados
+Reemplazar el redireccionamiento actual al login de Clerk por una ruta interna hacia nuestra propia página de autenticación.
+
+### Guardar libros en el perfil del usuario
+Implementar la lógica en el frontend para que los usuarios puedan guardar libros desde la interfaz.
+
+### Eliminar libros guardados
+Permitir a los usuarios eliminar libros previamente guardados desde su lista personal.
+
+### Mostrar solo los libros guardados del usuario
+Filtrar la vista de libros guardados para mostrar únicamente los libros asociados al usuario autenticado, en lugar de todos los libros en la base de datos.
 
 ## Licencia
 
