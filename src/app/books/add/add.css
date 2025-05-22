@@ -133,6 +133,12 @@
   box-shadow: none;
 }
 
+.text-select-category {
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--neutral-700);
+}
+
 .select-list-categories {
   list-style: none;
 }
@@ -241,8 +247,11 @@
 }
 
 @media screen and (width >= 1024px) {
-  .edit-book-title,
-  .edit-form {
+  .add-book-title {
+    padding-top: 1.6rem;
+  }
+  .add-book-title,
+  .add-form {
     padding-inline: calc(50vw - 512px + 16rem);
   }
 }

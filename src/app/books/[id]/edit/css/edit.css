@@ -134,6 +134,11 @@
   box-shadow: none;
 }
 
+.text-select-category {
+  font-weight: 400;
+  color: var(--neutral-700);
+}
+
 .select-list-categories {
   list-style: none;
 }
