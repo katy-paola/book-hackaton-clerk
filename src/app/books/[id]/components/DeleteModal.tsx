@@ -1,9 +1,23 @@
+"use client";
+
 import Close from "@/components/icons/Close";
 
-export default function DeleteModal() {
+export default function DeleteModal({
+  setShowDeleteModal,
+}: {
+  showDeleteModal: boolean;
+  setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
-    <div className="reset-password-form">
-      <button className="close-button" type="button">
+    <div className="delete-modal-container">
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowDeleteModal(false);
+        }}
+        className="close-button"
+        type="button"
+      >
         <Close />
         Cerrar
       </button>
@@ -16,10 +30,20 @@ export default function DeleteModal() {
         </p>
       </div>
       <div className="reset-password-buttons">
-        <button className="reset-password-button reset-password-code-button">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowDeleteModal(false);
+          }}
+          className="reset-password-button reset-password-code-button"
+        >
           No, cancelar
         </button>
         <button
+          onClick={(e) => {
+            e.stopPropagation();
+            return;
+          }}
           className="reset-password-button reset-password-cancel-button"
           type="button"
         >

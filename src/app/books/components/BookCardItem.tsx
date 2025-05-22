@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useClerk } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { isBookSaved } from "../services/saved.service";
+import DeleteModal from "../[id]/components/DeleteModal";
 
 interface BookProps {
   book_id: string;
@@ -29,6 +29,7 @@ export default function BookCardItem({
   bookLink,
 }: BookProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { signOut } = useClerk();
   const { user, isSignedIn } = useUser();
   const router = useRouter();
@@ -108,7 +109,15 @@ export default function BookCardItem({
                     </Link>
                   </li>
                   <li role="menuitem">
-                    <button className="book-more-menu-item">Eliminar</button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDeleteModal(true);
+                      }}
+                      className="book-more-menu-item"
+                    >
+                      Eliminar
+                    </button>
                   </li>
                 </>
               ) : (
@@ -120,6 +129,12 @@ export default function BookCardItem({
                 </li>
               )}
             </ul>
+          )}
+          {showDeleteModal && (
+            <DeleteModal
+              showDeleteModal={showDeleteModal}
+              setShowDeleteModal={setShowDeleteModal}
+            />
           )}
         </div>
       </div>

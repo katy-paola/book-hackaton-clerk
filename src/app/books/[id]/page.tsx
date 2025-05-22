@@ -1,11 +1,15 @@
+"use client";
+
 import "../css/books.css";
 import Delete from "@/components/icons/Delete";
 import Edit from "@/components/icons/Edit";
 import Save from "@/components/icons/Save";
 import Link from "next/link";
 import DeleteModal from "./components/DeleteModal";
+import { useState } from "react";
 
 export default function BookDetailsPage() {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   return (
     <main className="book-details-container">
       <header className="book-details-header">
@@ -38,7 +42,13 @@ export default function BookDetailsPage() {
           <Link className="book-details-edit" href="#">
             <Edit />
           </Link>
-          <button className="book-details-delete">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDeleteModal(true);
+            }}
+            className="book-details-delete"
+          >
             <Delete />
           </button>
           <button className="book-details-save">
@@ -52,7 +62,12 @@ export default function BookDetailsPage() {
           </a>
         </p>
       </section>
-      <DeleteModal />
+      {showDeleteModal && (
+        <DeleteModal
+          showDeleteModal={showDeleteModal}
+          setShowDeleteModal={setShowDeleteModal}
+        />
+      )}
     </main>
   );
 }
