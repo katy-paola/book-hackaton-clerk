@@ -709,4 +709,15 @@
     max-height: 159px;
     flex-wrap: wrap;
   }
+  .book-details-container {
+    padding-inline: calc(50vw - 512px + 16rem);
+  }
+  .book-details-content {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: repeat(4, auto);
+  }
+  .book-details-cover {
+    grid-row: 1 / -1;
+  }
 }
