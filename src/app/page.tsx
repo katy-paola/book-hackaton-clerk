@@ -1,14 +1,16 @@
-import console from 'console';
-import BookCollectionSection from './books/components/BookCollectionSection';
-import { getAllBooks } from './books/services/book.service';
-import './home.css';
-import { Suspense } from 'react';
+import console from "console";
+import BookCollectionSection from "./books/components/BookCollectionSection";
+import { getAllBooks } from "./books/services/book.service";
+import "./home.css";
+import { Suspense } from "react";
+import BookCollectionSectionClient from "./books/components/BookCollectionSectionClient";
+import { getCategories } from "./books/actions";
 
 const EMPTY_BOOKS_LIST = {
   message:
-    'Aún no hay libros publicados, puedes empezar por crear tu lista personal.',
-  href: '/add-book-prueba',
-  contentLink: 'Agregar mi primer libro',
+    "Aún no hay libros publicados, puedes empezar por crear tu lista personal.",
+  href: "/add-book-prueba",
+  contentLink: "Agregar mi primer libro",
 };
 
 export default async function Home(props: {
@@ -19,10 +21,11 @@ export default async function Home(props: {
   }>;
 }) {
   const searchParams = await props.searchParams;
-  const query = searchParams?.query || '';
-  const categories = searchParams?.categories?.split(',');
-  const access = searchParams?.access?.split(',');
+  const query = searchParams?.query || "";
+  const categories = searchParams?.categories?.split(",");
+  const access = searchParams?.access?.split(",");
 
+  const allCategories = await getCategories();
   const { data: books, error } = await getAllBooks({
     categories: categories,
     query: query,
@@ -30,27 +33,26 @@ export default async function Home(props: {
   });
 
   if (error) {
-    console.error('Error fetching books:', error);
+    console.error("Error fetching books:", error);
     return <div>Error fetching books</div>;
   }
 
   return (
     <section>
       <section className="about">
-        <h1 className="main-title">
-          BooK - No pierdas tus libros por leer
-        </h1>
+        <h1 className="main-title">BooK - No pierdas tus libros por leer</h1>
         <p className="main-description">
-          Crea tu colección personal, explora listas públicas y mantén
-          a mano todo lo que quieres leer.
+          Crea tu colección personal, explora listas públicas y mantén a mano
+          todo lo que quieres leer.
         </p>
       </section>
 
-      <BookCollectionSection
+      <BookCollectionSectionClient
         titleSection="Publicado por otros"
         books={books || []}
         searchQuery={query}
         emptyBooksList={EMPTY_BOOKS_LIST}
+        categories={allCategories}
       />
     </section>
   );
